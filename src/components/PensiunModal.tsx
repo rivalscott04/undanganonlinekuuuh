@@ -37,6 +37,13 @@ interface PensiunModalProps {
   onPreview: (file: File) => void;
 }
 
+// Custom option type for Select
+interface EmployeeOption {
+  value: string;
+  label: string;
+  name: string;
+}
+
 const formSchema = z.object({
   nip: z.string().min(1, { message: "NIP harus dipilih" }),
   tmt_pensiun: z.string().min(1, { message: "TMT Pensiun harus diisi" }),
@@ -51,6 +58,13 @@ export function PensiunModal({ isOpen, onClose, onPreview }: PensiunModalProps) 
   const [nama, setNama] = useState("");
   const [showFileUpload, setShowFileUpload] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  
+  // Mock employee options with separate NIP and name
+  const employeeOptions: EmployeeOption[] = [
+    { value: "123456789", label: "123456789", name: "John Doe" },
+    { value: "987654321", label: "987654321", name: "Jane Smith" },
+    { value: "456789123", label: "456789123", name: "Robert Johnson" },
+  ];
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -72,11 +86,16 @@ export function PensiunModal({ isOpen, onClose, onPreview }: PensiunModalProps) 
 
   // Mock function to get employee data by NIP
   const fetchEmployeeData = async (nip: string) => {
-    // This would be an API call in a real app
-    setTimeout(() => {
-      setNama("John Doe");
+    // Find the employee in our mock data
+    const employee = employeeOptions.find(emp => emp.value === nip);
+    
+    if (employee) {
+      setNama(employee.name);
       form.setValue("tmt_pensiun", "2023-12-31");
-    }, 500);
+    } else {
+      setNama("");
+      form.setValue("tmt_pensiun", "");
+    }
   };
 
   // When NIP changes
@@ -147,9 +166,11 @@ export function PensiunModal({ isOpen, onClose, onPreview }: PensiunModalProps) 
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="123456789">123456789</SelectItem>
-                        <SelectItem value="987654321">987654321</SelectItem>
-                        <SelectItem value="456789123">456789123</SelectItem>
+                        {employeeOptions.map((option) => (
+                          <SelectItem key={option.value} value={option.value}>
+                            {option.value} - {option.name}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                     <FormMessage />

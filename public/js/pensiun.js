@@ -137,4 +137,25 @@ document.addEventListener('DOMContentLoaded', function() {
     if (mainCard) {
         mainCard.classList.add('fade-in');
     }
+    
+    // Custom Select2 formatting functions
+    window.formatPegawai = function(pegawai) {
+        if (pegawai.loading) {
+            return pegawai.text;
+        }
+        
+        var $container = $(
+            '<div class="select2-result-pegawai d-flex flex-column">' +
+                '<div class="select2-result-pegawai__name font-weight-bold">' + pegawai.text + '</div>' +
+                '<div class="select2-result-pegawai__nip text-muted small">' + pegawai.id + '</div>' +
+            '</div>'
+        );
+        
+        return $container;
+    }
+    
+    window.formatPegawaiSelection = function(pegawai) {
+        // Only display NIP once followed by the name
+        return pegawai.id ? pegawai.id + ' - ' + pegawai.text : pegawai.text;
+    }
 });
