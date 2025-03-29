@@ -138,12 +138,13 @@ document.addEventListener('DOMContentLoaded', function() {
         mainCard.classList.add('fade-in');
     }
     
-    // Custom Select2 formatting functions
+    // Custom Select2 formatting functions - update these to show NIP only once
     window.formatPegawai = function(pegawai) {
         if (pegawai.loading) {
             return pegawai.text;
         }
         
+        // Updated format to show name as primary and NIP as secondary information
         var $container = $(
             '<div class="select2-result-pegawai d-flex flex-column">' +
                 '<div class="select2-result-pegawai__name font-weight-bold">' + pegawai.text + '</div>' +
@@ -155,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     window.formatPegawaiSelection = function(pegawai) {
-        // Only display NIP once followed by the name
+        // Display NIP only once followed by the name
         return pegawai.id ? pegawai.id + ' - ' + pegawai.text : pegawai.text;
     }
 });
