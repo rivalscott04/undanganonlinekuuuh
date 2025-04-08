@@ -14,6 +14,7 @@ import {
   Plus
 } from "lucide-react";
 import { usePensiunData } from "@/hooks/usePensiunData";
+import { showIncompleteDataNotification } from "@/components/NotificationToast";
 
 const Index = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,6 +22,18 @@ const Index = () => {
   const [previewFile, setPreviewFile] = useState<File | null>(null);
   const { toast } = useToast();
   const { data, isLoading, refresh } = usePensiunData();
+
+  useEffect(() => {
+    // Show notification about incomplete data when the component mounts
+    if (data && data.length > 0) {
+      // Assuming we have 3 incomplete records for demo purposes
+      // In a real app, you would calculate this based on your data
+      const incompleteCount = 3;
+      if (incompleteCount > 0) {
+        showIncompleteDataNotification(incompleteCount);
+      }
+    }
+  }, [data]);
 
   const handleRefresh = () => {
     refresh();

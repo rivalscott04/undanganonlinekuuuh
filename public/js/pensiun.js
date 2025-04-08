@@ -1,7 +1,6 @@
 
 // Retirement Data Management JavaScript
 
-// Initialize DataTable when document is ready
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize DataTable if the table exists
     const pensiunTable = document.getElementById('pensiun-table');
@@ -159,4 +158,84 @@ document.addEventListener('DOMContentLoaded', function() {
         // Display NIP only once followed by the name
         return pegawai.id ? pegawai.id + ' - ' + pegawai.text : pegawai.text;
     }
+
+    // Show incomplete data notification
+    showIncompleteDataNotification(3); // Show notification for 3 incomplete records
 });
+
+// Function to show a notification for incomplete employee data
+function showIncompleteDataNotification(count) {
+    // Create the notification HTML
+    const notificationHtml = `
+        <div class="toast-notification fade-in" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <div class="d-flex align-items-center">
+                    <span class="bg-retirement-light text-retirement p-1 rounded-circle me-2">
+                        <i class="bi bi-bell"></i>
+                    </span>
+                    <strong class="me-auto">Perhatian!</strong>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                <p>Terdapat ${count} data pegawai yang belum lengkap. Silakan lengkapi data tersebut.</p>
+                <div class="mt-2 pt-2 border-top d-flex gap-2">
+                    <button type="button" class="btn btn-sm btn-outline-secondary" id="ignoreNotification">Abaikan</button>
+                    <button type="button" class="btn btn-sm btn-primary-custom" id="completeData">Lengkapi</button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Create container if it doesn't exist
+    let toastContainer = document.querySelector('.toast-container');
+    if (!toastContainer) {
+        toastContainer = document.createElement('div');
+        toastContainer.className = 'toast-container position-fixed top-0 end-0 p-3';
+        document.body.appendChild(toastContainer);
+    }
+
+    // Add the notification to the container
+    toastContainer.innerHTML = notificationHtml;
+
+    // Initialize the toast
+    const toastElement = toastContainer.querySelector('.toast-notification');
+    const toast = new bootstrap.Toast(toastElement, { autohide: false });
+    toast.show();
+
+    // Add event listeners to buttons
+    const ignoreButton = document.getElementById('ignoreNotification');
+    const completeButton = document.getElementById('completeData');
+
+    if (ignoreButton) {
+        ignoreButton.addEventListener('click', function() {
+            toast.hide();
+            
+            // Show feedback toast
+            Swal.fire({
+                title: 'Notifikasi diabaikan',
+                icon: 'info',
+                timer: 2000,
+                showConfirmButton: false
+            });
+        });
+    }
+
+    if (completeButton) {
+        completeButton.addEventListener('click', function() {
+            toast.hide();
+            
+            // Show feedback and redirect
+            Swal.fire({
+                title: 'Mengarahkan...',
+                text: 'Mengarahkan ke halaman pelengkapan data',
+                icon: 'info',
+                timer: 2000,
+                showConfirmButton: false
+            }).then(() => {
+                // In a real app, you would redirect to the data completion page
+                console.log('Navigate to data completion page');
+            });
+        });
+    }
+}
