@@ -1,4 +1,3 @@
-
 // Retirement Data Management JavaScript
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -137,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
         mainCard.classList.add('fade-in');
     }
     
-    // Custom Select2 formatting functions - update these to show NIP only once
+    // Custom Select2 formatting functions
     window.formatPegawai = function(pegawai) {
         if (pegawai.loading) {
             return pegawai.text;
@@ -160,58 +159,96 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Show incomplete data notification
-    showIncompleteDataNotification(3); // Show notification for 3 incomplete records
+    showIncompleteDataModal(3); // Show notification for 3 incomplete records
 });
 
-// Function to show a notification for incomplete employee data
-function showIncompleteDataNotification(count) {
-    // Create the notification HTML
-    const notificationHtml = `
-        <div class="toast-notification fade-in" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <div class="d-flex align-items-center">
-                    <span class="bg-retirement-light text-retirement p-1 rounded-circle me-2">
-                        <i class="bi bi-bell"></i>
-                    </span>
-                    <strong class="me-auto">Perhatian!</strong>
-                </div>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-                <p>Terdapat ${count} data pegawai yang belum lengkap. Silakan lengkapi data tersebut.</p>
-                <div class="mt-2 pt-2 border-top d-flex gap-2">
-                    <button type="button" class="btn btn-sm btn-outline-secondary" id="ignoreNotification">Abaikan</button>
-                    <button type="button" class="btn btn-sm btn-primary-custom" id="completeData">Lengkapi</button>
+// Function to show a modal dialog for incomplete employee data
+function showIncompleteDataModal(count) {
+    // Create modal HTML
+    const modalHtml = `
+        <div class="modal fade" id="incompleteDataModal" tabindex="-1" aria-labelledby="incompleteDataModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header border-0 pb-0">
+                        <div class="d-flex align-items-center">
+                            <span class="bg-retirement-light text-retirement p-2 rounded-circle me-2">
+                                <i class="bi bi-bell"></i>
+                            </span>
+                            <h5 class="modal-title" id="incompleteDataModalLabel">Perhatian!</h5>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body pt-2">
+                        <p>Terdapat ${count} data pegawai yang belum lengkap. Silakan lengkapi data tersebut.</p>
+                    </div>
+                    <div class="modal-footer border-0 pt-0">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" id="ignoreModalBtn">Abaikan</button>
+                        <button type="button" class="btn btn-primary-custom" id="completeDataBtn">Lengkapi</button>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="modal-backdrop fade show" id="modalBackdrop" style="display: none;"></div>
     `;
 
-    // Create container if it doesn't exist
-    let toastContainer = document.querySelector('.toast-container');
-    if (!toastContainer) {
-        toastContainer = document.createElement('div');
-        toastContainer.className = 'toast-container position-fixed top-0 end-0 p-3';
-        document.body.appendChild(toastContainer);
+    // Insert modal into document
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+    // Get modal elements
+    const modalElement = document.getElementById('incompleteDataModal');
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    
+    // Apply a blur effect to the main content when modal is shown
+    const mainContent = document.querySelector('main') || document.querySelector('.container');
+    if (mainContent) {
+        mainContent.style.transition = 'filter 0.3s ease';
     }
-
-    // Add the notification to the container
-    toastContainer.innerHTML = notificationHtml;
-
-    // Initialize the toast
-    const toastElement = toastContainer.querySelector('.toast-notification');
-    const toast = new bootstrap.Toast(toastElement, { autohide: false });
-    toast.show();
-
+    
+    // Function to show modal
+    function showModal() {
+        modalElement.classList.add('show');
+        modalElement.style.display = 'block';
+        modalBackdrop.style.display = 'block';
+        document.body.classList.add('modal-open');
+        
+        // Add blur effect
+        if (mainContent) {
+            mainContent.style.filter = 'blur(4px)';
+        }
+    }
+    
+    // Function to hide modal
+    function hideModal() {
+        modalElement.classList.remove('show');
+        modalElement.style.display = 'none';
+        modalBackdrop.style.display = 'none';
+        document.body.classList.remove('modal-open');
+        
+        // Remove blur effect
+        if (mainContent) {
+            mainContent.style.filter = 'none';
+        }
+        
+        // Remove modal elements after animation completes
+        setTimeout(() => {
+            modalElement.remove();
+            modalBackdrop.remove();
+        }, 300);
+    }
+    
+    // Show the modal
+    setTimeout(showModal, 500);
+    
     // Add event listeners to buttons
-    const ignoreButton = document.getElementById('ignoreNotification');
-    const completeButton = document.getElementById('completeData');
-
-    if (ignoreButton) {
-        ignoreButton.addEventListener('click', function() {
-            toast.hide();
+    const ignoreBtn = document.getElementById('ignoreModalBtn');
+    const completeBtn = document.getElementById('completeDataBtn');
+    const closeBtn = modalElement.querySelector('.btn-close');
+    
+    if (ignoreBtn) {
+        ignoreBtn.addEventListener('click', function() {
+            hideModal();
             
-            // Show feedback toast
+            // Show feedback
             Swal.fire({
                 title: 'Notifikasi diabaikan',
                 icon: 'info',
@@ -220,10 +257,10 @@ function showIncompleteDataNotification(count) {
             });
         });
     }
-
-    if (completeButton) {
-        completeButton.addEventListener('click', function() {
-            toast.hide();
+    
+    if (completeBtn) {
+        completeBtn.addEventListener('click', function() {
+            hideModal();
             
             // Show feedback and redirect
             Swal.fire({
@@ -238,4 +275,11 @@ function showIncompleteDataNotification(count) {
             });
         });
     }
+    
+    if (closeBtn) {
+        closeBtn.addEventListener('click', hideModal);
+    }
+    
+    // Close modal when clicking on backdrop
+    modalBackdrop.addEventListener('click', hideModal);
 }

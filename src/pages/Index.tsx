@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PensiunTable } from "@/components/PensiunTable";
@@ -14,12 +14,13 @@ import {
   Plus
 } from "lucide-react";
 import { usePensiunData } from "@/hooks/usePensiunData";
-import { showIncompleteDataNotification } from "@/components/NotificationToast";
+import { NotificationDialog } from "@/components/NotificationDialog";
 
 const Index = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
   const [previewFile, setPreviewFile] = useState<File | null>(null);
+  const [notificationOpen, setNotificationOpen] = useState(false);
   const { toast } = useToast();
   const { data, isLoading, refresh } = usePensiunData();
 
@@ -30,7 +31,7 @@ const Index = () => {
       // In a real app, you would calculate this based on your data
       const incompleteCount = 3;
       if (incompleteCount > 0) {
-        showIncompleteDataNotification(incompleteCount);
+        setNotificationOpen(true);
       }
     }
   }, [data]);
@@ -56,6 +57,24 @@ const Index = () => {
         document.getElementById('pensiunModal')?.classList.add('show');
       }, 300);
     }
+  };
+
+  const handleCompleteData = () => {
+    setNotificationOpen(false);
+    toast({
+      description: "Mengarahkan ke halaman pelengkapan data...",
+      duration: 2000,
+    });
+    // Here you would add navigation logic to the data completion page
+    console.log("Navigate to complete data page");
+  };
+
+  const handleIgnoreNotification = () => {
+    setNotificationOpen(false);
+    toast({
+      description: "Notifikasi diabaikan",
+      duration: 2000,
+    });
   };
 
   return (
@@ -115,6 +134,15 @@ const Index = () => {
         isOpen={isPreviewModalOpen}
         onClose={handleClosePreview}
         file={previewFile}
+      />
+
+      {/* Notification Dialog */}
+      <NotificationDialog
+        count={3}
+        open={notificationOpen}
+        onOpenChange={setNotificationOpen}
+        onComplete={handleCompleteData}
+        onIgnore={handleIgnoreNotification}
       />
     </div>
   );
