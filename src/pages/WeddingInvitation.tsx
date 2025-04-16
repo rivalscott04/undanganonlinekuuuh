@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Envelope } from "@/components/Envelope";
 import { Hero } from "@/components/Hero";
 import { Intro } from "@/components/Intro";
+import { CountdownTimer } from "@/components/CountdownTimer";
 import { EventDetails } from "@/components/EventDetails";
 import { RSVPConfirm } from "@/components/RSVPConfirm";
 import { WishesForm } from "@/components/WishesForm";
@@ -45,6 +46,7 @@ export default function WeddingInvitation() {
       
       <Hero />
       <Intro />
+      <CountdownTimer targetDate="2025-08-08T10:00:00" />
       <EventDetails />
       <RSVPConfirm />
       
