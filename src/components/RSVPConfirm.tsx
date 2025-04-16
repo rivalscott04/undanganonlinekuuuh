@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams } from "react-router-dom";
@@ -83,9 +82,9 @@ export function RSVPConfirm() {
                   variant="outline"
                   onClick={handleDecline}
                   size={isMobile ? "default" : "lg"}
-                  className="flex-1 py-4 sm:py-6 border-retirement-muted text-slate-700 hover:bg-slate-100"
+                  className="flex-1 py-4 sm:py-6 border-retirement-muted text-slate-700 hover:bg-retirement-light/30 hover:text-retirement-dark hover:border-retirement-dark transition-colors duration-300 group"
                 >
-                  <X className="mr-2 h-4 w-4" />
+                  <X className="mr-2 h-4 w-4 group-hover:text-retirement-dark" />
                   Mohon maaf, belum bisa hadir
                 </Button>
               </div>
