@@ -12,12 +12,12 @@ export function HeroEnvelope() {
   const guestName = searchParams.get("to") || "Tamu Undangan";
 
   const handleOpenEnvelope = () => {
-    // Trigger confetti effect
+    // Trigger confetti effect with wedding-themed colors
     confetti({
       particleCount: 50,
       spread: 70,
       origin: { y: 0.6 },
-      colors: ['#c8a961', '#911f1f', '#E5EAF2']
+      colors: ['#911f1f', '#c8a961', '#FFDEE2']
     });
     
     setIsOpen(true);
@@ -139,3 +139,4 @@ export function HeroEnvelope() {
     </section>
   );
 }
+
