@@ -39,7 +39,11 @@ export default function WeddingInvitation() {
   return (
     <div className="min-h-screen bg-white">
       {!isOpened && <HeroEnvelope isOpen={isOpened} onOpen={() => setIsOpened(true)} />}
-      <InvitationPage wishes={wishes} onWishSent={handleWishSent} />
+      
+      {/* Always render the invitation page but control its visibility with CSS */}
+      <div className={isOpened ? "opacity-100 transition-opacity duration-500" : "opacity-0 pointer-events-none transition-opacity duration-500"}>
+        <InvitationPage wishes={wishes} onWishSent={handleWishSent} />
+      </div>
     </div>
   );
 }

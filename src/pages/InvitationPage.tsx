@@ -25,11 +25,15 @@ export default function InvitationPage({ wishes, onWishSent }: InvitationPagePro
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.8, delay: 0.5 }}
+      transition={{ duration: 0.8 }}
       className="bg-white min-h-screen"
     >
       <MusicToggle />
+      
+      {/* Header Section - Primary Element */}
       <WeddingHeader />
+      
+      {/* Content Sections */}
       <Intro />
       <CountdownTimer targetDate="2025-08-08T10:00:00" />
       <EventDetails />
