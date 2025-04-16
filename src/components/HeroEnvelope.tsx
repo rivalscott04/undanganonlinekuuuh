@@ -118,7 +118,14 @@ export function HeroEnvelope() {
               >
                 Rival
               </motion.span>
-              <span className="mx-2 md:mx-4 block">&</span>
+              <motion.span
+                initial={{ opacity: 0, x: 0 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.9 }}
+                className="block my-2 text-3xl sm:text-4xl md:text-5xl"
+              >
+                &
+              </motion.span>
               <motion.span
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
