@@ -121,12 +121,12 @@ export function CountdownTimer({ targetDate = "2025-06-15T08:00:00" }: Countdown
         >
           {timeBlocks.map(({ label, value }) => (
             <motion.div
-              key={`${label}-${value}`}
+              key={label}
               variants={itemVariants}
               className="text-center"
             >
               <motion.div
-                key={value}
+                key={`${label}-${value}`}
                 initial={{ scale: 0.95, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.2 }}
