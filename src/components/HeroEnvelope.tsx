@@ -109,19 +109,21 @@ export function HeroEnvelope() {
               UNDANGAN PERNIKAHAN
             </div>
             
-            <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl font-bold text-[#4F6FA0] mb-6">
+            <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl font-bold text-[#4F6FA0] mb-6 flex flex-col items-center">
               <motion.span
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
+                className="block"
               >
                 Rival
               </motion.span>
-              <span className="mx-2 md:mx-4">&</span>
+              <span className="mx-2 md:mx-4 block">&</span>
               <motion.span
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
+                className="block"
               >
                 Syahrina
               </motion.span>
