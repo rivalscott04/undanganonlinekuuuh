@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { CalendarPlus, Flower2 } from "lucide-react";
@@ -95,18 +96,6 @@ export function CountdownTimer({ targetDate = "2025-06-15T08:00:00" }: Countdown
           maskImage: 'linear-gradient(to top, black, transparent)',
           WebkitMaskImage: 'linear-gradient(to top, black, transparent)'
         }}
-      />
-
-      {/* Muslim Couple Silhouettes */}
-      <img 
-        src="/src/public/images/muslim-couple-silhouette.svg" 
-        alt="Muslim Bride and Groom Silhouette" 
-        className="absolute bottom-0 left-0 w-28 opacity-20 hidden sm:block z-0"
-      />
-      <img 
-        src="/src/public/images/muslim-couple-silhouette.svg" 
-        alt="Muslim Bride and Groom Silhouette" 
-        className="absolute bottom-0 right-0 w-28 opacity-20 hidden sm:block z-0 transform scale-x-[-1]"
       />
 
       {/* Animated Doves */}
