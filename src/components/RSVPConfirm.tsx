@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams } from "react-router-dom";
@@ -106,8 +107,8 @@ export function RSVPConfirm() {
           {status === "attending" && (
             <motion.div
               key="attending"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               className="py-8 sm:py-12 space-y-4 sm:space-y-6"
             >
               <div className="flex justify-center mb-4 sm:mb-6">
@@ -137,9 +138,8 @@ export function RSVPConfirm() {
           {status === "not-attending" && (
             <motion.div
               key="not-attending"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               className="py-4 w-full"
             >
               <AbsentFlow />
@@ -150,3 +150,4 @@ export function RSVPConfirm() {
     </section>
   );
 }
+
