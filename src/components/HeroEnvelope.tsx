@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams } from "react-router-dom";
@@ -5,7 +6,11 @@ import { Button } from "@/components/ui/button";
 import { Mail } from "lucide-react";
 import confetti from "canvas-confetti";
 
-export function HeroEnvelope() {
+interface HeroEnvelopeProps {
+  onEnvelopeOpen: () => void;
+}
+
+export function HeroEnvelope({ onEnvelopeOpen }: HeroEnvelopeProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [searchParams] = useSearchParams();
   const guestName = searchParams.get("to") || "Tamu Undangan";
@@ -19,6 +24,7 @@ export function HeroEnvelope() {
     });
     
     setIsOpen(true);
+    onEnvelopeOpen();
   };
 
   return (
@@ -69,8 +75,10 @@ export function HeroEnvelope() {
                   <div className="w-20 h-1 bg-[#E5DEFF] rounded-full"></div>
                 </div>
                 
-                <h1 className="font-serif text-4xl font-bold text-[#4F6FA0] mb-6">
-                  Rival & Syahrina
+                <h1 className="font-serif text-4xl font-bold text-[#4F6FA0] mb-6 flex flex-col items-center">
+                  <span className="block text-center">Rival</span>
+                  <span className="block my-2 text-3xl text-center">&</span>
+                  <span className="block text-center">Syahrina</span>
                 </h1>
                 
                 <div className="mb-4 text-sm text-[#7E6F9E]">

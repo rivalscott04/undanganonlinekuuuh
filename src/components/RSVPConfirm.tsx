@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams } from "react-router-dom";
@@ -150,4 +149,3 @@ export function RSVPConfirm() {
     </section>
   );
 }
-
