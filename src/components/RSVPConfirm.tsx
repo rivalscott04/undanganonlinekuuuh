@@ -6,6 +6,7 @@ import confetti from "canvas-confetti";
 import { Button } from "@/components/ui/button";
 import { Check, X, Heart } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { AbsentFlow } from "@/components/AbsentFlow";
 
 export function RSVPConfirm() {
   const [searchParams] = useSearchParams();
@@ -131,21 +132,10 @@ export function RSVPConfirm() {
               key="not-attending"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="py-8 sm:py-12 space-y-4 sm:space-y-6"
+              transition={{ duration: 0.5 }}
+              className="py-4"
             >
-              <div className="flex justify-center mb-4 sm:mb-6">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-retirement-muted/30 flex items-center justify-center">
-                  <Heart className="h-8 w-8 sm:h-10 sm:w-10 text-slate-400" />
-                </div>
-              </div>
-              
-              <h3 className="text-xl sm:text-2xl font-medium text-retirement-dark">
-                Terima kasih atas doa dan perhatiannya
-              </h3>
-              
-              <p className="text-slate-600 text-sm sm:text-base">
-                Semoga kita bisa bersua di kesempatan lain
-              </p>
+              <AbsentFlow />
             </motion.div>
           )}
         </AnimatePresence>
