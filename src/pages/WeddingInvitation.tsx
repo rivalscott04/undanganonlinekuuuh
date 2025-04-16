@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import { Hero } from "@/components/Hero";
+import { HeroEnvelope } from "@/components/HeroEnvelope";
 import { Intro } from "@/components/Intro";
 import { CountdownTimer } from "@/components/CountdownTimer";
 import { EventDetails } from "@/components/EventDetails";
@@ -38,7 +38,7 @@ export default function WeddingInvitation() {
     <div className="bg-white min-h-screen">
       <MusicToggle />
       
-      <Hero />
+      <HeroEnvelope />
       <Intro />
       <CountdownTimer targetDate="2025-08-08T10:00:00" />
       <EventDetails />
