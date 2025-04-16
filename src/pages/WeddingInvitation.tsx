@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { HeroEnvelope } from "@/components/HeroEnvelope";
 import InvitationPage from "./InvitationPage";
 
@@ -24,14 +24,22 @@ export default function WeddingInvitation() {
     }
   ]);
   
+  // Lock/unlock scroll based on isOpened state
+  useEffect(() => {
+    document.body.style.overflow = isOpened ? 'auto' : 'hidden';
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isOpened]);
+  
   const handleWishSent = (newWish: Wish) => {
     setWishes(prevWishes => [newWish, ...prevWishes]);
   };
   
   return (
-    <>
-      <HeroEnvelope isOpen={isOpened} onOpen={() => setIsOpened(true)} />
+    <div className="min-h-screen bg-white">
+      {!isOpened && <HeroEnvelope isOpen={isOpened} onOpen={() => setIsOpened(true)} />}
       {isOpened && <InvitationPage wishes={wishes} onWishSent={handleWishSent} />}
-    </>
+    </div>
   );
 }
