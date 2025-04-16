@@ -9,6 +9,7 @@ import { WishesForm } from "@/components/WishesForm";
 import { WishesList } from "@/components/WishesList";
 import { MusicToggle } from "@/components/MusicToggle";
 import { Toaster } from "@/components/ui/toaster";
+import { WeddingHeader } from "@/components/WeddingHeader";
 
 interface InvitationPageProps {
   wishes: {
@@ -28,6 +29,7 @@ export default function InvitationPage({ wishes, onWishSent }: InvitationPagePro
       className="bg-white min-h-screen"
     >
       <MusicToggle />
+      <WeddingHeader />
       <Intro />
       <CountdownTimer targetDate="2025-08-08T10:00:00" />
       <EventDetails />
