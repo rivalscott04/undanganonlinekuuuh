@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams } from "react-router-dom";
@@ -12,7 +11,6 @@ export function HeroEnvelope() {
   const guestName = searchParams.get("to") || "Tamu Undangan";
 
   const handleOpenEnvelope = () => {
-    // Trigger confetti effect with wedding-themed colors
     confetti({
       particleCount: 50,
       spread: 70,
@@ -25,7 +23,6 @@ export function HeroEnvelope() {
 
   return (
     <section className="py-12 md:py-20 px-4 flex flex-col items-center justify-center min-h-[80vh] bg-[#F6F6F7] relative overflow-hidden">
-      {/* Sasak Pattern Background */}
       <div className="absolute inset-0 opacity-10 z-0">
         <svg
           viewBox="0 0 1440 900"
@@ -54,9 +51,7 @@ export function HeroEnvelope() {
             transition={{ duration: 0.6 }}
             className="w-full max-w-md z-10"
           >
-            {/* Envelope */}
             <div className="relative bg-white rounded-xl shadow-lg border border-[#E5DEFF] overflow-hidden p-8">
-              {/* Envelope Flap - Top Triangle */}
               <motion.div 
                 className="absolute top-0 left-0 w-full h-24 bg-[#F6F6F7]"
                 style={{ 
@@ -114,7 +109,7 @@ export function HeroEnvelope() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
-                className="block"
+                className="block text-center"
               >
                 Rival
               </motion.span>
@@ -122,7 +117,7 @@ export function HeroEnvelope() {
                 initial={{ opacity: 0, x: 0 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.9 }}
-                className="block my-2 text-3xl sm:text-4xl md:text-5xl"
+                className="block my-2 text-3xl sm:text-4xl md:text-5xl text-center"
               >
                 &
               </motion.span>
@@ -130,7 +125,7 @@ export function HeroEnvelope() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
-                className="block"
+                className="block text-center"
               >
                 Syahrina
               </motion.span>
