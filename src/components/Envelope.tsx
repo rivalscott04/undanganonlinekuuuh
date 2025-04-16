@@ -1,10 +1,8 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { validateGuest } from "@/utils/guestList";
-import { AlertCircle } from "lucide-react";
 
 interface EnvelopeProps {
   onOpen: () => void;
@@ -12,20 +10,8 @@ interface EnvelopeProps {
 
 export function Envelope({ onOpen }: EnvelopeProps) {
   const [isOpening, setIsOpening] = useState(false);
-  const [isInvited, setIsInvited] = useState<boolean | null>(null);
   const [searchParams] = useSearchParams();
   const guestName = searchParams.get("to") || "Tamu Undangan";
-  
-  useEffect(() => {
-    // Validate if guest is invited
-    if (guestName !== "Tamu Undangan") {
-      const isValidGuest = validateGuest(guestName);
-      setIsInvited(isValidGuest);
-    } else {
-      // Default guest is always allowed
-      setIsInvited(true);
-    }
-  }, [guestName]);
 
   const handleOpenClick = () => {
     setIsOpening(true);
@@ -67,18 +53,10 @@ export function Envelope({ onOpen }: EnvelopeProps) {
                 Untuk hadir dan memberikan doa restu
               </div>
             </div>
-            
-            {isInvited === false && (
-              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-md flex items-center text-red-700">
-                <AlertCircle className="h-5 w-5 mr-2 flex-shrink-0" />
-                <p className="text-sm">Maaf, Anda tidak terdaftar dalam daftar undangan</p>
-              </div>
-            )}
 
             <Button 
               onClick={handleOpenClick}
-              disabled={isInvited === false}
-              className="w-full py-6 text-white bg-retirement hover:bg-retirement-dark disabled:bg-slate-300"
+              className="w-full py-6 text-white bg-retirement hover:bg-retirement-dark"
             >
               Buka Undangan
             </Button>
