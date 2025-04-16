@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useSearchParams } from "react-router-dom";
+import { IslamicAvatars } from "./IslamicAvatars";
 
 export function Intro() {
   const [searchParams] = useSearchParams();
@@ -21,6 +22,8 @@ export function Intro() {
         <p className="text-slate-700 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
           Assalamu'alaikum Warahmatullahi Wabarakatuh
         </p>
+
+        <IslamicAvatars />
         
         <p className="text-slate-700 mb-8 sm:mb-10 leading-relaxed text-sm sm:text-base px-2">
           Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i <span className="font-medium text-retirement-dark">{guestName}</span> untuk menghadiri pernikahan kami:
@@ -68,4 +71,3 @@ export function Intro() {
     </section>
   );
 }
-
