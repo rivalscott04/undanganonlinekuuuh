@@ -1,3 +1,4 @@
+
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams } from "react-router-dom";
@@ -26,11 +27,7 @@ export function HeroEnvelope({ isOpen, onOpen }: HeroEnvelopeProps) {
   };
 
   return (
-    <section className={`
-      fixed inset-0 z-[999] 
-      ${isOpen ? 'pointer-events-none' : 'bg-white'}
-      transition-colors duration-500
-    `}>
+    <section className="fixed inset-0 z-[999] bg-white">
       <div className="py-12 md:py-20 px-4 flex flex-col items-center justify-center min-h-screen bg-[#f9fafb] relative overflow-hidden">
         <div className="absolute inset-0 opacity-5 z-0">
           <svg
