@@ -17,7 +17,7 @@ export function HeroEnvelope() {
       particleCount: 50,
       spread: 70,
       origin: { y: 0.6 },
-      colors: ['#403E43', '#E5DEFF', '#F6F6F7']
+      colors: ['#4F6FA0', '#E5DEFF', '#FFFFFF']
     });
     
     setIsOpen(true);
@@ -35,10 +35,10 @@ export function HeroEnvelope() {
         >
           <defs>
             <pattern id="sasakPattern" width="120" height="120" patternUnits="userSpaceOnUse">
-              <path d="M60 0 L90 30 L60 60 L30 30 Z" fill="#403E43" opacity="0.3" />
-              <circle cx="60" cy="60" r="8" fill="#8A898C" opacity="0.5" />
-              <path d="M0 60 Q30 75 60 60 Q30 45 0 60" fill="none" stroke="#8A898C" strokeWidth="1" opacity="0.5" />
-              <path d="M60 0 Q75 30 60 60 Q45 30 60 0" fill="none" stroke="#8A898C" strokeWidth="1" opacity="0.5" />
+              <path d="M60 0 L90 30 L60 60 L30 30 Z" fill="#4F6FA0" opacity="0.3" />
+              <circle cx="60" cy="60" r="8" fill="#7E6F9E" opacity="0.5" />
+              <path d="M0 60 Q30 75 60 60 Q30 45 0 60" fill="none" stroke="#7E6F9E" strokeWidth="1" opacity="0.5" />
+              <path d="M60 0 Q75 30 60 60 Q45 30 60 0" fill="none" stroke="#7E6F9E" strokeWidth="1" opacity="0.5" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#sasakPattern)" />
@@ -62,35 +62,35 @@ export function HeroEnvelope() {
                 style={{ 
                   clipPath: "polygon(0 0, 100% 0, 50% 100%)",
                   zIndex: 5,
-                  backgroundImage: `linear-gradient(45deg, rgba(138, 137, 140, 0.1), rgba(64, 62, 67, 0.05))`,
-                  borderBottom: "1px dashed rgba(64, 62, 67, 0.2)"
+                  backgroundImage: `linear-gradient(45deg, rgba(126, 111, 158, 0.1), rgba(79, 111, 160, 0.05))`,
+                  borderBottom: "1px dashed rgba(79, 111, 160, 0.2)"
                 }}
               />
               
               <div className="pt-20 text-center">
                 <div className="flex items-center justify-center mb-6">
                   <div className="w-20 h-1 bg-[#E5DEFF] rounded-full"></div>
-                  <div className="mx-4 text-xl font-medium text-[#403E43] font-serif">Undangan</div>
+                  <div className="mx-4 text-xl font-medium text-[#4F6FA0] font-serif">Undangan</div>
                   <div className="w-20 h-1 bg-[#E5DEFF] rounded-full"></div>
                 </div>
                 
-                <h1 className="font-serif text-4xl font-bold text-[#403E43] mb-6">
+                <h1 className="font-serif text-4xl font-bold text-[#4F6FA0] mb-6">
                   Rival & Syahrina
                 </h1>
                 
-                <div className="mb-4 text-sm text-[#8A898C]">
+                <div className="mb-4 text-sm text-[#7E6F9E]">
                   Kami mengundang Bapak/Ibu/Saudara/i
                 </div>
-                <div className="py-3 px-8 mb-6 mx-auto text-lg font-medium border border-[#E5DEFF] inline-block rounded-md text-[#403E43] font-serif">
+                <div className="py-3 px-8 mb-6 mx-auto text-lg font-medium border border-[#E5DEFF] inline-block rounded-md text-[#4F6FA0] font-serif">
                   Yth. {guestName}
                 </div>
-                <div className="text-sm text-[#8A898C] mb-8">
+                <div className="text-sm text-[#7E6F9E] mb-8">
                   Untuk hadir dan memberikan doa restu
                 </div>
 
                 <Button 
                   onClick={handleOpenEnvelope}
-                  className="px-6 py-6 text-white bg-[#403E43] hover:bg-[#555555] transition-colors font-serif"
+                  className="px-6 py-6 text-white bg-[#4F6FA0] hover:bg-[#3D5A8F] transition-colors font-serif"
                 >
                   <Mail className="mr-2 h-5 w-5" />
                   Buka Undangan
@@ -105,11 +105,11 @@ export function HeroEnvelope() {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="relative z-10 text-center"
           >
-            <div className="mb-4 text-xs sm:text-sm tracking-widest text-[#403E43] font-serif">
+            <div className="mb-4 text-xs sm:text-sm tracking-widest text-[#4F6FA0] font-serif">
               UNDANGAN PERNIKAHAN
             </div>
             
-            <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl font-bold text-[#403E43] mb-6">
+            <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl font-bold text-[#4F6FA0] mb-6">
               <motion.span
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -129,10 +129,10 @@ export function HeroEnvelope() {
             
             <div className="w-16 sm:w-20 h-1 bg-[#E5DEFF] mx-auto mb-6 rounded-full"></div>
             
-            <p className="text-[#8A898C] text-sm sm:text-base max-w-lg mx-auto px-2 font-serif">
+            <p className="text-[#7E6F9E] text-sm sm:text-base max-w-lg mx-auto px-2 font-serif">
               "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu istri-istri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang."
             </p>
-            <p className="text-[#403E43] mt-3 italic text-xs sm:text-sm font-serif">— QS. Ar-Rum: 21</p>
+            <p className="text-[#4F6FA0] mt-3 italic text-xs sm:text-sm font-serif">— QS. Ar-Rum: 21</p>
           </motion.div>
         )}
       </AnimatePresence>
