@@ -101,8 +101,33 @@ export function AbsentFlow() {
     }
   };
 
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: { 
+        staggerChildren: 0.1
+      }
+    }
+  };
+  
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.5 }
+    }
+  };
+
   return (
-    <div className="w-full max-w-4xl mx-auto py-10 px-4 relative overflow-hidden">
+    <motion.div 
+      className="w-full max-w-4xl mx-auto px-4 relative overflow-x-hidden"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
       {/* Decorative elements */}
       <motion.div
         animate={{ y: [0, 20, 0], opacity: [0.4, 0.8, 0.4] }}
@@ -130,17 +155,13 @@ export function AbsentFlow() {
       
       {/* Main content */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="space-y-10"
+        className="space-y-8"
+        variants={containerVariants}
       >
         {/* Islamic & Inclusive Prayer */}
         <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.2 }}
           className="text-center space-y-6"
+          variants={itemVariants}
         >
           <h2 className="text-xl sm:text-2xl font-medium font-serif text-retirement-dark">
             بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
@@ -173,10 +194,8 @@ export function AbsentFlow() {
         
         {/* Wishes Form */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
           className="bg-white rounded-lg p-6 shadow-sm border border-retirement-muted/30"
+          variants={itemVariants}
         >
           <h3 className="text-lg sm:text-xl font-medium text-retirement-dark mb-4">
             Kirim Doa & Ucapan
@@ -217,10 +236,8 @@ export function AbsentFlow() {
         
         {/* Gift Section */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.7 }}
           className="pt-4"
+          variants={itemVariants}
         >
           <div className="text-center mb-6">
             <h3 className="text-lg sm:text-xl font-medium text-retirement-dark mb-2">
@@ -317,10 +334,8 @@ export function AbsentFlow() {
         {/* Wishes List */}
         {wishes.length > 0 && (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
             className="mt-8 space-y-4"
+            variants={itemVariants}
           >
             <h3 className="text-lg sm:text-xl font-medium text-retirement-dark mb-4">
               Ucapan & Doa Tamu
@@ -346,6 +361,6 @@ export function AbsentFlow() {
           </motion.div>
         )}
       </motion.div>
-    </div>
+    </motion.div>
   );
 }
