@@ -1,21 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Mail } from "lucide-react";
 import confetti from "canvas-confetti";
 
-export function HeroEnvelope() {
-  const [isOpen, setIsOpen] = useState(false);
+interface HeroEnvelopeProps {
+  isOpen: boolean;
+  onOpen: () => void;
+}
+
+export function HeroEnvelope({ isOpen, onOpen }: HeroEnvelopeProps) {
   const [searchParams] = useSearchParams();
   const guestName = searchParams.get("to") || "Tamu Undangan";
-
-  useEffect(() => {
-    document.body.style.overflow = isOpen ? 'auto' : 'hidden';
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, [isOpen]);
 
   const handleOpenEnvelope = () => {
     confetti({
@@ -25,7 +22,7 @@ export function HeroEnvelope() {
       colors: ['#445981', '#c8a961', '#E5EAF2']
     });
     
-    setIsOpen(true);
+    onOpen();
   };
 
   return (
@@ -105,43 +102,7 @@ export function HeroEnvelope() {
                 </div>
               </div>
             </motion.div>
-          ) : (
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-              className="relative z-10 text-center"
-            >
-              <div className="mb-4 text-xs sm:text-sm tracking-widest text-[#445981]">
-                UNDANGAN PERNIKAHAN
-              </div>
-              
-              <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl font-bold text-[#445981] mb-6">
-                <motion.span
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.8 }}
-                >
-                  Rival
-                </motion.span>
-                <span className="mx-2 md:mx-4">&</span>
-                <motion.span
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.8 }}
-                >
-                  Syahrina
-                </motion.span>
-              </h1>
-              
-              <div className="w-16 sm:w-20 h-[1px] bg-[#445981]/30 mx-auto mb-6 rounded-full"></div>
-              
-              <p className="text-slate-600 text-sm sm:text-base max-w-lg mx-auto px-2">
-                "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu istri-istri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang."
-              </p>
-              <p className="text-[#445981] mt-3 italic text-xs sm:text-sm">— QS. Ar-Rum: 21</p>
-            </motion.div>
-          )}
+          ) : null}
         </AnimatePresence>
       </div>
     </section>
