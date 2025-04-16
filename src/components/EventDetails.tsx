@@ -1,0 +1,131 @@
+
+import React from "react";
+import { motion } from "framer-motion";
+import { MapPin, Calendar, Clock } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+export function EventDetails() {
+  return (
+    <section className="py-20 px-4 bg-retirement-light/30">
+      <div className="max-w-4xl mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <h2 className="font-serif text-3xl md:text-4xl text-retirement-dark mb-4">Rangkaian Acara</h2>
+          <div className="w-20 h-1 bg-retirement-accent/50 mx-auto mb-6 rounded-full"></div>
+          <p className="text-slate-600 max-w-xl mx-auto">
+            Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu
+          </p>
+        </motion.div>
+        
+        <div className="grid md:grid-cols-2 gap-8">
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <Card className="border-retirement-muted/30 shadow-sm h-full">
+              <CardHeader className="pb-2">
+                <CardTitle className="font-serif text-2xl text-retirement-dark">Akad Nikah</CardTitle>
+                <CardDescription>Ijab Kabul Pernikahan</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-start">
+                  <Calendar className="mr-3 h-5 w-5 text-retirement" />
+                  <div>
+                    <div className="font-medium">Sabtu, 15 Juni 2024</div>
+                    <div className="text-sm text-slate-500">13 Dzulhijjah 1445 H</div>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <Clock className="mr-3 h-5 w-5 text-retirement" />
+                  <div>
+                    <div className="font-medium">08:00 - 10:00 WIB</div>
+                    <div className="text-sm text-slate-500">Akad Pernikahan</div>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <MapPin className="mr-3 h-5 w-5 text-retirement" />
+                  <div>
+                    <div className="font-medium">Masjid Al-Muhajirin</div>
+                    <div className="text-sm text-slate-500">Jl. Cendrawasih No. 12, Jakarta Selatan</div>
+                  </div>
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button 
+                  variant="outline" 
+                  className="w-full border-retirement text-retirement hover:bg-retirement hover:text-white"
+                  onClick={() => window.open("https://maps.google.com/?q=Masjid+Al+Muhajirin+Jakarta", "_blank")}
+                >
+                  <MapPin className="mr-2 h-4 w-4" />
+                  Buka Google Maps
+                </Button>
+              </CardFooter>
+            </Card>
+          </motion.div>
+          
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <Card className="border-retirement-muted/30 shadow-sm h-full">
+              <CardHeader className="pb-2">
+                <CardTitle className="font-serif text-2xl text-retirement-dark">Resepsi</CardTitle>
+                <CardDescription>Walimatul 'Ursy</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-start">
+                  <Calendar className="mr-3 h-5 w-5 text-retirement" />
+                  <div>
+                    <div className="font-medium">Sabtu, 15 Juni 2024</div>
+                    <div className="text-sm text-slate-500">13 Dzulhijjah 1445 H</div>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <Clock className="mr-3 h-5 w-5 text-retirement" />
+                  <div>
+                    <div className="font-medium">11:00 - 14:00 WIB</div>
+                    <div className="text-sm text-slate-500">Resepsi Pernikahan</div>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <MapPin className="mr-3 h-5 w-5 text-retirement" />
+                  <div>
+                    <div className="font-medium">Gedung Auditorium Pertamina</div>
+                    <div className="text-sm text-slate-500">Jl. M.H. Thamrin No. 28, Jakarta Pusat</div>
+                  </div>
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button 
+                  variant="outline" 
+                  className="w-full border-retirement text-retirement hover:bg-retirement hover:text-white"
+                  onClick={() => window.open("https://maps.google.com/?q=Gedung+Auditorium+Pertamina+Jakarta", "_blank")}
+                >
+                  <MapPin className="mr-2 h-4 w-4" />
+                  Buka Google Maps
+                </Button>
+              </CardFooter>
+            </Card>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
