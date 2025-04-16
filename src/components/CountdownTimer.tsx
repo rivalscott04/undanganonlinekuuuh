@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { CalendarPlus, Flower2 } from "lucide-react";
@@ -64,6 +65,23 @@ export function CountdownTimer({ targetDate = "2025-06-15T08:00:00" }: Countdown
 
   return (
     <section className="relative py-16 sm:py-20 px-4 overflow-hidden">
+      {/* Sasak Pattern Background */}
+      <div 
+        className="absolute inset-0 bg-[url('/src/public/images/sasak-pattern.svg')] 
+        bg-repeat opacity-10 pointer-events-none text-retirement/20"
+        style={{ backgroundSize: '100px 100px' }}
+      />
+      
+      {/* Top Border Pattern */}
+      <div className="absolute top-0 left-0 right-0 h-8 bg-[url('/src/public/images/sasak-pattern.svg')] 
+        bg-repeat-x opacity-20 pointer-events-none transform rotate-180"
+      />
+      
+      {/* Bottom Border Pattern */}
+      <div className="absolute bottom-0 left-0 right-0 h-8 bg-[url('/src/public/images/sasak-pattern.svg')] 
+        bg-repeat-x opacity-20 pointer-events-none"
+      />
+
       {/* Muslim Couple Silhouettes */}
       <img 
         src="/src/public/images/muslim-couple-silhouette.svg" 
@@ -76,14 +94,27 @@ export function CountdownTimer({ targetDate = "2025-06-15T08:00:00" }: Countdown
         className="absolute bottom-0 right-0 w-28 opacity-20 hidden sm:block z-0 transform scale-x-[-1]"
       />
 
-      {/* Floral Ornaments */}
-      <div className="absolute -left-4 top-0 text-retirement/10">
-        <Flower2 className="w-24 h-24 sm:w-32 sm:h-32 rotate-45" />
-      </div>
-      <div className="absolute -right-4 bottom-0 text-retirement/10">
-        <Flower2 className="w-24 h-24 sm:w-32 sm:h-32 -rotate-45" />
-      </div>
+      {/* Animated Doves */}
+      <motion.div
+        initial={{ x: -100, y: 50, opacity: 0 }}
+        animate={{ 
+          x: [null, 0, 100],
+          y: [null, 0, -50],
+          opacity: [0, 1, 0]
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          repeatDelay: 3
+        }}
+        className="absolute top-1/4 left-0 pointer-events-none"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" className="text-retirement-accent/30">
+          <path d="M21.946 9.372a1.5 1.5 0 0 0-.484-.667L21 6.5s-4 2-8 2-8-2-8-2l-.446 2.205a1.5 1.5 0 0 0-.484.667L8 12l-3.93 2.621a1.5 1.5 0 0 0 .484.667L5 17.5s4-2 8-2 8 2 8 2l.446-2.205a1.5 1.5 0 0 0 .484-.667L18 12l3.946-2.628zM12 13.5c-1.933 0-3.5-2.09-3.5-4.667S10.067 4.167 12 4.167s3.5 2.09 3.5 4.666S13.933 13.5 12 13.5z" fill="currentColor"/>
+        </svg>
+      </motion.div>
 
+      {/* Main Content */}
       <motion.div
         initial="hidden"
         whileInView="visible"
