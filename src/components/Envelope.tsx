@@ -31,32 +31,32 @@ export function Envelope({ onOpen }: EnvelopeProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50, scale: 0.9 }}
             transition={{ duration: 0.6 }}
-            className="w-full max-w-md p-8 mx-auto bg-white rounded-lg shadow-md border border-slate-200"
+            className="w-full max-w-md p-5 sm:p-8 mx-auto bg-white rounded-lg shadow-md border border-slate-200"
           >
-            <div className="flex items-center justify-center mb-6">
-              <div className="w-20 h-1 bg-retirement-accent/30 rounded-full"></div>
-              <div className="mx-4 text-xl font-medium text-retirement">Undangan</div>
-              <div className="w-20 h-1 bg-retirement-accent/30 rounded-full"></div>
+            <div className="flex items-center justify-center mb-4 sm:mb-6">
+              <div className="w-14 sm:w-20 h-1 bg-retirement-accent/30 rounded-full"></div>
+              <div className="mx-2 sm:mx-4 text-base sm:text-xl font-medium text-retirement">Undangan</div>
+              <div className="w-14 sm:w-20 h-1 bg-retirement-accent/30 rounded-full"></div>
             </div>
             
-            <div className="text-center mb-8">
-              <h1 className="font-serif text-4xl font-bold text-retirement-dark mb-6">
+            <div className="text-center mb-6 sm:mb-8">
+              <h1 className="font-serif text-3xl sm:text-4xl font-bold text-retirement-dark mb-4 sm:mb-6">
                 Rival & Syahrina
               </h1>
-              <div className="mb-6 text-sm text-slate-500">
+              <div className="mb-4 sm:mb-6 text-xs sm:text-sm text-slate-500">
                 Kami mengundang Bapak/Ibu/Saudara/i
               </div>
-              <div className="py-3 px-8 mb-6 mx-auto text-lg font-medium border border-retirement-accent/30 inline-block rounded-md text-retirement-dark">
+              <div className="py-2 sm:py-3 px-4 sm:px-8 mb-4 sm:mb-6 mx-auto text-base sm:text-lg font-medium border border-retirement-accent/30 inline-block rounded-md text-retirement-dark">
                 Yth. {guestName}
               </div>
-              <div className="text-sm text-slate-500 mb-8">
+              <div className="text-xs sm:text-sm text-slate-500 mb-6 sm:mb-8">
                 Untuk hadir dan memberikan doa restu
               </div>
             </div>
 
             <Button 
               onClick={handleOpenClick}
-              className="w-full py-6 text-white bg-retirement hover:bg-retirement-dark"
+              className="w-full py-4 sm:py-6 text-white bg-retirement hover:bg-retirement-dark"
             >
               Buka Undangan
             </Button>

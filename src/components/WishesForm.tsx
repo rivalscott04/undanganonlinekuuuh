@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Send } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface WishFormData {
   name: string;
@@ -22,6 +23,7 @@ export function WishesForm({ onWishSent }: WishesFormProps) {
     message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const isMobile = useIsMobile();
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -72,9 +74,9 @@ export function WishesForm({ onWishSent }: WishesFormProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
-      className="max-w-xl mx-auto bg-white rounded-lg p-6 shadow-sm border border-retirement-muted/30"
+      className="max-w-xl mx-auto bg-white rounded-lg p-4 sm:p-6 shadow-sm border border-retirement-muted/30"
     >
-      <h3 className="text-xl font-medium text-retirement-dark mb-4">Kirim Ucapan & Doa</h3>
+      <h3 className="text-lg sm:text-xl font-medium text-retirement-dark mb-4">Kirim Ucapan & Doa</h3>
       
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -84,7 +86,7 @@ export function WishesForm({ onWishSent }: WishesFormProps) {
             placeholder="Nama Anda"
             value={formData.name}
             onChange={handleChange}
-            className="w-full border-retirement-muted/50 focus:border-retirement focus:ring-retirement"
+            className="w-full text-sm sm:text-base border-retirement-muted/50 focus:border-retirement focus:ring-retirement"
           />
         </div>
         
@@ -94,18 +96,19 @@ export function WishesForm({ onWishSent }: WishesFormProps) {
             placeholder="Ucapan & doa untuk pengantin..."
             value={formData.message}
             onChange={handleChange}
-            rows={4}
-            className="w-full border-retirement-muted/50 focus:border-retirement focus:ring-retirement"
+            rows={isMobile ? 3 : 4}
+            className="w-full text-sm sm:text-base border-retirement-muted/50 focus:border-retirement focus:ring-retirement"
           />
         </div>
         
         <Button 
           type="submit" 
           disabled={isSubmitting}
+          size={isMobile ? "default" : "lg"}
           className="w-full bg-retirement hover:bg-retirement-dark"
         >
           {isSubmitting ? (
-            <div className="w-5 h-5 border-t-2 border-white rounded-full animate-spin mr-2"></div>
+            <div className="w-4 h-4 sm:w-5 sm:h-5 border-t-2 border-white rounded-full animate-spin mr-2"></div>
           ) : (
             <Send className="mr-2 h-4 w-4" />
           )}

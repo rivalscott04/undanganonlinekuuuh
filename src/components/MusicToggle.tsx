@@ -3,10 +3,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Volume2, VolumeX } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function MusicToggle() {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const isMobile = useIsMobile();
   
   useEffect(() => {
     // Create audio element
@@ -71,18 +73,18 @@ export function MusicToggle() {
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.3 }}
-      className="fixed top-4 right-4 z-50"
+      className="fixed top-3 right-3 sm:top-4 sm:right-4 z-50"
     >
       <Button
-        size="icon"
+        size={isMobile ? "sm" : "icon"}
         variant="outline"
         onClick={toggleMusic}
-        className="rounded-full h-10 w-10 bg-white shadow-md border-retirement-muted/30 hover:bg-retirement-light"
+        className="rounded-full h-8 w-8 sm:h-10 sm:w-10 bg-white shadow-md border-retirement-muted/30 hover:bg-retirement-light"
       >
         {isPlaying ? (
-          <Volume2 className="h-5 w-5 text-retirement" />
+          <Volume2 className="h-4 w-4 sm:h-5 sm:w-5 text-retirement" />
         ) : (
-          <VolumeX className="h-5 w-5 text-slate-500" />
+          <VolumeX className="h-4 w-4 sm:h-5 sm:w-5 text-slate-500" />
         )}
       </Button>
     </motion.div>
