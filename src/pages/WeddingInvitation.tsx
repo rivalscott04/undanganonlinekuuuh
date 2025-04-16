@@ -39,7 +39,7 @@ export default function WeddingInvitation() {
   return (
     <div className="min-h-screen bg-white">
       {!isOpened && <HeroEnvelope isOpen={isOpened} onOpen={() => setIsOpened(true)} />}
-      {isOpened && <InvitationPage wishes={wishes} onWishSent={handleWishSent} />}
+      <InvitationPage wishes={wishes} onWishSent={handleWishSent} />
     </div>
   );
 }

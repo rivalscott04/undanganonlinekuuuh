@@ -27,7 +27,7 @@ export function HeroEnvelope({ isOpen, onOpen }: HeroEnvelopeProps) {
   };
 
   return (
-    <section className="fixed inset-0 z-[999] bg-white">
+    <section className={`fixed inset-0 z-[999] ${isOpen ? 'opacity-0 pointer-events-none' : 'bg-white'} transition-opacity duration-500`}>
       <div className="py-12 md:py-20 px-4 flex flex-col items-center justify-center min-h-screen bg-[#f9fafb] relative overflow-hidden">
         <div className="absolute inset-0 opacity-5 z-0">
           <svg
