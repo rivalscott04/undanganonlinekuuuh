@@ -95,7 +95,7 @@ export function CountdownTimer({ targetDate = "2025-06-15T08:00:00" }: Countdown
             variants={itemVariants}
             className="text-slate-600 mb-4"
           >
-            15 Juni 2024 - 13 Dzulhijjah 1445 H
+            15 Juni 2025 - 13 Dzulhijjah 1445 H
           </motion.p>
           <motion.div variants={itemVariants}>
             <Button 
