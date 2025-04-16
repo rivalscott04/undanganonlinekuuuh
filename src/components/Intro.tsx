@@ -1,8 +1,8 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { useSearchParams } from "react-router-dom";
 import { IslamicAvatars } from "./IslamicAvatars";
+import { CountdownTimer } from "./CountdownTimer";
 
 export function Intro() {
   const [searchParams] = useSearchParams();
@@ -24,6 +24,8 @@ export function Intro() {
         </p>
 
         <IslamicAvatars />
+        
+        <CountdownTimer targetDate="2025-08-08T10:00:00" />
         
         <p className="text-slate-700 mb-8 sm:mb-10 leading-relaxed text-sm sm:text-base px-2">
           Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i <span className="font-medium text-retirement-dark">{guestName}</span> untuk menghadiri pernikahan kami:
