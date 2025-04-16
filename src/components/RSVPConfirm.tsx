@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams } from "react-router-dom";
@@ -117,12 +116,20 @@ export function RSVPConfirm() {
                 </div>
               </div>
               
-              <h3 className="text-xl sm:text-2xl font-medium text-retirement-dark">
-                Terima kasih, kami tunggu di hari bahagia kami!
+              <h3 className="text-xl sm:text-2xl font-medium text-retirement-dark text-center">
+                MasyaAllah, terima kasih atas kesediaannya untuk hadir.
               </h3>
               
-              <p className="text-slate-600 text-sm sm:text-base">
-                Kehadiran Anda akan melengkapi kebahagiaan kami pada hari spesial tersebut
+              <p className="text-slate-600 text-sm sm:text-base text-center px-4">
+                Semoga perjumpaan kita di hari bahagia nanti membawa berkah dan kebaikan untuk kita semua.
+              </p>
+              
+              <p className="text-slate-600 text-sm sm:text-base text-center px-4">
+                Kami doakan, semoga setiap langkahmu menuju acara diberi kemudahan, kelancaran, dan limpahan rahmat dari Allah SWT.
+              </p>
+              
+              <p className="text-retirement text-base sm:text-lg font-medium text-center">
+                Sampai jumpa di hari yang penuh cinta dan doa ✨
               </p>
             </motion.div>
           )}
