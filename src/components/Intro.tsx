@@ -34,8 +34,8 @@ export function Intro() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="p-4 sm:p-6 border border-retirement-muted rounded-lg"
           >
-            <h3 className="font-serif text-xl sm:text-2xl text-retirement-dark mb-2">Rival Fauzi Rahadian</h3>
-            <p className="text-slate-600 mb-4 text-sm sm:text-base">Putra dari Bapak Rahmat & Ibu Santi</p>
+            <h3 className="font-serif text-xl sm:text-2xl text-retirement-dark mb-2">Rival Biasrori</h3>
+            <p className="text-slate-600 mb-4 text-sm sm:text-base">Putra dari Bapak Fulan</p>
             <div className="flex justify-center">
               <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-retirement/10 flex items-center justify-center">
                 <span className="text-retirement text-xl sm:text-2xl">R</span>
@@ -50,8 +50,8 @@ export function Intro() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="p-4 sm:p-6 border border-retirement-muted rounded-lg"
           >
-            <h3 className="font-serif text-xl sm:text-2xl text-retirement-dark mb-2">Syahrina Putri Kamila</h3>
-            <p className="text-slate-600 mb-4 text-sm sm:text-base">Putri dari Bapak Firmansyah & Ibu Dewi</p>
+            <h3 className="font-serif text-xl sm:text-2xl text-retirement-dark mb-2">Syahrina Ulya Ramadhani</h3>
+            <p className="text-slate-600 mb-4 text-sm sm:text-base">Putri dari Bapak Fulan</p>
             <div className="flex justify-center">
               <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-retirement/10 flex items-center justify-center">
                 <span className="text-retirement text-xl sm:text-2xl">S</span>
@@ -68,3 +68,4 @@ export function Intro() {
     </section>
   );
 }
+
