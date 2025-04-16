@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { CalendarPlus, Flower2 } from "lucide-react";
@@ -65,6 +64,18 @@ export function CountdownTimer({ targetDate = "2025-06-15T08:00:00" }: Countdown
 
   return (
     <section className="relative py-16 sm:py-20 px-4 overflow-hidden">
+      {/* Muslim Couple Silhouettes */}
+      <img 
+        src="/src/public/images/muslim-couple-silhouette.svg" 
+        alt="Muslim Bride and Groom Silhouette" 
+        className="absolute bottom-0 left-0 w-28 opacity-20 hidden sm:block z-0"
+      />
+      <img 
+        src="/src/public/images/muslim-couple-silhouette.svg" 
+        alt="Muslim Bride and Groom Silhouette" 
+        className="absolute bottom-0 right-0 w-28 opacity-20 hidden sm:block z-0 transform scale-x-[-1]"
+      />
+
       {/* Floral Ornaments */}
       <div className="absolute -left-4 top-0 text-retirement/10">
         <Flower2 className="w-24 h-24 sm:w-32 sm:h-32 rotate-45" />
@@ -78,7 +89,7 @@ export function CountdownTimer({ targetDate = "2025-06-15T08:00:00" }: Countdown
         whileInView="visible"
         viewport={{ once: true }}
         variants={containerVariants}
-        className="max-w-4xl mx-auto"
+        className="max-w-4xl mx-auto relative z-10"
       >
         <div className="text-center mb-10 sm:mb-12">
           <motion.h3 

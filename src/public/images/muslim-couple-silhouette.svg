@@ -1,0 +1,15 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" className="w-full h-full">
+  {/* Groom (left) */}
+  <path 
+    d="M30,90 Q40,70 40,50 C40,30 30,20 20,20 Q10,20 10,30 L10,80 C10,85 15,90 20,90 Z" 
+    fill="#9F9EA1" 
+    className="opacity-50"
+  />
+  {/* Bride (right) */}
+  <path 
+    d="M170,90 Q160,70 160,50 C160,30 170,20 180,20 Q190,20 190,30 L190,80 C190,85 185,90 180,90 Z" 
+    fill="#9F9EA1" 
+    className="opacity-50"
+  />
+</svg>
