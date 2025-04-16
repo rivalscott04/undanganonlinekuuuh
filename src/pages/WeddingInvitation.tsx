@@ -1,6 +1,5 @@
 
 import React, { useState } from "react";
-import { Envelope } from "@/components/Envelope";
 import { Hero } from "@/components/Hero";
 import { Intro } from "@/components/Intro";
 import { CountdownTimer } from "@/components/CountdownTimer";
@@ -18,7 +17,6 @@ interface Wish {
 }
 
 export default function WeddingInvitation() {
-  const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
   const [wishes, setWishes] = useState<Wish[]>([
     {
       name: "Ahmad Fauzi",
@@ -35,10 +33,6 @@ export default function WeddingInvitation() {
   const handleWishSent = (newWish: Wish) => {
     setWishes(prevWishes => [newWish, ...prevWishes]);
   };
-  
-  if (!isEnvelopeOpen) {
-    return <Envelope onOpen={() => setIsEnvelopeOpen(true)} />;
-  }
   
   return (
     <div className="bg-white min-h-screen">
