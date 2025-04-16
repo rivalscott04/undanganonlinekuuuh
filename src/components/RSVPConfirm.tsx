@@ -1,13 +1,13 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams } from "react-router-dom";
 import confetti from "canvas-confetti";
 import { Button } from "@/components/ui/button";
 import { Check, X, Heart } from "lucide-react";
 
 export function RSVPConfirm() {
-  const searchParams = useSearchParams();
+  const [searchParams] = useSearchParams();
   const guestName = searchParams.get("to") || "Tamu Undangan";
   
   const [status, setStatus] = useState<"idle" | "loading" | "attending" | "not-attending">("idle");

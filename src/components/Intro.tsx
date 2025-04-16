@@ -1,10 +1,10 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams } from "react-router-dom";
 
 export function Intro() {
-  const searchParams = useSearchParams();
+  const [searchParams] = useSearchParams();
   const guestName = searchParams.get("to") || "Tamu Undangan";
 
   return (

@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { validateGuest } from "@/utils/guestList";
 import { AlertCircle } from "lucide-react";
@@ -13,7 +13,7 @@ interface EnvelopeProps {
 export function Envelope({ onOpen }: EnvelopeProps) {
   const [isOpening, setIsOpening] = useState(false);
   const [isInvited, setIsInvited] = useState<boolean | null>(null);
-  const searchParams = useSearchParams();
+  const [searchParams] = useSearchParams();
   const guestName = searchParams.get("to") || "Tamu Undangan";
   
   useEffect(() => {
