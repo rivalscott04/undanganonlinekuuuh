@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { CalendarPlus, Flower2 } from "lucide-react";
@@ -65,21 +64,37 @@ export function CountdownTimer({ targetDate = "2025-06-15T08:00:00" }: Countdown
 
   return (
     <section className="relative py-16 sm:py-20 px-4 overflow-hidden">
-      {/* Sasak Pattern Background */}
+      {/* Enhanced Sasak Pattern Background */}
       <div 
         className="absolute inset-0 bg-[url('/src/public/images/sasak-pattern.svg')] 
-        bg-repeat opacity-10 pointer-events-none text-retirement/20"
-        style={{ backgroundSize: '100px 100px' }}
+        bg-repeat opacity-10 pointer-events-none"
+        style={{ 
+          backgroundSize: '100px 100px',
+          backgroundImage: `linear-gradient(45deg, 
+            rgba(79, 111, 160, 0.05), 
+            rgba(126, 111, 158, 0.05)
+          ), url('/src/public/images/sasak-pattern.svg')`
+        }}
       />
       
-      {/* Top Border Pattern */}
-      <div className="absolute top-0 left-0 right-0 h-8 bg-[url('/src/public/images/sasak-pattern.svg')] 
+      {/* Enhanced Top Border Pattern */}
+      <div 
+        className="absolute top-0 left-0 right-0 h-12 bg-[url('/src/public/images/sasak-pattern.svg')] 
         bg-repeat-x opacity-20 pointer-events-none transform rotate-180"
+        style={{ 
+          maskImage: 'linear-gradient(to bottom, black, transparent)',
+          WebkitMaskImage: 'linear-gradient(to bottom, black, transparent)'
+        }}
       />
       
-      {/* Bottom Border Pattern */}
-      <div className="absolute bottom-0 left-0 right-0 h-8 bg-[url('/src/public/images/sasak-pattern.svg')] 
+      {/* Enhanced Bottom Border Pattern */}
+      <div 
+        className="absolute bottom-0 left-0 right-0 h-12 bg-[url('/src/public/images/sasak-pattern.svg')] 
         bg-repeat-x opacity-20 pointer-events-none"
+        style={{ 
+          maskImage: 'linear-gradient(to top, black, transparent)',
+          WebkitMaskImage: 'linear-gradient(to top, black, transparent)'
+        }}
       />
 
       {/* Muslim Couple Silhouettes */}
