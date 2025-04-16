@@ -11,7 +11,7 @@ export function MusicToggle() {
   const isMobile = useIsMobile();
   
   useEffect(() => {
-    // Create audio element with online URL
+    // Create audio element with online URL for "A Thousand Years"
     audioRef.current = new Audio("https://www.mboxdrive.com/Christina%20Perri%20-%20A%20Thousand%20Years.mp3");
     audioRef.current.loop = true;
     
