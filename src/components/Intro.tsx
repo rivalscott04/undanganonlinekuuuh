@@ -1,4 +1,3 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { useSearchParams } from "react-router-dom";
@@ -16,14 +15,17 @@ export function Intro() {
         transition={{ duration: 0.8 }}
         className="max-w-3xl mx-auto text-center"
       >
-        <h2 className="font-serif text-3xl sm:text-4xl font-bold text-retirement-dark mb-6 sm:mb-8">Bismillahirrahmanirrahim</h2>
+        <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-retirement-dark mb-6 sm:mb-8 px-4">
+          Bismillahirrahmanirrahim
+        </h2>
         
-        <p className="text-slate-700 mb-4 sm:mb-6 leading-relaxed text-base sm:text-lg font-semibold">
+        <p className="text-slate-700 mb-4 sm:mb-6 leading-relaxed text-base sm:text-lg font-semibold px-4">
           Assalamu'alaikum Warahmatullahi Wabarakatuh
         </p>
         
-        <p className="text-slate-700 mb-8 sm:mb-10 leading-relaxed text-sm sm:text-base px-2">
-          Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i <span className="font-bold text-retirement-dark">{guestName}</span> untuk menghadiri pernikahan kami:
+        <p className="text-slate-700 mb-8 sm:mb-10 leading-relaxed text-sm sm:text-base px-4">
+          Dengan memohon rahmat dan ridho Allah SWT, 
+          kami mengundang Bapak/Ibu/Saudara/i <span className="font-bold text-retirement-dark">{guestName}</span> untuk menghadiri pernikahan kami:
         </p>
         
         <div className="grid md:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-10">
@@ -68,4 +70,3 @@ export function Intro() {
     </section>
   );
 }
-
