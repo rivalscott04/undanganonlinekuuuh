@@ -60,12 +60,12 @@ export function RSVPConfirm() {
               exit={{ opacity: 0 }}
               className="space-y-6 sm:space-y-8"
             >
-              <p className="text-slate-600 mb-6 sm:mb-8 text-sm sm:text-base">
-                Kami sangat berharap kehadiranmu di hari bahagia kami, <span className="font-medium text-retirement-dark">{guestName}</span>.
+              <p className="text-slate-600 mb-6 sm:mb-8 text-base sm:text-lg text-center">
+                Dengan penuh rasa syukur, kami mengundangmu untuk hadir di hari pernikahan kami, <span className="font-medium text-retirement-dark">{guestName}</span>.
               </p>
               
-              <p className="text-slate-700 font-medium mb-6 sm:mb-8 text-sm sm:text-base">
-                Berkenankah Anda hadir untuk berbagi kebahagiaan bersama kami?
+              <p className="text-slate-700 font-medium mb-6 sm:mb-8 text-base sm:text-lg text-center">
+                Semoga Allah SWT Tuhan Yang Maha Esa mengizinkan kita bertemu dan bersilaturahmi di momen bahagia ini.
               </p>
               
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center">
