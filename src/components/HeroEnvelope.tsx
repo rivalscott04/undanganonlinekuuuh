@@ -28,7 +28,7 @@ export function HeroEnvelope({ onEnvelopeOpen }: HeroEnvelopeProps) {
   };
 
   return (
-    <section className="py-12 md:py-20 px-4 flex flex-col items-center justify-center min-h-[80vh] bg-[#F6F6F7] relative overflow-hidden">
+    <section className="py-8 md:py-12 lg:py-16 px-4 flex flex-col items-center justify-center min-h-[80vh] bg-[#F6F6F7] relative overflow-hidden">
       <div className="absolute inset-0 opacity-10 z-0">
         <svg
           viewBox="0 0 1440 900"
@@ -57,7 +57,7 @@ export function HeroEnvelope({ onEnvelopeOpen }: HeroEnvelopeProps) {
             transition={{ duration: 0.6 }}
             className="w-full max-w-md z-10"
           >
-            <div className="relative bg-white rounded-xl shadow-lg border border-[#E5DEFF] overflow-hidden p-8">
+            <div className="relative bg-white rounded-xl shadow-lg border border-[#E5DEFF] overflow-hidden p-6 sm:p-8">
               <motion.div 
                 className="absolute top-0 left-0 w-full h-24 bg-[#F6F6F7]"
                 style={{ 
@@ -68,34 +68,34 @@ export function HeroEnvelope({ onEnvelopeOpen }: HeroEnvelopeProps) {
                 }}
               />
               
-              <div className="pt-20 text-center">
-                <div className="flex items-center justify-center mb-6">
-                  <div className="w-20 h-1 bg-[#E5DEFF] rounded-full"></div>
-                  <div className="mx-4 text-xl font-medium text-[#4F6FA0] font-serif">Undangan</div>
-                  <div className="w-20 h-1 bg-[#E5DEFF] rounded-full"></div>
+              <div className="pt-16 sm:pt-20 text-center">
+                <div className="flex items-center justify-center mb-4 sm:mb-6">
+                  <div className="w-16 sm:w-20 h-1 bg-[#E5DEFF] rounded-full"></div>
+                  <div className="mx-2 sm:mx-4 text-base sm:text-xl font-medium text-[#4F6FA0] font-serif">Undangan</div>
+                  <div className="w-16 sm:w-20 h-1 bg-[#E5DEFF] rounded-full"></div>
                 </div>
                 
-                <h1 className="font-serif text-4xl font-bold text-[#4F6FA0] mb-6 flex flex-col items-center">
+                <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#4F6FA0] mb-4 sm:mb-6 flex flex-col items-center">
                   <span className="block text-center">Rival</span>
-                  <span className="block my-2 text-3xl text-center">&</span>
+                  <span className="block my-1 sm:my-2 text-2xl sm:text-3xl text-center">&</span>
                   <span className="block text-center">Syahrina</span>
                 </h1>
                 
-                <div className="mb-4 text-sm text-[#7E6F9E]">
+                <div className="mb-3 sm:mb-4 text-xs sm:text-sm text-[#7E6F9E]">
                   Kami mengundang Bapak/Ibu/Saudara/i
                 </div>
-                <div className="py-3 px-8 mb-6 mx-auto text-lg font-medium border border-[#E5DEFF] inline-block rounded-md text-[#4F6FA0] font-serif">
+                <div className="py-2 sm:py-3 px-4 sm:px-8 mb-4 sm:mb-6 mx-auto text-sm sm:text-lg font-medium border border-[#E5DEFF] inline-block rounded-md text-[#4F6FA0] font-serif">
                   Yth. {guestName}
                 </div>
-                <div className="text-sm text-[#7E6F9E] mb-8">
+                <div className="text-xs sm:text-sm text-[#7E6F9E] mb-6 sm:mb-8">
                   Untuk hadir dan memberikan doa restu
                 </div>
 
                 <Button 
                   onClick={handleOpenEnvelope}
-                  className="px-6 py-6 text-white bg-[#4F6FA0] hover:bg-[#3D5A8F] transition-colors font-serif"
+                  className="px-4 sm:px-6 py-4 sm:py-6 text-white bg-[#4F6FA0] hover:bg-[#3D5A8F] transition-colors font-serif"
                 >
-                  <Mail className="mr-2 h-5 w-5" />
+                  <Mail className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                   Buka Undangan
                 </Button>
               </div>
@@ -106,13 +106,13 @@ export function HeroEnvelope({ onEnvelopeOpen }: HeroEnvelopeProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="relative z-10 text-center"
+            className="relative z-10 text-center max-w-full w-full px-4"
           >
-            <div className="mb-4 text-xs sm:text-sm tracking-widest text-[#4F6FA0] font-serif">
+            <div className="mb-3 md:mb-4 text-xs sm:text-sm tracking-widest text-[#4F6FA0] font-serif">
               UNDANGAN PERNIKAHAN
             </div>
             
-            <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl font-bold text-[#4F6FA0] mb-6 flex flex-col items-center">
+            <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#4F6FA0] mb-4 md:mb-6 flex flex-col items-center">
               <motion.span
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -125,7 +125,7 @@ export function HeroEnvelope({ onEnvelopeOpen }: HeroEnvelopeProps) {
                 initial={{ opacity: 0, x: 0 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.9 }}
-                className="block my-2 text-3xl sm:text-4xl md:text-5xl text-center"
+                className="block my-1 sm:my-2 text-2xl sm:text-3xl md:text-4xl text-center"
               >
                 &
               </motion.span>
@@ -139,12 +139,14 @@ export function HeroEnvelope({ onEnvelopeOpen }: HeroEnvelopeProps) {
               </motion.span>
             </h1>
             
-            <div className="w-16 sm:w-20 h-1 bg-[#E5DEFF] mx-auto mb-6 rounded-full"></div>
+            <div className="w-12 sm:w-16 h-1 bg-[#E5DEFF] mx-auto mb-4 sm:mb-6 rounded-full"></div>
             
-            <p className="text-[#7E6F9E] text-sm sm:text-base max-w-lg mx-auto px-2 font-serif">
+            <p className="text-[#7E6F9E] text-xs sm:text-sm md:text-base max-w-xs sm:max-w-sm md:max-w-lg mx-auto px-2 font-serif">
               "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu istri-istri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang."
             </p>
-            <p className="text-[#4F6FA0] mt-3 italic text-xs sm:text-sm font-serif">— QS. Ar-Rum: 21</p>
+            <p className="text-[#4F6FA0] mt-2 md:mt-3 italic text-xs sm:text-sm font-serif">
+              — QS. Ar-Rum: 21
+            </p>
           </motion.div>
         )}
       </AnimatePresence>
