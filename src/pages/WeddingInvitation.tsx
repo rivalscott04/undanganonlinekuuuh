@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { HeroEnvelope } from "@/components/HeroEnvelope";
 import { Intro } from "@/components/Intro";
@@ -120,7 +119,7 @@ export default function WeddingInvitation() {
             </div>
           </section>
 
-          <section id="wishes" className="py-16 sm:py-20 px-4 bg-[#F9E5D4]">
+          <section id="wishes" className="py-16 sm:py-20 px-4 bg-[#F0F4F8]">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-8 sm:mb-10">
                 <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-retirement-dark mb-3 sm:mb-4">Ucapan & Doa</h2>
@@ -149,4 +148,3 @@ export default function WeddingInvitation() {
     </div>
   );
 }
-
