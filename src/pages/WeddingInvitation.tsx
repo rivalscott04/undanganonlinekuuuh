@@ -52,6 +52,71 @@ export default function WeddingInvitation() {
           <EventDetails />
           <RSVPConfirm />
           
+          <section className="py-16 sm:py-20 px-4 bg-white">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-8 sm:mb-10">
+                <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-retirement-dark mb-3 sm:mb-4">Amplop Digital</h2>
+                <div className="w-16 sm:w-20 h-1 bg-retirement-accent/50 mx-auto mb-4 sm:mb-6 rounded-full"></div>
+                <p className="text-slate-600 max-w-xl mx-auto text-sm sm:text-base">
+                  Doa Restu Anda merupakan karunia yang sangat berarti bagi kami.
+                  Dan jika memberi adalah ungkapan tanda kasih Anda, Anda dapat memberi kado secara cashless.
+                </p>
+              </div>
+
+              <div className="grid gap-6 md:grid-cols-2 max-w-2xl mx-auto">
+                {/* BSI Card */}
+                <div className="bg-retirement-light/30 rounded-lg p-6 border border-retirement-muted/20">
+                  <div className="flex items-center justify-center h-12 mb-4">
+                    <div className="w-20 h-8 bg-retirement-muted/20 rounded flex items-center justify-center text-sm font-medium text-retirement-dark">
+                      BSI
+                    </div>
+                  </div>
+                  <p className="text-center text-sm text-slate-600 mb-2">a.n Rival Biasrori</p>
+                  <div className="flex items-center justify-center gap-2 bg-white rounded-md px-3 py-2 border border-retirement-muted/30">
+                    <p className="font-mono text-retirement-dark">7205700867</p>
+                    <button 
+                      onClick={() => {
+                        navigator.clipboard.writeText("7205700867");
+                        toast({
+                          title: "Berhasil disalin",
+                          description: "Nomor rekening telah disalin ke clipboard",
+                        });
+                      }}
+                      className="p-1 hover:bg-retirement-light rounded-md transition-colors"
+                    >
+                      <Copy className="h-4 w-4 text-retirement" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Bank NTB Card */}
+                <div className="bg-retirement-light/30 rounded-lg p-6 border border-retirement-muted/20">
+                  <div className="flex items-center justify-center h-12 mb-4">
+                    <div className="w-20 h-8 bg-retirement-muted/20 rounded flex items-center justify-center text-sm font-medium text-retirement-dark">
+                      Bank NTB
+                    </div>
+                  </div>
+                  <p className="text-center text-sm text-slate-600 mb-2">a.n Syahrina Ulya Ramadhani</p>
+                  <div className="flex items-center justify-center gap-2 bg-white rounded-md px-3 py-2 border border-retirement-muted/30">
+                    <p className="font-mono text-retirement-dark">0010205703314</p>
+                    <button 
+                      onClick={() => {
+                        navigator.clipboard.writeText("0010205703314");
+                        toast({
+                          title: "Berhasil disalin",
+                          description: "Nomor rekening telah disalin ke clipboard",
+                        });
+                      }}
+                      className="p-1 hover:bg-retirement-light rounded-md transition-colors"
+                    >
+                      <Copy className="h-4 w-4 text-retirement" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
           <section id="wishes" className="py-16 sm:py-20 px-4 bg-retirement-light/30">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-8 sm:mb-10">
