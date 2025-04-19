@@ -8,7 +8,7 @@ import { WishesForm } from "@/components/WishesForm";
 import { WishesList } from "@/components/WishesList";
 import { MusicToggle } from "@/components/MusicToggle";
 import { Toaster } from "@/components/ui/toaster";
-import { toast } from "@/hooks/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { Copy } from "lucide-react";
 
 interface Wish {
@@ -40,6 +40,8 @@ export default function WeddingInvitation() {
     setIsEnvelopeOpen(true);
   };
   
+  const { toast } = useToast();
+  
   return (
     <div className="bg-white min-h-screen overflow-x-hidden w-full">
       <MusicToggle />
@@ -53,7 +55,7 @@ export default function WeddingInvitation() {
           <EventDetails />
           <RSVPConfirm />
           
-          <section className="py-16 sm:py-20 px-4 bg-soft-peach">
+          <section className="py-16 sm:py-20 px-4 bg-soft-blue">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-8 sm:mb-10">
                 <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-retirement-dark mb-3 sm:mb-4">Amplop Digital</h2>
@@ -118,7 +120,7 @@ export default function WeddingInvitation() {
             </div>
           </section>
 
-          <section id="wishes" className="py-16 sm:py-20 px-4 bg-retirement-light/30">
+          <section id="wishes" className="py-16 sm:py-20 px-4 bg-soft-peach">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-8 sm:mb-10">
                 <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-retirement-dark mb-3 sm:mb-4">Ucapan & Doa</h2>
