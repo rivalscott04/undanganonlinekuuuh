@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { HeroEnvelope } from "@/components/HeroEnvelope";
 import { Intro } from "@/components/Intro";
@@ -55,14 +56,13 @@ export default function WeddingInvitation() {
           <EventDetails />
           <RSVPConfirm />
           
-          <section className="py-16 sm:py-20 px-4 bg-soft-blue">
+          <section className="py-16 sm:py-20 px-4 bg-[#F0F4F8]">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-8 sm:mb-10">
                 <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-retirement-dark mb-3 sm:mb-4">Amplop Digital</h2>
                 <div className="w-16 sm:w-20 h-1 bg-retirement-accent/50 mx-auto mb-4 sm:mb-6 rounded-full"></div>
                 <p className="text-slate-600 max-w-xl mx-auto text-sm sm:text-base">
-                  Doa Restu Anda merupakan karunia yang sangat berarti bagi kami.
-                  Dan jika memberi adalah ungkapan tanda kasih Anda, Anda dapat memberi kado secara cashless.
+                  Restu dan doa Anda adalah berkah bagi kami. Jika Anda ingin memberikan sesuatu, kami dengan penuh hormat akan menerimanya.
                 </p>
               </div>
 
@@ -120,7 +120,7 @@ export default function WeddingInvitation() {
             </div>
           </section>
 
-          <section id="wishes" className="py-16 sm:py-20 px-4 bg-soft-peach">
+          <section id="wishes" className="py-16 sm:py-20 px-4 bg-[#F9E5D4]">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-8 sm:mb-10">
                 <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-retirement-dark mb-3 sm:mb-4">Ucapan & Doa</h2>
@@ -149,3 +149,4 @@ export default function WeddingInvitation() {
     </div>
   );
 }
+
