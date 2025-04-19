@@ -119,7 +119,7 @@ export default function WeddingInvitation() {
             </div>
           </section>
 
-          <section id="wishes" className="py-16 sm:py-20 px-4 bg-[#F0F4F8]">
+          <section id="wishes" className="py-16 sm:py-20 px-4 bg-[#FDE1D3]">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-8 sm:mb-10">
                 <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-retirement-dark mb-3 sm:mb-4">Ucapan & Doa</h2>
@@ -134,7 +134,7 @@ export default function WeddingInvitation() {
             </div>
           </section>
           
-          <footer className="py-8 sm:py-10 bg-white text-center text-xs sm:text-sm text-slate-500 border-t border-retirement-muted/20">
+          <footer className="py-8 sm:py-10 bg-[#F0F4F8] text-center text-xs sm:text-sm text-slate-500 border-t border-retirement-muted/20">
             <div className="max-w-4xl mx-auto px-4">
               <p className="mb-1 sm:mb-2 font-serif text-base sm:text-lg text-retirement-dark">Rival & Syahrina</p>
               <p className="mb-3 sm:mb-4">15 Juni 2024</p>
