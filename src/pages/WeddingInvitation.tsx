@@ -9,6 +9,8 @@ import { WishesForm } from "@/components/WishesForm";
 import { WishesList } from "@/components/WishesList";
 import { MusicToggle } from "@/components/MusicToggle";
 import { Toaster } from "@/components/ui/toaster";
+import { toast } from "@/hooks/use-toast";
+import { Copy } from "lucide-react";
 
 interface Wish {
   name: string;
