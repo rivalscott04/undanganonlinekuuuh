@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { HeroEnvelope } from "@/components/HeroEnvelope";
 import { Intro } from "@/components/Intro";
@@ -54,7 +53,7 @@ export default function WeddingInvitation() {
           <EventDetails />
           <RSVPConfirm />
           
-          <section className="py-16 sm:py-20 px-4 bg-white">
+          <section className="py-16 sm:py-20 px-4 bg-soft-peach">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-8 sm:mb-10">
                 <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-retirement-dark mb-3 sm:mb-4">Amplop Digital</h2>
@@ -67,14 +66,14 @@ export default function WeddingInvitation() {
 
               <div className="grid gap-6 md:grid-cols-2 max-w-2xl mx-auto">
                 {/* BSI Card */}
-                <div className="bg-retirement-light/30 rounded-lg p-6 border border-retirement-muted/20">
+                <div className="bg-white rounded-lg p-6 shadow-sm border border-retirement-muted/20">
                   <div className="flex items-center justify-center h-12 mb-4">
-                    <div className="w-20 h-8 bg-retirement-muted/20 rounded flex items-center justify-center text-sm font-medium text-retirement-dark">
+                    <div className="w-20 h-8 bg-retirement-light/20 rounded flex items-center justify-center text-sm font-medium text-retirement-dark">
                       BSI
                     </div>
                   </div>
                   <p className="text-center text-sm text-slate-600 mb-2">a.n Rival Biasrori</p>
-                  <div className="flex items-center justify-center gap-2 bg-white rounded-md px-3 py-2 border border-retirement-muted/30">
+                  <div className="flex items-center justify-center gap-2 bg-retirement-light/10 rounded-md px-3 py-2 border border-retirement-muted/30">
                     <p className="font-mono text-retirement-dark">7205700867</p>
                     <button 
                       onClick={() => {
@@ -84,7 +83,7 @@ export default function WeddingInvitation() {
                           description: "Nomor rekening telah disalin ke clipboard",
                         });
                       }}
-                      className="p-1 hover:bg-retirement-light rounded-md transition-colors"
+                      className="p-1 hover:bg-retirement-light/20 rounded-md transition-colors"
                     >
                       <Copy className="h-4 w-4 text-retirement" />
                     </button>
@@ -92,14 +91,14 @@ export default function WeddingInvitation() {
                 </div>
 
                 {/* Bank NTB Card */}
-                <div className="bg-retirement-light/30 rounded-lg p-6 border border-retirement-muted/20">
+                <div className="bg-white rounded-lg p-6 shadow-sm border border-retirement-muted/20">
                   <div className="flex items-center justify-center h-12 mb-4">
-                    <div className="w-20 h-8 bg-retirement-muted/20 rounded flex items-center justify-center text-sm font-medium text-retirement-dark">
+                    <div className="w-20 h-8 bg-retirement-light/20 rounded flex items-center justify-center text-sm font-medium text-retirement-dark">
                       Bank NTB
                     </div>
                   </div>
                   <p className="text-center text-sm text-slate-600 mb-2">a.n Syahrina Ulya Ramadhani</p>
-                  <div className="flex items-center justify-center gap-2 bg-white rounded-md px-3 py-2 border border-retirement-muted/30">
+                  <div className="flex items-center justify-center gap-2 bg-retirement-light/10 rounded-md px-3 py-2 border border-retirement-muted/30">
                     <p className="font-mono text-retirement-dark">0010205703314</p>
                     <button 
                       onClick={() => {
@@ -109,7 +108,7 @@ export default function WeddingInvitation() {
                           description: "Nomor rekening telah disalin ke clipboard",
                         });
                       }}
-                      className="p-1 hover:bg-retirement-light rounded-md transition-colors"
+                      className="p-1 hover:bg-retirement-light/20 rounded-md transition-colors"
                     >
                       <Copy className="h-4 w-4 text-retirement" />
                     </button>
