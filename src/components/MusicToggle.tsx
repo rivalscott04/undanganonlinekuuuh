@@ -14,115 +14,54 @@ export function MusicToggle() {
   const { toast } = useToast();
   
   useEffect(() => {
-    // Create audio element
-    audioRef.current = new Audio();
+    // Create an audio element directly in the DOM for better browser compatibility
+    const audioElement = document.createElement('audio');
+    audioElement.id = 'wedding-music';
+    audioElement.loop = true;
+    audioElement.preload = 'auto';
     
-    const tryLoadAudio = (audioPath: string) => {
-      console.log("Trying to load audio from:", audioPath);
-      
-      if (!audioRef.current) return;
-      
-      audioRef.current.src = audioPath;
-      audioRef.current.loop = true;
-      
-      // Remove previous event listeners if any
-      const handleCanPlay = () => {
-        console.log("Audio loaded successfully from:", audioPath);
-        setAudioLoaded(true);
-        attemptAutoplay();
-      };
-      
-      const handleError = (e: Event) => {
-        console.error("Audio loading error:", e);
-        if (audioRef.current?.error) {
-          console.error("Error code:", audioRef.current.error.code);
-          console.error("Error message:", audioRef.current.error.message);
-        }
-        
-        // If we tried the absolute path and it failed, try relative path
-        if (audioPath === "/music/BIW.mp3") {
-          console.log("Trying alternative audio path...");
-          tryLoadAudio("music/BIW.mp3");
-        } else if (audioPath === "music/BIW.mp3") {
-          console.log("Trying with audio element in DOM...");
-          tryWithAudioElement();
-        } else {
-          toast({
-            title: "Musik tidak dapat dimuat",
-            description: "Silakan klik tombol untuk mencoba lagi",
-            variant: "destructive"
-          });
-        }
-      };
-      
-      audioRef.current.addEventListener('canplaythrough', handleCanPlay);
-      audioRef.current.addEventListener('error', handleError);
-      
-      // Store the event listeners for cleanup
-      return { handleCanPlay, handleError };
-    };
+    // Add multiple sources with different paths to increase chances of success
+    const paths = [
+      { src: '/music/wedding-song.mp3', type: 'audio/mp3' },
+      { src: 'music/wedding-song.mp3', type: 'audio/mp3' },
+      { src: '/music/BIW.mp3', type: 'audio/mp3' },
+      { src: 'music/BIW.mp3', type: 'audio/mp3' }
+    ];
     
-    const tryWithAudioElement = () => {
-      // As a last resort, create an audio element in the DOM
-      const audioElement = document.createElement('audio');
-      audioElement.id = 'wedding-music';
-      audioElement.loop = true;
-      audioElement.preload = 'auto';
-      
-      // Try with a different file format if available
+    // Add all sources to increase chances of successful loading
+    paths.forEach(path => {
       const source = document.createElement('source');
-      source.src = '/music/wedding-song.mp3';
-      source.type = 'audio/mp3';
-      
+      source.src = path.src;
+      source.type = path.type;
       audioElement.appendChild(source);
-      document.body.appendChild(audioElement);
-      
-      audioElement.oncanplaythrough = () => {
-        console.log("Audio loaded successfully with DOM element");
-        audioRef.current = audioElement;
-        setAudioLoaded(true);
-        attemptAutoplay();
-      };
-      
-      audioElement.onerror = () => {
-        console.error("Failed to load audio even with DOM element");
-        toast({
-          title: "Musik tidak dapat dimuat",
-          description: "Silakan klik tombol untuk mencoba lagi",
-          variant: "destructive"
-        });
-      };
+    });
+    
+    // Add the audio element to the DOM
+    document.body.appendChild(audioElement);
+    audioRef.current = audioElement;
+    
+    // Log when audio is ready
+    audioElement.oncanplaythrough = () => {
+      console.log("Audio loaded successfully");
+      setAudioLoaded(true);
     };
     
-    // Attempt to autoplay once the audio is loaded
-    const attemptAutoplay = async () => {
-      try {
-        if (audioRef.current && audioLoaded) {
-          await audioRef.current.play();
-          setIsPlaying(true);
-          console.log("Autoplay successful");
-        }
-      } catch (error) {
-        console.log("Autoplay prevented by browser:", error);
-        // Most browsers require user interaction before playing audio
-      }
+    // Handle errors more gracefully
+    audioElement.onerror = (e) => {
+      console.error("Audio couldn't be loaded", e);
+      toast({
+        title: "Musik tidak dapat dimuat",
+        description: "Silakan klik tombol untuk mencoba lagi",
+        variant: "destructive"
+      });
     };
     
-    // Start by trying the absolute path
-    const listeners = tryLoadAudio("/music/BIW.mp3");
-    
-    // Cleanup function
+    // Cleanup function to properly remove the audio element
     return () => {
       if (audioRef.current) {
-        if (listeners) {
-          audioRef.current.removeEventListener('canplaythrough', listeners.handleCanPlay);
-          audioRef.current.removeEventListener('error', listeners.handleError);
-        }
-        
         audioRef.current.pause();
-        audioRef.current.src = "";
         
-        // Remove audio element from DOM if we added one
+        // Remove audio element from DOM
         const domAudio = document.getElementById('wedding-music');
         if (domAudio) {
           document.body.removeChild(domAudio);
@@ -135,21 +74,19 @@ export function MusicToggle() {
   
   const toggleMusic = () => {
     if (!audioRef.current) {
-      // If audio element doesn't exist, recreate it
-      audioRef.current = new Audio("/music/wedding-song.mp3");
-      audioRef.current.loop = true;
-      audioRef.current.load();
+      // If audio element doesn't exist for some reason, show error
+      toast({
+        title: "Musik tidak tersedia",
+        description: "Silakan muat ulang halaman",
+        variant: "destructive"
+      });
+      return;
     }
     
     if (isPlaying) {
       audioRef.current.pause();
       setIsPlaying(false);
     } else {
-      // If audio isn't loaded yet, try loading it again
-      if (!audioLoaded) {
-        audioRef.current.load();
-      }
-      
       audioRef.current.play()
         .then(() => {
           setIsPlaying(true);
@@ -159,7 +96,7 @@ export function MusicToggle() {
           console.error("Play prevented:", error);
           toast({
             title: "Gagal memutar musik",
-            description: "Silakan coba lagi",
+            description: "Silakan izinkan pemutaran audio di browser Anda",
             variant: "destructive"
           });
         });
