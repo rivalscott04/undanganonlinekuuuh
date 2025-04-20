@@ -1,7 +1,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { formatDistance } from "date-fns";
+import { formatDistanceToNow } from "date-fns";
 import { id } from "date-fns/locale";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -20,10 +20,10 @@ export function WishesList({ wishes }: WishesListProps) {
   
   const formatTime = (timestamp: string) => {
     try {
-      return formatDistance(new Date(timestamp), new Date(), {
+      return formatDistanceToNow(new Date(timestamp), {
         addSuffix: true,
-        locale: id
-      });
+        locale: id,
+      }).replace('sekitar ', '');
     } catch (error) {
       return "baru saja";
     }
