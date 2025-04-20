@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { HeroEnvelope } from "@/components/HeroEnvelope";
 import { Intro } from "@/components/Intro";
@@ -135,7 +134,10 @@ export default function WeddingInvitation() {
             <div className="max-w-4xl mx-auto px-4">
               <p className="mb-1 font-serif text-sm sm:text-base text-retirement-dark">Rival & Syahrina</p>
               <p className="mb-2 sm:mb-3">15 Juni 2024</p>
-              <p>© 2024 Digital Wedding Invitation</p>
+              <div className="flex items-center justify-center gap-1 text-xs text-gray-600">
+                Made with <Heart className="h-4 w-4 text-[#ea384c] fill-[#ea384c]" /> by Couple
+              </div>
+              <p>© 2025 Digital Wedding Invitation</p>
             </div>
           </footer>
         </>
