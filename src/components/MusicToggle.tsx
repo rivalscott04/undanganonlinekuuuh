@@ -11,9 +11,23 @@ export function MusicToggle() {
   const isMobile = useIsMobile();
   
   useEffect(() => {
-    // Create audio element with online URL for "A Thousand Years"
-    audioRef.current = new Audio("https://www.mboxdrive.com/Christina%20Perri%20-%20A%20Thousand%20Years.mp3");
+    // Use local MP3 file
+    audioRef.current = new Audio("/music/wedding-song.mp3");
     audioRef.current.loop = true;
+
+    // Try to auto play
+    const attemptAutoplay = async () => {
+      try {
+        if (audioRef.current) {
+          await audioRef.current.play();
+          setIsPlaying(true);
+        }
+      } catch (error) {
+        console.log("Autoplay prevented by browser:", error);
+      }
+    };
+
+    attemptAutoplay();
     
     // Cleanup function
     return () => {
@@ -23,35 +37,6 @@ export function MusicToggle() {
       }
     };
   }, []);
-  
-  useEffect(() => {
-    if (!audioRef.current) return;
-    
-    // Handle autoplay restrictions
-    const handleUserInteraction = () => {
-      if (audioRef.current && !isPlaying) {
-        audioRef.current.play()
-          .then(() => {
-            setIsPlaying(true);
-          })
-          .catch(error => {
-            console.error("Autoplay prevented:", error);
-          });
-      }
-      
-      // Remove event listeners after first interaction
-      document.removeEventListener("click", handleUserInteraction);
-      document.removeEventListener("touchstart", handleUserInteraction);
-    };
-    
-    document.addEventListener("click", handleUserInteraction);
-    document.addEventListener("touchstart", handleUserInteraction);
-    
-    return () => {
-      document.removeEventListener("click", handleUserInteraction);
-      document.removeEventListener("touchstart", handleUserInteraction);
-    };
-  }, [isPlaying]);
   
   const toggleMusic = () => {
     if (!audioRef.current) return;
