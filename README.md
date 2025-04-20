@@ -10,7 +10,7 @@ Aplikasi undangan pernikahan digital dengan fitur database untuk mengelola tamu 
 - TypeScript
 - TailwindCSS 3.4
 - React Router Dom 6
-- Framer Motion
+- Framer Motion 12.7
 - shadcn/ui
 - MySQL/PostgreSQL (database)
 
@@ -77,25 +77,70 @@ DB_PASS=password
 DB_NAME=wedding_db
 ```
 
-5. Jalankan Development Server
+## Perintah yang Tersedia
+
 ```bash
+# Development server
 npm run dev
-```
 
-Aplikasi akan berjalan di `http://localhost:5173`
-
-6. Build untuk Production
-```bash
+# Build untuk production
 npm run build
+
+# Preview build hasil
+npm run preview
+
+# Type check
+npm run typecheck
+
+# Lint check
+npm run lint
+
+# Format code
+npm run format
 ```
 
-## Fitur
+## Komponen UI yang Tersedia
 
-- ✨ Tampilan responsif
-- 📋 Manajemen tamu undangan via database
-- 💝 Koleksi ucapan dan doa
-- 🎵 Background music
-- 🔗 Share link undangan per tamu
+Menggunakan shadcn/ui dengan komponen:
+
+- Accordion
+- Alert Dialog
+- Alert
+- Avatar
+- Badge
+- Button
+- Calendar
+- Card
+- Carousel
+- Checkbox
+- Collapsible
+- Command
+- Context Menu
+- Dialog
+- Dropdown Menu
+- Form
+- Hover Card
+- Input
+- Label
+- Menubar
+- Navigation Menu
+- Pagination
+- Popover
+- Progress
+- Radio Group
+- Scroll Area
+- Select
+- Separator
+- Sheet
+- Skeleton
+- Slider
+- Switch
+- Table
+- Tabs
+- Textarea
+- Toast
+- Toggle
+- Tooltip
 
 ## Struktur Folder
 
