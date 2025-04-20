@@ -14,8 +14,15 @@
     }
     button {
       padding: 10px 20px;
-      margin: 10px 0;
+      margin: 10px 5px;
       cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+    }
+    button:hover {
+      background-color: #45a049;
     }
     #log {
       border: 1px solid #ccc;
@@ -23,6 +30,31 @@
       height: 200px;
       overflow-y: auto;
       margin-top: 20px;
+      background-color: #f8f8f8;
+    }
+    .success {
+      color: green;
+    }
+    .error {
+      color: red;
+    }
+    .warning {
+      color: orange;
+    }
+    .info {
+      color: blue;
+    }
+    .upload-container {
+      margin: 20px 0;
+      padding: 15px;
+      border: 2px dashed #ccc;
+      border-radius: 5px;
+      text-align: center;
+    }
+    h2 {
+      margin-top: 30px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #eee;
     }
   </style>
 </head>
@@ -30,18 +62,38 @@
   <h1>Audio Test Page</h1>
   <p>This page tests if the wedding music can be played.</p>
   
-  <button id="play1">Play wedding-song.mp3</button>
-  <button id="play2">Play BIW.mp3</button>
+  <div>
+    <button id="play1">Test wedding-song.mp3</button>
+    <button id="play2">Test BIW.mp3</button>
+    <button id="clear">Clear Log</button>
+  </div>
   
+  <h2>MP3 Upload</h2>
+  <div class="upload-container">
+    <p>Upload MP3 files here to replace the placeholders:</p>
+    <div>
+      <label for="wedding-song">Wedding Song:</label>
+      <input type="file" id="wedding-song" accept="audio/mpeg" />
+      <button id="upload1">Upload as wedding-song.mp3</button>
+    </div>
+    <div style="margin-top: 10px;">
+      <label for="biw-song">BIW Song:</label>
+      <input type="file" id="biw-song" accept="audio/mpeg" />
+      <button id="upload2">Upload as BIW.mp3</button>
+    </div>
+  </div>
+  
+  <h2>Debug Log</h2>
   <div id="log"></div>
   
   <script>
     const logElement = document.getElementById('log');
     
-    function log(message) {
+    function log(message, type = 'info') {
       console.log(message);
       const entry = document.createElement('div');
-      entry.textContent = message;
+      entry.textContent = new Date().toLocaleTimeString() + ": " + message;
+      entry.className = type;
       logElement.appendChild(entry);
       logElement.scrollTop = logElement.scrollHeight;
     }
@@ -54,22 +106,31 @@
       testAudio('/music/BIW.mp3');
     });
     
+    document.getElementById('clear').addEventListener('click', () => {
+      logElement.innerHTML = '';
+      log('Log cleared', 'info');
+    });
+    
     function testAudio(src) {
-      log(`Testing audio: ${src}`);
+      log(`Testing audio: ${src}`, 'info');
       
       const audio = new Audio(src);
       
       audio.addEventListener('canplaythrough', () => {
-        log(`✅ Audio loaded successfully: ${src}`);
+        log(`✅ Audio loaded successfully: ${src}`, 'success');
       });
       
       audio.addEventListener('error', (e) => {
-        log(`❌ Error loading audio: ${src}`);
-        log(`Error code: ${audio.error?.code}, message: ${audio.error?.message}`);
+        log(`❌ Error loading audio: ${src}`, 'error');
+        log(`Error code: ${audio.error?.code}, message: ${audio.error?.message || 'No specific error message'}`, 'error');
+        
+        if (audio.error?.code === 4) {
+          log(`This is likely because the MP3 file is missing or corrupted. Please upload a valid MP3 file.`, 'warning');
+        }
       });
       
       audio.addEventListener('playing', () => {
-        log(`▶️ Audio playing: ${src}`);
+        log(`▶️ Audio playing: ${src}`, 'success');
       });
       
       try {
@@ -77,15 +138,49 @@
         if (playPromise !== undefined) {
           playPromise
             .then(() => {
-              log(`✅ Play promise resolved for: ${src}`);
+              log(`✅ Play promise resolved for: ${src}`, 'success');
             })
             .catch(err => {
-              log(`❌ Play promise rejected: ${err.message}`);
+              log(`❌ Play promise rejected: ${err.message}`, 'error');
+              
+              if (err.name === 'NotAllowedError') {
+                log(`The browser blocked autoplay. Click the button again to play.`, 'warning');
+              }
             });
         }
       } catch (err) {
-        log(`❌ Error playing audio: ${err.message}`);
+        log(`❌ Error playing audio: ${err.message}`, 'error');
       }
+    }
+    
+    // File upload handling
+    document.getElementById('upload1').addEventListener('click', () => {
+      uploadFile('wedding-song', '/music/wedding-song.mp3');
+    });
+    
+    document.getElementById('upload2').addEventListener('click', () => {
+      uploadFile('biw-song', '/music/BIW.mp3');
+    });
+    
+    function uploadFile(inputId, destination) {
+      const fileInput = document.getElementById(inputId);
+      const file = fileInput.files[0];
+      
+      if (!file) {
+        log(`No file selected for ${destination}`, 'error');
+        return;
+      }
+      
+      if (file.type !== 'audio/mpeg') {
+        log(`File must be an MP3 (audio/mpeg). Selected file is ${file.type}`, 'error');
+        return;
+      }
+      
+      log(`Would upload ${file.name} to ${destination}`, 'info');
+      log(`Note: In this demo page, uploads don't actually work. You need to upload the file directly to your project.`, 'warning');
+      
+      // In a real app, you would implement an actual upload mechanism here
+      // Since this is just a test page, we're only simulating the process
     }
   </script>
 </body>
