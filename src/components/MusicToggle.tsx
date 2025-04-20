@@ -17,6 +17,7 @@ export function MusicToggle() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [showDialog, setShowDialog] = useState(true);
   const [hasInteracted, setHasInteracted] = useState(false);
+  const [audioError, setAudioError] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const isMobile = useIsMobile();
   const { toast } = useToast();
@@ -33,6 +34,7 @@ export function MusicToggle() {
     // Set up event listeners after assigning the audio reference
     audio.addEventListener("canplaythrough", () => {
       console.log("Audio loaded successfully and can play through");
+      setAudioError(false);
       
       // On desktop, attempt autoplay after canplaythrough event
       if (!isMobile && !hasInteracted) {
@@ -47,11 +49,7 @@ export function MusicToggle() {
     
     audio.addEventListener("error", (e) => {
       console.error("Audio error:", e);
-      toast({
-        title: "Kesalahan Audio",
-        description: "Tidak dapat memuat file musik",
-        variant: "destructive"
-      });
+      setAudioError(true);
     });
     
     return () => {
@@ -63,7 +61,7 @@ export function MusicToggle() {
         audioRef.current.removeEventListener("error", () => {});
       }
     };
-  }, [isMobile, hasInteracted, toast]);
+  }, [isMobile, hasInteracted]);
   
   // Show welcome dialog with music notification
   useEffect(() => {
@@ -72,7 +70,7 @@ export function MusicToggle() {
         setShowDialog(false);
         
         // For mobile, show a toast explaining they need to tap
-        if (isMobile && !hasInteracted) {
+        if (isMobile && !hasInteracted && !audioError) {
           toast({
             title: "Ketuk tombol musik",
             description: "Ketuk tombol di kanan atas untuk memutar musik",
@@ -82,10 +80,19 @@ export function MusicToggle() {
       
       return () => clearTimeout(timer);
     }
-  }, [showDialog, toast, isMobile, hasInteracted]);
+  }, [showDialog, toast, isMobile, hasInteracted, audioError]);
   
   const toggleMusic = () => {
     if (!audioRef.current) return;
+    
+    if (audioError) {
+      toast({
+        title: "Kesalahan Audio",
+        description: "Tidak dapat memuat file musik",
+        variant: "destructive"
+      });
+      return;
+    }
     
     try {
       if (isPlaying) {
@@ -127,11 +134,20 @@ export function MusicToggle() {
             <DialogHeader>
               <DialogTitle className="text-center">Memutar Musik</DialogTitle>
               <DialogDescription className="text-center">
-                Silakan nikmati lagu pernikahan kami
-                {isMobile && (
-                  <p className="mt-2 text-sm text-gray-500">
-                    Ketuk tombol musik di kanan atas untuk memutar musik
-                  </p>
+                {!audioError ? (
+                  <>
+                    Silakan nikmati lagu pernikahan kami
+                    {isMobile && (
+                      <p className="mt-2 text-sm text-gray-500">
+                        Ketuk tombol musik di kanan atas untuk memutar musik
+                      </p>
+                    )}
+                  </>
+                ) : (
+                  <div className="text-red-500 mt-2">
+                    Kesalahan Audio
+                    <p className="mt-1">Tidak dapat memuat file musik</p>
+                  </div>
                 )}
               </DialogDescription>
             </DialogHeader>
@@ -149,14 +165,14 @@ export function MusicToggle() {
           size={isMobile ? "sm" : "icon"}
           variant="outline"
           onClick={toggleMusic}
-          className={`rounded-full h-8 w-8 sm:h-10 sm:w-10 bg-white shadow-md border-retirement-muted/30 hover:bg-retirement-light cursor-pointer ${!isPlaying && isMobile ? 'animate-pulse' : ''}`}
+          className={`rounded-full h-8 w-8 sm:h-10 sm:w-10 bg-white shadow-md border-retirement-muted/30 hover:bg-retirement-light cursor-pointer ${!isPlaying && isMobile && !audioError ? 'animate-pulse' : ''} ${audioError ? 'border-red-300' : ''}`}
           type="button"
           aria-label={isPlaying ? "Mute music" : "Unmute music"}
         >
           {isPlaying ? (
             <Volume2 className="h-4 w-4 sm:h-5 sm:w-5 text-retirement" />
           ) : (
-            <VolumeX className="h-4 w-4 sm:h-5 sm:w-5 text-slate-500" />
+            <VolumeX className={`h-4 w-4 sm:h-5 sm:w-5 ${audioError ? 'text-red-500' : 'text-slate-500'}`} />
           )}
         </Button>
       </motion.div>
