@@ -14,31 +14,13 @@ export function MusicToggle() {
   const { toast } = useToast();
   
   useEffect(() => {
-    // Create an audio element directly in the DOM for better browser compatibility
-    const audioElement = document.createElement('audio');
-    audioElement.id = 'wedding-music';
+    // Create audio element
+    const audioElement = new Audio();
     audioElement.loop = true;
     audioElement.preload = 'auto';
     
-    // Add multiple sources with different paths to increase chances of success
-    const paths = [
-      { src: '/music/wedding-song.mp3', type: 'audio/mp3' },
-      { src: 'music/wedding-song.mp3', type: 'audio/mp3' },
-      { src: '/music/BIW.mp3', type: 'audio/mp3' },
-      { src: 'music/BIW.mp3', type: 'audio/mp3' }
-    ];
-    
-    // Add all sources to increase chances of successful loading
-    paths.forEach(path => {
-      const source = document.createElement('source');
-      source.src = path.src;
-      source.type = path.type;
-      audioElement.appendChild(source);
-    });
-    
-    // Add the audio element to the DOM
-    document.body.appendChild(audioElement);
-    audioRef.current = audioElement;
+    // Set audio source with fallbacks
+    audioElement.src = '/music/BIW.mp3';
     
     // Log when audio is ready
     audioElement.oncanplaythrough = () => {
@@ -46,27 +28,28 @@ export function MusicToggle() {
       setAudioLoaded(true);
     };
     
-    // Handle errors more gracefully
-    audioElement.onerror = (e) => {
-      console.error("Audio couldn't be loaded", e);
-      toast({
-        title: "Musik tidak dapat dimuat",
-        description: "Silakan klik tombol untuk mencoba lagi",
-        variant: "destructive"
-      });
+    // Handle errors
+    audioElement.onerror = () => {
+      console.error("Audio failed to load, trying alternative path");
+      // Try alternative paths if the first one fails
+      audioElement.src = 'music/BIW.mp3';
+      
+      // Add a second error handler for the alternative path
+      audioElement.onerror = () => {
+        console.error("All audio paths failed");
+        toast({
+          title: "Musik tidak dapat dimuat",
+          description: "Silakan klik tombol untuk mencoba lagi",
+          variant: "destructive"
+        });
+      };
     };
     
-    // Cleanup function to properly remove the audio element
+    audioRef.current = audioElement;
+    
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
-        
-        // Remove audio element from DOM
-        const domAudio = document.getElementById('wedding-music');
-        if (domAudio) {
-          document.body.removeChild(domAudio);
-        }
-        
         audioRef.current = null;
       }
     };
@@ -74,7 +57,6 @@ export function MusicToggle() {
   
   const toggleMusic = () => {
     if (!audioRef.current) {
-      // If audio element doesn't exist for some reason, show error
       toast({
         title: "Musik tidak tersedia",
         description: "Silakan muat ulang halaman",
@@ -87,6 +69,10 @@ export function MusicToggle() {
       audioRef.current.pause();
       setIsPlaying(false);
     } else {
+      // Force reload the audio src before playing to handle potential stale sources
+      const currentSrc = audioRef.current.src;
+      audioRef.current.src = currentSrc;
+      
       audioRef.current.play()
         .then(() => {
           setIsPlaying(true);
@@ -108,13 +94,14 @@ export function MusicToggle() {
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.3 }}
-      className="fixed top-3 right-3 sm:top-4 sm:right-4 z-50"
+      className="fixed top-3 right-3 sm:top-4 sm:right-4 z-[100]"
     >
       <Button
         size={isMobile ? "sm" : "icon"}
         variant="outline"
         onClick={toggleMusic}
         className="rounded-full h-8 w-8 sm:h-10 sm:w-10 bg-white shadow-md border-retirement-muted/30 hover:bg-retirement-light"
+        type="button"
       >
         {isPlaying ? (
           <Volume2 className="h-4 w-4 sm:h-5 sm:w-5 text-retirement" />
