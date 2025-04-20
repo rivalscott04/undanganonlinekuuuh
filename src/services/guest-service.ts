@@ -1,6 +1,6 @@
 
-import { Guest, GuestResponse } from '@/types/guest-local';
 import Papa from 'papaparse';
+import { Guest } from '@/types/guest-local';
 
 // Replace these URLs with your actual MySQL API endpoints
 const API_URL = 'YOUR_API_URL';
@@ -37,7 +37,7 @@ export const guestService = {
             const guests = results.data.slice(1).map((row: any) => ({
               name: row[0],
               slug: row[0].toLowerCase().replace(/\s+/g, '-'),
-              status: 'active'
+              status: 'active' as const
             }));
 
             // TODO: Replace with your actual API call
