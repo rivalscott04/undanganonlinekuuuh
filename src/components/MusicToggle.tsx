@@ -6,68 +6,63 @@ import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useToast } from "@/hooks/use-toast";
 
-// Define the locations where we'll look for music files
-const MUSIC_PATHS = [
-  "/music/wedding-song.mp3",
-  "/music/BIW.mp3",
-  "music/wedding-song.mp3",
-  "music/BIW.mp3"
-];
-
 export function MusicToggle() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentPathIndex, setCurrentPathIndex] = useState(0);
   const [audioLoaded, setAudioLoaded] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const isMobile = useIsMobile();
   const { toast } = useToast();
   
-  // Create and set up the audio element
+  // Create audio element on component mount
   useEffect(() => {
-    console.log("Initializing audio with path:", MUSIC_PATHS[currentPathIndex]);
+    console.log("Creating new audio element");
     
-    const audio = new Audio();
-    audio.loop = true;
-    audio.preload = "auto";
-    audio.src = MUSIC_PATHS[currentPathIndex];
+    // Create the audio element directly in the DOM for better browser compatibility
+    const audioElement = document.createElement("audio");
+    audioElement.id = "wedding-music";
+    audioElement.loop = true;
     
-    audio.addEventListener("canplaythrough", () => {
-      console.log("Audio loaded successfully");
+    // Add sources with different paths to maximize chances of success
+    const paths = ["/music/wedding-song.mp3", "/music/BIW.mp3", "music/wedding-song.mp3", "music/BIW.mp3"];
+    
+    paths.forEach(path => {
+      const source = document.createElement("source");
+      source.src = path;
+      source.type = "audio/mp3";
+      audioElement.appendChild(source);
+      console.log(`Added audio source: ${path}`);
+    });
+    
+    // Add event listeners
+    audioElement.addEventListener("canplaythrough", () => {
+      console.log("Audio can play through, marking as loaded");
       setAudioLoaded(true);
     });
     
-    audio.addEventListener("error", () => {
-      console.error(`Failed to load audio from ${audio.src}`);
-      
-      // Try the next path in our array if available
-      if (currentPathIndex < MUSIC_PATHS.length - 1) {
-        setCurrentPathIndex(prevIndex => prevIndex + 1);
-      } else {
-        // We've tried all paths and none worked
-        toast({
-          title: "Musik tidak dapat dimuat",
-          description: "Silakan periksa koneksi internet Anda dan coba lagi",
-          variant: "destructive"
-        });
-      }
+    audioElement.addEventListener("error", (e) => {
+      console.error("Audio element error:", e);
     });
     
-    audioRef.current = audio;
+    // Add to the DOM but hidden
+    document.body.appendChild(audioElement);
+    audioRef.current = audioElement;
     
-    // Cleanup function
+    // Cleanup on unmount
     return () => {
+      console.log("Cleaning up audio element");
       if (audioRef.current) {
         audioRef.current.pause();
-        audioRef.current.removeEventListener("canplaythrough", () => {});
-        audioRef.current.removeEventListener("error", () => {});
-        audioRef.current = null;
+        audioRef.current.remove();
       }
     };
-  }, [currentPathIndex, toast]);
+  }, []);
   
-  // Handle music toggle
+  // Function to toggle music playback
   const toggleMusic = () => {
+    console.log("Toggle button clicked, audio loaded:", audioLoaded);
+    
     if (!audioRef.current) {
+      console.error("Audio element not available");
       toast({
         title: "Musik tidak tersedia",
         description: "Silakan muat ulang halaman",
@@ -76,97 +71,62 @@ export function MusicToggle() {
       return;
     }
     
-    if (isPlaying) {
-      audioRef.current.pause();
-      setIsPlaying(false);
-      console.log("Music paused");
-    } else {
-      // Play the audio
-      const playPromise = audioRef.current.play();
-      
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            setIsPlaying(true);
-            console.log("Music playing");
-          })
-          .catch(error => {
-            console.error("Play prevented:", error);
-            
-            // If it's a user interaction issue, tell them
-            if (error.name === "NotAllowedError") {
-              toast({
-                title: "Gagal memutar musik",
-                description: "Browser menghalangi pemutaran otomatis. Silakan klik lagi.",
-                variant: "destructive"
-              });
-            } else {
-              // Try the next audio path
-              if (currentPathIndex < MUSIC_PATHS.length - 1) {
-                setCurrentPathIndex(prevIndex => prevIndex + 1);
+    try {
+      if (isPlaying) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+        console.log("Music paused");
+      } else {
+        const playPromise = audioRef.current.play();
+        
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              setIsPlaying(true);
+              console.log("Music playing successfully");
+            })
+            .catch(error => {
+              console.error("Play prevented:", error);
+              
+              // User interaction error
+              if (error.name === "NotAllowedError") {
+                toast({
+                  title: "Interaksi Pengguna Diperlukan",
+                  description: "Silakan klik lagi untuk memutar musik",
+                  variant: "destructive"
+                });
               } else {
                 toast({
                   title: "Gagal memutar musik",
-                  description: "Format audio tidak didukung oleh browser Anda",
+                  description: "Format audio mungkin tidak didukung browser Anda",
                   variant: "destructive"
                 });
               }
-            }
-          });
+            });
+        }
       }
+    } catch (error) {
+      console.error("Error in toggle music:", error);
+      toast({
+        title: "Terjadi kesalahan",
+        description: "Tidak dapat memutar atau menjeda musik",
+        variant: "destructive"
+      });
     }
   };
-  
-  // Create a hardcoded audio element directly in the DOM as a fallback
-  useEffect(() => {
-    // Add a direct audio tag to the DOM as a last resort
-    const createFallbackAudio = () => {
-      if (!audioLoaded && currentPathIndex === MUSIC_PATHS.length - 1) {
-        console.log("Creating fallback audio element in DOM");
-        const audioElement = document.createElement("audio");
-        audioElement.id = "wedding-music-fallback";
-        audioElement.loop = true;
-        
-        // Add sources for each path
-        MUSIC_PATHS.forEach(path => {
-          const source = document.createElement("source");
-          source.src = path;
-          source.type = "audio/mp3";
-          audioElement.appendChild(source);
-        });
-        
-        // Append to body but hidden
-        document.body.appendChild(audioElement);
-        
-        // If our main audio fails, try to use this one
-        audioRef.current = audioElement;
-      }
-    };
-    
-    // Add fallback after a delay
-    const fallbackTimer = setTimeout(createFallbackAudio, 5000);
-    
-    return () => {
-      clearTimeout(fallbackTimer);
-      const fallbackElement = document.getElementById("wedding-music-fallback");
-      if (fallbackElement) {
-        fallbackElement.remove();
-      }
-    };
-  }, [audioLoaded, currentPathIndex]);
   
   return (
     <motion.div 
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.3 }}
-      className="fixed top-3 right-3 sm:top-4 sm:right-4 z-[100]"
+      className="fixed top-3 right-3 sm:top-4 sm:right-4 z-[9999]"
     >
       <Button
         size={isMobile ? "sm" : "icon"}
         variant="outline"
         onClick={toggleMusic}
-        className="rounded-full h-8 w-8 sm:h-10 sm:w-10 bg-white shadow-md border-retirement-muted/30 hover:bg-retirement-light"
+        className="rounded-full h-8 w-8 sm:h-10 sm:w-10 bg-white shadow-md border-retirement-muted/30 hover:bg-retirement-light cursor-pointer"
         type="button"
         aria-label={isPlaying ? "Pause music" : "Play music"}
       >
