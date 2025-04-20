@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { CalendarPlus, Flower2 } from "lucide-react";
+import { CalendarPlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { addToCalendar } from "@/utils/calendar";
 
@@ -16,12 +16,15 @@ interface CountdownTimerProps {
   targetDate?: string;
 }
 
-export function CountdownTimer({ targetDate = "2025-06-15T08:00:00" }: CountdownTimerProps) {
+export function CountdownTimer({ targetDate = "2025-05-31T08:00:00" }: CountdownTimerProps) {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
     const calculateTimeLeft = () => {
-      const difference = new Date(targetDate).getTime() - new Date().getTime();
+      // Get current date and time from user's device
+      const now = new Date();
+      const target = new Date(targetDate);
+      const difference = target.getTime() - now.getTime();
       
       if (difference > 0) {
         const days = Math.floor(difference / (1000 * 60 * 60 * 24));

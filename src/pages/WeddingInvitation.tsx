@@ -42,7 +42,7 @@ export default function WeddingInvitation() {
       {isEnvelopeOpen && (
         <>
           <Intro />
-          <CountdownTimer targetDate="2025-08-08T10:00:00" />
+          <CountdownTimer targetDate="2025-05-31T08:00:00" />
           <EventDetails />
           <RSVPConfirm />
           
