@@ -127,6 +127,7 @@ export function MusicToggle() {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.3 }}
       className="fixed top-3 right-3 sm:top-4 sm:right-4 z-[9999]"
+      style={{ position: 'fixed' }} // Ensure it's fixed even with other styles
     >
       <Button
         size={isMobile ? "sm" : "icon"}

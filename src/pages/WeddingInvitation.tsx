@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { HeroEnvelope } from "@/components/HeroEnvelope";
 import { Intro } from "@/components/Intro";
@@ -33,6 +34,7 @@ export default function WeddingInvitation() {
   
   return (
     <div className="bg-white min-h-screen overflow-x-hidden w-full">
+      {/* Music Toggle is now always visible, regardless of envelope state */}
       <MusicToggle />
       
       <HeroEnvelope onEnvelopeOpen={handleEnvelopeOpen} />
