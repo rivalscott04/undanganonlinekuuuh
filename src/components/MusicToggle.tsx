@@ -38,7 +38,6 @@ export function MusicToggle() {
       if (!isMobile && !hasInteracted) {
         audio.play().then(() => {
           setIsPlaying(true);
-          showMusicToast();
         }).catch(error => {
           console.log("Autoplay prevented:", error);
           setIsPlaying(false);
@@ -85,13 +84,6 @@ export function MusicToggle() {
     }
   }, [showDialog, toast, isMobile, hasInteracted]);
   
-  const showMusicToast = () => {
-    toast({
-      title: "Musik diputar",
-      description: "Nikmati lagu pernikahan kami",
-    });
-  };
-  
   const toggleMusic = () => {
     if (!audioRef.current) return;
     
@@ -111,7 +103,6 @@ export function MusicToggle() {
             .then(() => {
               setIsPlaying(true);
               setHasInteracted(true);
-              showMusicToast();
             })
             .catch(error => {
               console.error("Play prevented:", error);
