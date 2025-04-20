@@ -1,4 +1,3 @@
-
 # Digital Wedding Invitation
 
 Aplikasi undangan pernikahan digital dengan fitur database untuk mengelola tamu dan ucapan.
@@ -184,3 +183,87 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 [MIT](https://choosealicense.com/licenses/mit/)
 
+## Instalasi Dependensi
+
+### Prasyarat
+- Node.js versi 18 atau lebih baru
+- npm atau yarn
+
+### Instalasi Utama
+```bash
+# Install dependencies utama
+npm install
+
+# Install Tailwind CSS (versi 3.4)
+npm install -D tailwindcss@3.4 postcss autoprefixer
+
+# Install shadcn/ui
+npx shadcn-ui@latest init
+
+# Install Lucide React
+npm install lucide-react@0.462.0
+
+# Install React Query
+npm install @tanstack/react-query@5.56.2
+
+# Install Form Hooks
+npm install react-hook-form@7.53.0
+npm install @hookform/resolvers@3.9.0
+
+# Install Framer Motion
+npm install framer-motion@12.7.3
+
+# Install Canvas Confetti (jika diperlukan)
+npm install canvas-confetti@1.9.3
+```
+
+### Konfigurasi shadcn/ui
+Jalankan perintah berikut untuk menginstal komponen shadcn/ui:
+```bash
+# Contoh instalasi komponen
+npx shadcn-ui@latest add button
+npx shadcn-ui@latest add toast
+npx shadcn-ui@latest add dialog
+```
+
+## Struktur Folder
+
+```
+src/
+  ├── components/         # Komponen React
+  ├── pages/             # Halaman utama
+  ├── hooks/             # Custom React hooks
+  ├── api/               # API handlers
+  ├── lib/               # Utilitas dan helpers
+  ├── types/             # TypeScript types
+  └── styles/            # CSS dan Tailwind styles
+```
+
+## Deployment
+
+1. Setup web server (Apache/Nginx)
+2. Import struktur database
+3. Konfigurasi environment variables
+4. Upload build files ke server
+5. Konfigurasi domain dan SSL
+
+## API Endpoints
+
+- `GET /api/guests/:slug` - Validasi tamu
+- `GET /api/wishes` - Ambil daftar ucapan
+- `POST /api/wishes` - Tambah ucapan baru
+
+## Penggunaan
+
+1. Admin menambahkan data tamu ke database
+2. Share link undangan dengan format: `https://domain.com/undangan/{slug-tamu}`
+3. Tamu membuka link dan melihat undangan
+4. Tamu bisa memberikan ucapan dan doa
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
