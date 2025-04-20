@@ -9,7 +9,7 @@ import { WishesList } from "@/components/WishesList";
 import { MusicToggle } from "@/components/MusicToggle";
 import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/hooks/use-toast";
-import { Copy } from "lucide-react";
+import { Copy, Heart } from "lucide-react";
 
 interface Wish {
   name: string;
