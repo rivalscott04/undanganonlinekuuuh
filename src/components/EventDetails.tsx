@@ -49,8 +49,8 @@ export function EventDetails() {
                 <div className="flex items-start">
                   <Calendar className="mr-3 h-4 sm:h-5 w-4 sm:w-5 text-retirement" />
                   <div>
-                    <div className="font-medium text-sm sm:text-base">Sabtu, 15 Juni 2024</div>
-                    <div className="text-xs sm:text-sm text-slate-500">13 Dzulhijjah 1445 H</div>
+                    <div className="font-medium text-sm sm:text-base">Minggu, 31 Mei 2025</div>
+                    <div className="text-xs sm:text-sm text-slate-500">4 Dzulhijah 1446 H</div>
                   </div>
                 </div>
                 <div className="flex items-start">
@@ -63,8 +63,8 @@ export function EventDetails() {
                 <div className="flex items-start">
                   <MapPin className="mr-3 h-4 sm:h-5 w-4 sm:w-5 text-retirement" />
                   <div>
-                    <div className="font-medium text-sm sm:text-base">Masjid Al-Muhajirin</div>
-                    <div className="text-xs sm:text-sm text-slate-500">Jl. Cendrawasih No. 12, Jakarta Selatan</div>
+                    <div className="font-medium text-sm sm:text-base">Dusun Dalam Lauq, Desa Kotaraja</div>
+                    <div className="text-xs sm:text-sm text-slate-500">Jl. Raden Lung Negare</div>
                   </div>
                 </div>
               </CardContent>
@@ -73,7 +73,7 @@ export function EventDetails() {
                   variant="outline" 
                   size={isMobile ? "sm" : "default"}
                   className="w-full border-retirement text-retirement hover:bg-retirement hover:text-white"
-                  onClick={() => window.open("https://maps.google.com/?q=Masjid+Al+Muhajirin+Jakarta", "_blank")}
+                  onClick={() => window.open("https://maps.app.goo.gl/ihqFznWfXqXe8wmbA", "_blank")}
                 >
                   <MapPin className="mr-2 h-4 w-4" />
                   Buka Google Maps
@@ -97,8 +97,8 @@ export function EventDetails() {
                 <div className="flex items-start">
                   <Calendar className="mr-3 h-4 sm:h-5 w-4 sm:w-5 text-retirement" />
                   <div>
-                    <div className="font-medium text-sm sm:text-base">Sabtu, 15 Juni 2024</div>
-                    <div className="text-xs sm:text-sm text-slate-500">13 Dzulhijjah 1445 H</div>
+                    <div className="font-medium text-sm sm:text-base">Minggu, 31 Mei 2025</div>
+                    <div className="text-xs sm:text-sm text-slate-500">4 Dzulhijjah 1446 H</div>
                   </div>
                 </div>
                 <div className="flex items-start">
@@ -111,8 +111,8 @@ export function EventDetails() {
                 <div className="flex items-start">
                   <MapPin className="mr-3 h-4 sm:h-5 w-4 sm:w-5 text-retirement" />
                   <div>
-                    <div className="font-medium text-sm sm:text-base">Gedung Auditorium Pertamina</div>
-                    <div className="text-xs sm:text-sm text-slate-500">Jl. M.H. Thamrin No. 28, Jakarta Pusat</div>
+                    <div className="font-medium text-sm sm:text-base">Dusun Dalam Lauq, Desa Kotaraja</div>
+                    <div className="text-xs sm:text-sm text-slate-500">Jl. Raden Lung Negare</div>
                   </div>
                 </div>
               </CardContent>
@@ -121,7 +121,7 @@ export function EventDetails() {
                   variant="outline" 
                   size={isMobile ? "sm" : "default"}
                   className="w-full border-retirement text-retirement hover:bg-retirement hover:text-white"
-                  onClick={() => window.open("https://maps.google.com/?q=Gedung+Auditorium+Pertamina+Jakarta", "_blank")}
+                  onClick={() => window.open("https://maps.app.goo.gl/ihqFznWfXqXe8wmbA", "_blank")}
                 >
                   <MapPin className="mr-2 h-4 w-4" />
                   Buka Google Maps

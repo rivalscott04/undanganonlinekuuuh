@@ -60,7 +60,7 @@ export default function WeddingInvitation() {
                 {/* BSI Card */}
                 <div className="bg-white rounded-lg p-4 shadow-sm border border-retirement-muted/20">
                   <div className="flex items-center justify-center h-10 mb-3">
-                    <img src="/images/bank/bsi-logo.svg" alt="BSI" className="h-8" />
+                    <img src="/images/bsi-logo.svg" alt="BSI" className="h-24" />
                   </div>
                   <p className="text-center text-xs text-slate-600 mb-2">a.n Rival Biasrori</p>
                   <div className="flex items-center justify-center gap-2 bg-retirement-light/10 rounded-md px-3 py-1.5 border border-retirement-muted/30">
@@ -83,7 +83,7 @@ export default function WeddingInvitation() {
                 {/* Bank NTB Card */}
                 <div className="bg-white rounded-lg p-4 shadow-sm border border-retirement-muted/20">
                   <div className="flex items-center justify-center h-10 mb-3">
-                    <img src="/images/bank/ntb-logo.svg" alt="Bank NTB" className="h-8" />
+                    <img src="/images/ntb-logo.svg" alt="Bank NTB" className="h-16" />
                   </div>
                   <p className="text-center text-xs text-slate-600 mb-2">a.n Syahrina Ulya Ramadhani</p>
                   <div className="flex items-center justify-center gap-2 bg-retirement-light/10 rounded-md px-3 py-1.5 border border-retirement-muted/30">
