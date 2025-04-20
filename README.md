@@ -215,6 +215,9 @@ npm install framer-motion@12.7.3
 
 # Install Canvas Confetti (jika diperlukan)
 npm install canvas-confetti@1.9.3
+
+# Install PapaParse untuk parsing CSV
+npm install papaparse@5.5.2
 ```
 
 ### Konfigurasi shadcn/ui
