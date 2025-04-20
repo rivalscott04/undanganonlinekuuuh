@@ -19,11 +19,13 @@ export function MusicToggle() {
     
     // Set audio properties
     if (audioRef.current) {
-      audioRef.current.src = "/music/BIW.mp3";
+      // Use the correct path to the audio file
+      audioRef.current.src = "./music/BIW.mp3";
       audioRef.current.loop = true;
       
       // Add event listeners
       audioRef.current.addEventListener('canplaythrough', () => {
+        console.log("Audio loaded successfully");
         setAudioLoaded(true);
         attemptAutoplay();
       });
@@ -44,6 +46,7 @@ export function MusicToggle() {
         if (audioRef.current && audioLoaded) {
           await audioRef.current.play();
           setIsPlaying(true);
+          console.log("Autoplay successful");
         }
       } catch (error) {
         console.log("Autoplay prevented by browser:", error);
@@ -78,6 +81,7 @@ export function MusicToggle() {
       audioRef.current.play()
         .then(() => {
           setIsPlaying(true);
+          console.log("Music playing");
         })
         .catch(error => {
           console.error("Play prevented:", error);
