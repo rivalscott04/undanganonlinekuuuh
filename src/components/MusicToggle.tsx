@@ -6,15 +6,15 @@ import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useToast } from "@/hooks/use-toast";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 export function MusicToggle() {
-  const [isPlaying, setIsPlaying] = useState(false); // Start as false until user interaction
+  const [isPlaying, setIsPlaying] = useState(false);
   const [showDialog, setShowDialog] = useState(true);
   const [hasInteracted, setHasInteracted] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -28,11 +28,13 @@ export function MusicToggle() {
     const audio = new Audio();
     audio.loop = true;
     audio.src = "/music/BIW.mp3";
+    audioRef.current = audio;
     
+    // Set up event listeners after assigning the audio reference
     audio.addEventListener("canplaythrough", () => {
       console.log("Audio loaded successfully and can play through");
       
-      // On desktop, attempt autoplay
+      // On desktop, attempt autoplay after canplaythrough event
       if (!isMobile && !hasInteracted) {
         audio.play().then(() => {
           setIsPlaying(true);
@@ -53,20 +55,21 @@ export function MusicToggle() {
       });
     });
     
-    audioRef.current = audio;
-    
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
         audioRef.current.src = "";
+        // Clean up event listeners
+        audioRef.current.removeEventListener("canplaythrough", () => {});
+        audioRef.current.removeEventListener("error", () => {});
       }
     };
-  }, [toast, isMobile, hasInteracted]);
+  }, [isMobile, hasInteracted, toast]);
   
   // Show welcome dialog with music notification
   useEffect(() => {
     if (showDialog) {
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         setShowDialog(false);
         
         // For mobile, show a toast explaining they need to tap
@@ -77,6 +80,8 @@ export function MusicToggle() {
           });
         }
       }, 3000);
+      
+      return () => clearTimeout(timer);
     }
   }, [showDialog, toast, isMobile, hasInteracted]);
   
@@ -94,6 +99,10 @@ export function MusicToggle() {
       if (isPlaying) {
         audioRef.current.pause();
         setIsPlaying(false);
+        toast({
+          title: "Musik dijeda",
+          description: "Ketuk tombol untuk memutar lagi",
+        });
       } else {
         const playPromise = audioRef.current.play();
         
@@ -114,35 +123,36 @@ export function MusicToggle() {
             });
         }
       }
-    } catch (error: any) {
+    } catch (error) {
       console.error("Toggle music error:", error);
     }
   };
   
   return (
     <>
-      <Dialog open={showDialog} onOpenChange={setShowDialog}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle className="text-center">Memutar Musik</DialogTitle>
-            <DialogDescription className="text-center">
-              Silakan nikmati lagu pernikahan kami
-              {isMobile && (
-                <p className="mt-2 text-sm text-gray-500">
-                  Ketuk tombol musik di kanan atas untuk memutar musik
-                </p>
-              )}
-            </DialogDescription>
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
+      {showDialog && (
+        <AlertDialog open={showDialog} onOpenChange={setShowDialog}>
+          <AlertDialogContent className="sm:max-w-md">
+            <AlertDialogHeader>
+              <AlertDialogTitle className="text-center">Memutar Musik</AlertDialogTitle>
+              <AlertDialogDescription className="text-center">
+                Silakan nikmati lagu pernikahan kami
+                {isMobile && (
+                  <p className="mt-2 text-sm text-gray-500">
+                    Ketuk tombol musik di kanan atas untuk memutar musik
+                  </p>
+                )}
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+          </AlertDialogContent>
+        </AlertDialog>
+      )}
 
       <motion.div 
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.3 }}
         className="fixed top-3 right-3 sm:top-4 sm:right-4 z-[9999]"
-        style={{ position: 'fixed' }}
       >
         <Button
           size={isMobile ? "sm" : "icon"}
