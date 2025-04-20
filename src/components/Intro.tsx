@@ -37,7 +37,10 @@ export function Intro() {
             className="p-4 sm:p-6 border border-retirement-muted rounded-lg"
           >
             <h3 className="font-serif text-2xl sm:text-3xl font-bold text-retirement-dark mb-2">Rival Biasrori</h3>
-            <p className="text-slate-600 mb-4 text-sm sm:text-base">Putra dari Bapak Fulan</p>
+            <p className="text-slate-600 mb-4 text-sm sm:text-base">
+              Putra dari Pasangan<br />
+              Bapak Fulan & Ibu Fulanah
+            </p>
             <div className="flex justify-center">
               <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-retirement/10 flex items-center justify-center">
                 <span className="text-retirement text-xl sm:text-2xl font-bold">R</span>
@@ -53,7 +56,10 @@ export function Intro() {
             className="p-4 sm:p-6 border border-retirement-muted rounded-lg"
           >
             <h3 className="font-serif text-2xl sm:text-3xl font-bold text-retirement-dark mb-2">Syahrina Ulya Ramadhani</h3>
-            <p className="text-slate-600 mb-4 text-sm sm:text-base">Putri dari Bapak Fulan</p>
+            <p className="text-slate-600 mb-4 text-sm sm:text-base">
+              Putri dari Pasangan<br />
+              Bapak Fulan & Ibu Fulanah
+            </p>
             <div className="flex justify-center">
               <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-retirement/10 flex items-center justify-center">
                 <span className="text-retirement text-xl sm:text-2xl font-bold">S</span>
