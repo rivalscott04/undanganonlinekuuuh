@@ -1,69 +1,141 @@
-# Welcome to your Lovable project
 
-## Project info
+# Digital Wedding Invitation
 
-**URL**: https://lovable.dev/projects/573c66c5-b525-42ec-8227-e7cb62cb3640
+Aplikasi undangan pernikahan digital dengan fitur database untuk mengelola tamu dan ucapan.
 
-## How can I edit this code?
+## Teknologi yang Digunakan
 
-There are several ways of editing your application.
+- Vite
+- React 18
+- TypeScript
+- TailwindCSS 3.4
+- React Router Dom 6
+- Framer Motion
+- shadcn/ui
+- MySQL/PostgreSQL (database)
 
-**Use Lovable**
+## Persyaratan Sistem
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/573c66c5-b525-42ec-8227-e7cb62cb3640) and start prompting.
+- Node.js versi 18 atau lebih baru
+- npm atau yarn
+- MySQL/PostgreSQL
 
-Changes made via Lovable will be committed automatically to this repo.
+## Langkah Instalasi
 
-**Use your preferred IDE**
+1. Clone repository
+```bash
+git clone <repository-url>
+cd digital-wedding
+```
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+2. Install dependencies
+```bash
+npm install
+```
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+3. Setup Database
+```sql
+-- Buat database
+CREATE DATABASE wedding_db;
+USE wedding_db;
 
-Follow these steps:
+-- Tabel tamu undangan
+CREATE TABLE guests (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) UNIQUE NOT NULL,
+    status ENUM('active', 'inactive') DEFAULT 'active',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+-- Tabel ucapan dan doa
+CREATE TABLE wishes (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    guest_id INT,
+    name VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (guest_id) REFERENCES guests(id)
+);
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+-- Contoh data tamu
+INSERT INTO guests (name, slug) VALUES 
+('Budi Santoso', 'budi-santoso'),
+('Ani Wijaya', 'ani-wijaya'),
+('Keluarga Darmawan', 'keluarga-darmawan');
+```
 
-# Step 3: Install the necessary dependencies.
-npm i
+4. Konfigurasi Environment
+```bash
+# Copy .env.example ke .env
+cp .env.example .env
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Edit file .env sesuai konfigurasi database
+DB_HOST=localhost
+DB_USER=root
+DB_PASS=password
+DB_NAME=wedding_db
+```
+
+5. Jalankan Development Server
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Aplikasi akan berjalan di `http://localhost:5173`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+6. Build untuk Production
+```bash
+npm run build
+```
 
-**Use GitHub Codespaces**
+## Fitur
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- ✨ Tampilan responsif
+- 📋 Manajemen tamu undangan via database
+- 💝 Koleksi ucapan dan doa
+- 🎵 Background music
+- 🔗 Share link undangan per tamu
 
-## What technologies are used for this project?
+## Struktur Folder
 
-This project is built with .
+```
+src/
+  ├── components/         # Komponen React
+  ├── pages/             # Halaman utama
+  ├── hooks/             # Custom React hooks
+  ├── api/               # API handlers
+  ├── lib/               # Utilitas dan helpers
+  ├── types/             # TypeScript types
+  └── styles/            # CSS dan Tailwind styles
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Deployment
 
-## How can I deploy this project?
+1. Setup web server (Apache/Nginx)
+2. Import struktur database
+3. Konfigurasi environment variables
+4. Upload build files ke server
+5. Konfigurasi domain dan SSL
 
-Simply open [Lovable](https://lovable.dev/projects/573c66c5-b525-42ec-8227-e7cb62cb3640) and click on Share -> Publish.
+## API Endpoints
 
-## I want to use a custom domain - is that possible?
+- `GET /api/guests/:slug` - Validasi tamu
+- `GET /api/wishes` - Ambil daftar ucapan
+- `POST /api/wishes` - Tambah ucapan baru
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+## Penggunaan
+
+1. Admin menambahkan data tamu ke database
+2. Share link undangan dengan format: `https://domain.com/undangan/{slug-tamu}`
+3. Tamu membuka link dan melihat undangan
+4. Tamu bisa memberikan ucapan dan doa
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
