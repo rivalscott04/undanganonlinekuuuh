@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audio Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px 0;
+      cursor: pointer;
+    }
+    #log {
+      border: 1px solid #ccc;
+      padding: 10px;
+      height: 200px;
+      overflow-y: auto;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Audio Test Page</h1>
+  <p>This page tests if the wedding music can be played.</p>
+  
+  <button id="play1">Play wedding-song.mp3</button>
+  <button id="play2">Play BIW.mp3</button>
+  
+  <div id="log"></div>
+  
+  <script>
+    const logElement = document.getElementById('log');
+    
+    function log(message) {
+      console.log(message);
+      const entry = document.createElement('div');
+      entry.textContent = message;
+      logElement.appendChild(entry);
+      logElement.scrollTop = logElement.scrollHeight;
+    }
+    
+    document.getElementById('play1').addEventListener('click', () => {
+      testAudio('/music/wedding-song.mp3');
+    });
+    
+    document.getElementById('play2').addEventListener('click', () => {
+      testAudio('/music/BIW.mp3');
+    });
+    
+    function testAudio(src) {
+      log(`Testing audio: ${src}`);
+      
+      const audio = new Audio(src);
+      
+      audio.addEventListener('canplaythrough', () => {
+        log(`✅ Audio loaded successfully: ${src}`);
+      });
+      
+      audio.addEventListener('error', (e) => {
+        log(`❌ Error loading audio: ${src}`);
+        log(`Error code: ${audio.error?.code}, message: ${audio.error?.message}`);
+      });
+      
+      audio.addEventListener('playing', () => {
+        log(`▶️ Audio playing: ${src}`);
+      });
+      
+      try {
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              log(`✅ Play promise resolved for: ${src}`);
+            })
+            .catch(err => {
+              log(`❌ Play promise rejected: ${err.message}`);
+            });
+        }
+      } catch (err) {
+        log(`❌ Error playing audio: ${err.message}`);
+      }
+    }
+  </script>
+</body>
+</html>

@@ -8,58 +8,78 @@ import { useToast } from "@/hooks/use-toast";
 
 export function MusicToggle() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [audioLoaded, setAudioLoaded] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const isMobile = useIsMobile();
   const { toast } = useToast();
   
-  // Create audio element on component mount
   useEffect(() => {
-    console.log("Creating new audio element");
+    console.log("Setting up audio element");
     
-    // Create the audio element directly in the DOM for better browser compatibility
-    const audioElement = document.createElement("audio");
-    audioElement.id = "wedding-music";
-    audioElement.loop = true;
+    // Create audio element
+    const audio = new Audio();
+    audio.loop = true;
     
-    // Add sources with different paths to maximize chances of success
-    const paths = ["/music/wedding-song.mp3", "/music/BIW.mp3", "music/wedding-song.mp3", "music/BIW.mp3"];
-    
-    paths.forEach(path => {
-      const source = document.createElement("source");
-      source.src = path;
-      source.type = "audio/mp3";
-      audioElement.appendChild(source);
-      console.log(`Added audio source: ${path}`);
+    // Set up event listeners
+    audio.addEventListener("canplaythrough", () => {
+      console.log("Audio can play through");
     });
     
-    // Add event listeners
-    audioElement.addEventListener("canplaythrough", () => {
-      console.log("Audio can play through, marking as loaded");
-      setAudioLoaded(true);
-    });
-    
-    audioElement.addEventListener("error", (e) => {
+    audio.addEventListener("error", (e) => {
       console.error("Audio element error:", e);
+      toast({
+        title: "Audio Error",
+        description: "Could not load audio file.",
+        variant: "destructive"
+      });
     });
     
-    // Add to the DOM but hidden
-    document.body.appendChild(audioElement);
-    audioRef.current = audioElement;
+    // Try multiple sources - important for production vs development environments
+    const possibleSources = [
+      "/music/wedding-song.mp3",
+      "music/wedding-song.mp3",
+      "/music/BIW.mp3",
+      "music/BIW.mp3",
+      // Add relative path for Vite dev server
+      "../music/wedding-song.mp3",
+      "../public/music/wedding-song.mp3"
+    ];
+    
+    // Try to load each source until one works
+    const trySource = (index: number) => {
+      if (index >= possibleSources.length) {
+        console.error("All audio sources failed to load");
+        return;
+      }
+      
+      const source = possibleSources[index];
+      console.log(`Trying audio source: ${source}`);
+      
+      audio.src = source;
+      
+      // If this source fails, try the next one
+      audio.onerror = () => {
+        console.log(`Source failed: ${source}, trying next...`);
+        trySource(index + 1);
+      };
+    };
+    
+    // Start trying sources
+    trySource(0);
+    
+    // Store reference
+    audioRef.current = audio;
     
     // Cleanup on unmount
     return () => {
-      console.log("Cleaning up audio element");
       if (audioRef.current) {
         audioRef.current.pause();
-        audioRef.current.remove();
+        audioRef.current.src = "";
       }
     };
-  }, []);
+  }, [toast]);
   
-  // Function to toggle music playback
   const toggleMusic = () => {
-    console.log("Toggle button clicked, audio loaded:", audioLoaded);
+    console.log("Toggle button clicked");
     
     if (!audioRef.current) {
       console.error("Audio element not available");
@@ -77,6 +97,11 @@ export function MusicToggle() {
         setIsPlaying(false);
         console.log("Music paused");
       } else {
+        // Force load if needed
+        if (audioRef.current.readyState === 0) {
+          audioRef.current.load();
+        }
+        
         const playPromise = audioRef.current.play();
         
         if (playPromise !== undefined) {
@@ -84,6 +109,12 @@ export function MusicToggle() {
             .then(() => {
               setIsPlaying(true);
               console.log("Music playing successfully");
+              
+              // Show success toast
+              toast({
+                title: "Musik diputar",
+                description: "Nikmati lagu pernikahan kami",
+              });
             })
             .catch(error => {
               console.error("Play prevented:", error);
@@ -98,18 +129,18 @@ export function MusicToggle() {
               } else {
                 toast({
                   title: "Gagal memutar musik",
-                  description: "Format audio mungkin tidak didukung browser Anda",
+                  description: error.message || "Format audio mungkin tidak didukung browser Anda",
                   variant: "destructive"
                 });
               }
             });
         }
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error in toggle music:", error);
       toast({
         title: "Terjadi kesalahan",
-        description: "Tidak dapat memutar atau menjeda musik",
+        description: error.message || "Tidak dapat memutar atau menjeda musik",
         variant: "destructive"
       });
     }
