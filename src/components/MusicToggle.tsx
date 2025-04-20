@@ -19,7 +19,7 @@ export function MusicToggle() {
     
     // Set audio properties
     if (audioRef.current) {
-      audioRef.current.src = "/music/wedding-song.mp3";
+      audioRef.current.src = "/music/BIW.mp3";
       audioRef.current.loop = true;
       
       // Add event listeners
