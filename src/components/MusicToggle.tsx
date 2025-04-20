@@ -14,14 +14,16 @@ export function MusicToggle() {
   const { toast } = useToast();
   
   useEffect(() => {
-    // Create audio element with proper path
+    // Create audio element
     audioRef.current = new Audio();
     
     // Set audio properties
     if (audioRef.current) {
-      // Use the correct path to the audio file
-      audioRef.current.src = "./music/BIW.mp3";
+      // Use absolute path from root to access the file in public folder
+      audioRef.current.src = "/music/BIW.mp3";
       audioRef.current.loop = true;
+      
+      console.log("Setting up audio with source:", audioRef.current.src);
       
       // Add event listeners
       audioRef.current.addEventListener('canplaythrough', () => {
@@ -32,6 +34,9 @@ export function MusicToggle() {
       
       audioRef.current.addEventListener('error', (e) => {
         console.error("Audio loading error:", e);
+        console.error("Error code:", audioRef.current?.error?.code);
+        console.error("Error message:", audioRef.current?.error?.message);
+        
         toast({
           title: "Musik tidak dapat dimuat",
           description: "Silakan klik tombol untuk mencoba lagi",
