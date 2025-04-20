@@ -17,33 +17,82 @@ export function MusicToggle() {
     // Create audio element
     audioRef.current = new Audio();
     
-    // Set audio properties
-    if (audioRef.current) {
-      // Use absolute path from root to access the file in public folder
-      audioRef.current.src = "/music/BIW.mp3";
+    const tryLoadAudio = (audioPath: string) => {
+      console.log("Trying to load audio from:", audioPath);
+      
+      if (!audioRef.current) return;
+      
+      audioRef.current.src = audioPath;
       audioRef.current.loop = true;
       
-      console.log("Setting up audio with source:", audioRef.current.src);
-      
-      // Add event listeners
-      audioRef.current.addEventListener('canplaythrough', () => {
-        console.log("Audio loaded successfully");
+      // Remove previous event listeners if any
+      const handleCanPlay = () => {
+        console.log("Audio loaded successfully from:", audioPath);
         setAudioLoaded(true);
         attemptAutoplay();
-      });
+      };
       
-      audioRef.current.addEventListener('error', (e) => {
+      const handleError = (e: Event) => {
         console.error("Audio loading error:", e);
-        console.error("Error code:", audioRef.current?.error?.code);
-        console.error("Error message:", audioRef.current?.error?.message);
+        if (audioRef.current?.error) {
+          console.error("Error code:", audioRef.current.error.code);
+          console.error("Error message:", audioRef.current.error.message);
+        }
         
+        // If we tried the absolute path and it failed, try relative path
+        if (audioPath === "/music/BIW.mp3") {
+          console.log("Trying alternative audio path...");
+          tryLoadAudio("music/BIW.mp3");
+        } else if (audioPath === "music/BIW.mp3") {
+          console.log("Trying with audio element in DOM...");
+          tryWithAudioElement();
+        } else {
+          toast({
+            title: "Musik tidak dapat dimuat",
+            description: "Silakan klik tombol untuk mencoba lagi",
+            variant: "destructive"
+          });
+        }
+      };
+      
+      audioRef.current.addEventListener('canplaythrough', handleCanPlay);
+      audioRef.current.addEventListener('error', handleError);
+      
+      // Store the event listeners for cleanup
+      return { handleCanPlay, handleError };
+    };
+    
+    const tryWithAudioElement = () => {
+      // As a last resort, create an audio element in the DOM
+      const audioElement = document.createElement('audio');
+      audioElement.id = 'wedding-music';
+      audioElement.loop = true;
+      audioElement.preload = 'auto';
+      
+      // Try with a different file format if available
+      const source = document.createElement('source');
+      source.src = '/music/wedding-song.mp3';
+      source.type = 'audio/mp3';
+      
+      audioElement.appendChild(source);
+      document.body.appendChild(audioElement);
+      
+      audioElement.oncanplaythrough = () => {
+        console.log("Audio loaded successfully with DOM element");
+        audioRef.current = audioElement;
+        setAudioLoaded(true);
+        attemptAutoplay();
+      };
+      
+      audioElement.onerror = () => {
+        console.error("Failed to load audio even with DOM element");
         toast({
           title: "Musik tidak dapat dimuat",
           description: "Silakan klik tombol untuk mencoba lagi",
           variant: "destructive"
         });
-      });
-    }
+      };
+    };
     
     // Attempt to autoplay once the audio is loaded
     const attemptAutoplay = async () => {
@@ -59,20 +108,38 @@ export function MusicToggle() {
       }
     };
     
+    // Start by trying the absolute path
+    const listeners = tryLoadAudio("/music/BIW.mp3");
+    
     // Cleanup function
     return () => {
       if (audioRef.current) {
+        if (listeners) {
+          audioRef.current.removeEventListener('canplaythrough', listeners.handleCanPlay);
+          audioRef.current.removeEventListener('error', listeners.handleError);
+        }
+        
         audioRef.current.pause();
         audioRef.current.src = "";
-        audioRef.current.removeEventListener('canplaythrough', () => {});
-        audioRef.current.removeEventListener('error', () => {});
+        
+        // Remove audio element from DOM if we added one
+        const domAudio = document.getElementById('wedding-music');
+        if (domAudio) {
+          document.body.removeChild(domAudio);
+        }
+        
         audioRef.current = null;
       }
     };
   }, [toast]);
   
   const toggleMusic = () => {
-    if (!audioRef.current) return;
+    if (!audioRef.current) {
+      // If audio element doesn't exist, recreate it
+      audioRef.current = new Audio("/music/wedding-song.mp3");
+      audioRef.current.loop = true;
+      audioRef.current.load();
+    }
     
     if (isPlaying) {
       audioRef.current.pause();
