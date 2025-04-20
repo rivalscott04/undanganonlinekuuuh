@@ -6,12 +6,12 @@ import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useToast } from "@/hooks/use-toast";
 import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 export function MusicToggle() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -122,21 +122,21 @@ export function MusicToggle() {
   return (
     <>
       {showDialog && (
-        <AlertDialog open={showDialog} onOpenChange={setShowDialog}>
-          <AlertDialogContent className="sm:max-w-md">
-            <AlertDialogHeader>
-              <AlertDialogTitle className="text-center">Memutar Musik</AlertDialogTitle>
-              <AlertDialogDescription className="text-center">
+        <Dialog open={showDialog} onOpenChange={setShowDialog}>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle className="text-center">Memutar Musik</DialogTitle>
+              <DialogDescription className="text-center">
                 Silakan nikmati lagu pernikahan kami
                 {isMobile && (
                   <p className="mt-2 text-sm text-gray-500">
                     Ketuk tombol musik di kanan atas untuk memutar musik
                   </p>
                 )}
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-          </AlertDialogContent>
-        </AlertDialog>
+              </DialogDescription>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
       )}
 
       <motion.div 
