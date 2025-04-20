@@ -19,52 +19,27 @@ export function MusicToggle() {
     const audio = new Audio();
     audio.loop = true;
     
+    // Only try BIW.mp3 - we know this file exists
+    const audioFile = "/music/BIW.mp3";
+    console.log(`Loading audio file: ${audioFile}`);
+    audio.src = audioFile;
+    
     // Set up event listeners
     audio.addEventListener("canplaythrough", () => {
-      console.log("Audio can play through");
+      console.log("Audio loaded successfully and can play through");
     });
     
     audio.addEventListener("error", (e) => {
       console.error("Audio element error:", e);
+      console.error("Audio error code:", audio.error?.code);
+      console.error("Audio error message:", audio.error?.message);
+      
       toast({
         title: "Audio Error",
-        description: "Could not load audio file.",
+        description: "Could not load background music file.",
         variant: "destructive"
       });
     });
-    
-    // Try multiple sources - important for production vs development environments
-    const possibleSources = [
-      "/music/wedding-song.mp3",
-      "music/wedding-song.mp3",
-      "/music/BIW.mp3",
-      "music/BIW.mp3",
-      // Add relative path for Vite dev server
-      "../music/wedding-song.mp3",
-      "../public/music/wedding-song.mp3"
-    ];
-    
-    // Try to load each source until one works
-    const trySource = (index: number) => {
-      if (index >= possibleSources.length) {
-        console.error("All audio sources failed to load");
-        return;
-      }
-      
-      const source = possibleSources[index];
-      console.log(`Trying audio source: ${source}`);
-      
-      audio.src = source;
-      
-      // If this source fails, try the next one
-      audio.onerror = () => {
-        console.log(`Source failed: ${source}, trying next...`);
-        trySource(index + 1);
-      };
-    };
-    
-    // Start trying sources
-    trySource(0);
     
     // Store reference
     audioRef.current = audio;

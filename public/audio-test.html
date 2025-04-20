@@ -56,30 +56,37 @@
       padding-bottom: 5px;
       border-bottom: 1px solid #eee;
     }
+    .file-info {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #f1f1f1;
+      border-radius: 4px;
+    }
   </style>
 </head>
 <body>
   <h1>Audio Test Page</h1>
-  <p>This page tests if the wedding music can be played.</p>
+  <p>This page tests if the BIW.mp3 file can be played.</p>
   
   <div>
-    <button id="play1">Test wedding-song.mp3</button>
-    <button id="play2">Test BIW.mp3</button>
+    <button id="play-biw">Test BIW.mp3</button>
     <button id="clear">Clear Log</button>
+  </div>
+
+  <div class="file-info">
+    <p><strong>Important:</strong> This app is configured to use only:</p>
+    <ul>
+      <li><code>/music/BIW.mp3</code> - Make sure this file exists!</li>
+    </ul>
   </div>
   
   <h2>MP3 Upload</h2>
   <div class="upload-container">
-    <p>Upload MP3 files here to replace the placeholders:</p>
+    <p>Upload MP3 file here to replace the BIW.mp3:</p>
     <div>
-      <label for="wedding-song">Wedding Song:</label>
-      <input type="file" id="wedding-song" accept="audio/mpeg" />
-      <button id="upload1">Upload as wedding-song.mp3</button>
-    </div>
-    <div style="margin-top: 10px;">
       <label for="biw-song">BIW Song:</label>
       <input type="file" id="biw-song" accept="audio/mpeg" />
-      <button id="upload2">Upload as BIW.mp3</button>
+      <button id="upload-biw">Upload as BIW.mp3</button>
     </div>
   </div>
   
@@ -98,11 +105,7 @@
       logElement.scrollTop = logElement.scrollHeight;
     }
     
-    document.getElementById('play1').addEventListener('click', () => {
-      testAudio('/music/wedding-song.mp3');
-    });
-    
-    document.getElementById('play2').addEventListener('click', () => {
+    document.getElementById('play-biw').addEventListener('click', () => {
       testAudio('/music/BIW.mp3');
     });
     
@@ -154,11 +157,7 @@
     }
     
     // File upload handling
-    document.getElementById('upload1').addEventListener('click', () => {
-      uploadFile('wedding-song', '/music/wedding-song.mp3');
-    });
-    
-    document.getElementById('upload2').addEventListener('click', () => {
+    document.getElementById('upload-biw').addEventListener('click', () => {
       uploadFile('biw-song', '/music/BIW.mp3');
     });
     
