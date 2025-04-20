@@ -14,12 +14,14 @@ import {
 } from "@/components/ui/dialog";
 
 export function MusicToggle() {
-  const [isPlaying, setIsPlaying] = useState(true); // Start as true for autoplay
+  const [isPlaying, setIsPlaying] = useState(false); // Start as false until user interaction
   const [showDialog, setShowDialog] = useState(true);
+  const [hasInteracted, setHasInteracted] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const isMobile = useIsMobile();
   const { toast } = useToast();
   
+  // Setup audio element
   useEffect(() => {
     console.log("Setting up audio element");
     
@@ -29,11 +31,17 @@ export function MusicToggle() {
     
     audio.addEventListener("canplaythrough", () => {
       console.log("Audio loaded successfully and can play through");
-      // Attempt to autoplay
-      audio.play().catch(error => {
-        console.log("Autoplay prevented:", error);
-        setIsPlaying(false);
-      });
+      
+      // On desktop, attempt autoplay
+      if (!isMobile && !hasInteracted) {
+        audio.play().then(() => {
+          setIsPlaying(true);
+          showMusicToast();
+        }).catch(error => {
+          console.log("Autoplay prevented:", error);
+          setIsPlaying(false);
+        });
+      }
     });
     
     audio.addEventListener("error", (e) => {
@@ -53,7 +61,31 @@ export function MusicToggle() {
         audioRef.current.src = "";
       }
     };
-  }, [toast]);
+  }, [toast, isMobile, hasInteracted]);
+  
+  // Show welcome dialog with music notification
+  useEffect(() => {
+    if (showDialog) {
+      setTimeout(() => {
+        setShowDialog(false);
+        
+        // For mobile, show a toast explaining they need to tap
+        if (isMobile && !hasInteracted) {
+          toast({
+            title: "Ketuk tombol musik",
+            description: "Ketuk tombol di kanan atas untuk memutar musik",
+          });
+        }
+      }, 3000);
+    }
+  }, [showDialog, toast, isMobile, hasInteracted]);
+  
+  const showMusicToast = () => {
+    toast({
+      title: "Musik diputar",
+      description: "Nikmati lagu pernikahan kami",
+    });
+  };
   
   const toggleMusic = () => {
     if (!audioRef.current) return;
@@ -69,10 +101,8 @@ export function MusicToggle() {
           playPromise
             .then(() => {
               setIsPlaying(true);
-              toast({
-                title: "Musik diputar",
-                description: "Nikmati lagu pernikahan kami",
-              });
+              setHasInteracted(true);
+              showMusicToast();
             })
             .catch(error => {
               console.error("Play prevented:", error);
@@ -97,6 +127,11 @@ export function MusicToggle() {
             <DialogTitle className="text-center">Memutar Musik</DialogTitle>
             <DialogDescription className="text-center">
               Silakan nikmati lagu pernikahan kami
+              {isMobile && (
+                <p className="mt-2 text-sm text-gray-500">
+                  Ketuk tombol musik di kanan atas untuk memutar musik
+                </p>
+              )}
             </DialogDescription>
           </DialogHeader>
         </DialogContent>
@@ -113,7 +148,7 @@ export function MusicToggle() {
           size={isMobile ? "sm" : "icon"}
           variant="outline"
           onClick={toggleMusic}
-          className="rounded-full h-8 w-8 sm:h-10 sm:w-10 bg-white shadow-md border-retirement-muted/30 hover:bg-retirement-light cursor-pointer"
+          className={`rounded-full h-8 w-8 sm:h-10 sm:w-10 bg-white shadow-md border-retirement-muted/30 hover:bg-retirement-light cursor-pointer ${!isPlaying && isMobile ? 'animate-pulse' : ''}`}
           type="button"
           aria-label={isPlaying ? "Mute music" : "Unmute music"}
         >
