@@ -19,4 +19,17 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  // Mengatasi peringatan modul eksternalisasi
+  build: {
+    rollupOptions: {
+      external: [
+        'events',
+        'stream',
+        'buffer'
+      ],
+    },
+  },
+  optimizeDeps: {
+    exclude: ['events', 'stream', 'buffer'],
+  },
 }));

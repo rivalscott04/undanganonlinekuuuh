@@ -12,6 +12,7 @@ Aplikasi undangan pernikahan digital dengan fitur untuk mengelola tamu dan ucapa
 - React Router Dom 6
 - Framer Motion 12.7
 - shadcn/ui
+- React Query
 
 ## Persyaratan Sistem
 
@@ -31,51 +32,53 @@ cd digital-wedding
 npm install
 ```
 
-## Instalasi Dependensi
-
-### Prasyarat
-- Node.js versi 18 atau lebih baru
-- npm atau yarn
-
-### Instalasi Utama
+3. Jalankan aplikasi dalam mode development
 ```bash
-# Install dependencies utama
-npm install
-
-# Install Tailwind CSS (versi 3.4)
-npm install -D tailwindcss@3.4 postcss autoprefixer
-
-# Install shadcn/ui
-npx shadcn-ui@latest init
-
-# Install Lucide React
-npm install lucide-react@0.462.0
-
-# Install React Query
-npm install @tanstack/react-query@5.56.2
-
-# Install Form Hooks
-npm install react-hook-form@7.53.0
-npm install @hookform/resolvers@3.9.0
-
-# Install Framer Motion
-npm install framer-motion@12.7.3
-
-# Install Canvas Confetti (jika diperlukan)
-npm install canvas-confetti@1.9.3
-
-# Install PapaParse untuk parsing CSV
-npm install papaparse@5.5.2
+npm run dev
 ```
 
-### Konfigurasi shadcn/ui
-Jalankan perintah berikut untuk menginstal komponen shadcn/ui:
-```bash
-# Contoh instalasi komponen
-npx shadcn-ui@latest add button
-npx shadcn-ui@latest add toast
-npx shadcn-ui@latest add dialog
+## Fitur Admin Panel
+
+Admin panel dapat diakses melalui `/admin` dan menyediakan fitur-fitur berikut:
+
+1. **Dashboard** - Ringkasan informasi tentang tamu undangan dan fitur lainnya
+2. **Manajemen Tamu** - Mengelola daftar tamu undangan dengan fitur:
+   - Tambah tamu baru
+   - Import tamu dari file CSV
+   - Edit dan hapus tamu
+   - Salin link undangan
+   - Bagikan undangan via WhatsApp
+   - Melihat status konfirmasi kehadiran tamu
+   - Mengelola status aktif/nonaktif berdasarkan konfirmasi kehadiran
+3. **Pengaturan Acara** - Mengatur detail acara pernikahan:
+   - Informasi pengantin (nama pengantin pria dan wanita)
+   - Waktu acara (tanggal pernikahan, waktu akad, waktu resepsi)
+   - Lokasi acara (nama tempat, alamat, link Google Maps)
+4. **Pengaturan Aplikasi** - Mengkonfigurasi fitur-fitur undangan:
+   - Tema tampilan (terang, gelap, otomatis)
+   - Musik latar
+   - Galeri foto
+   - Hitung mundur
+   - Ucapan dan doa
+   - Konfirmasi kehadiran (RSVP)
+
+## Struktur Database
+
+Aplikasi ini menggunakan penyimpanan lokal (localStorage) untuk menyimpan data tamu. Untuk implementasi produksi, disarankan untuk menggunakan database MySQL dengan struktur sebagai berikut:
+
+```sql
+CREATE TABLE guests (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) NOT NULL UNIQUE,
+    status ENUM('active', 'inactive') DEFAULT 'active',
+    attended BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
 ```
+
+Lihat file `database/schema.sql` untuk skema database lengkap.
 
 ## Perintah yang Tersedia
 
@@ -103,21 +106,50 @@ npm run format
 
 ```
 src/
-  ├── components/         # Komponen React
-  ├── pages/             # Halaman utama
+  ├── api/               # API services
+  ├── components/        # Komponen React
+  ├── data/              # Data lokal dan mock data
   ├── hooks/             # Custom React hooks
-  ├── api/               # API handlers
   ├── lib/               # Utilitas dan helpers
+  ├── pages/             # Halaman utama
   ├── types/             # TypeScript types
   └── styles/            # CSS dan Tailwind styles
 ```
 
 ## Penggunaan
 
-1. Admin menambahkan data tamu melalui interface
-2. Share link undangan dengan format: `https://domain.com/undangan/{slug-tamu}`
+1. Admin menambahkan data tamu melalui interface di `/admin/guests`
+2. Share link undangan dengan format: `https://domain.com/undangan?to={nama-tamu}`
+   - Nama tamu digunakan apa adanya tanpa perubahan (tidak diubah menjadi slug)
+   - Contoh: `https://domain.com/undangan?to=Keluarga%20Bapak%20Ahmad`
 3. Tamu membuka link dan melihat undangan
-4. Tamu bisa memberikan ucapan dan doa
+4. Tamu dapat mengkonfirmasi kehadiran dengan mengklik tombol "InsyaAllah, Saya akan Hadir" atau "Mohon maaf, belum bisa hadir"
+5. Status konfirmasi kehadiran tamu akan otomatis diperbarui di admin panel
+6. Status aktif/nonaktif tamu akan otomatis diperbarui berdasarkan konfirmasi kehadiran:
+   - Jika tamu mengkonfirmasi kehadiran, status akan menjadi "Aktif"
+   - Jika tamu mengkonfirmasi ketidakhadiran, status akan menjadi "Nonaktif"
+7. Tamu bisa memberikan ucapan dan doa
+
+## Konfigurasi MySQL (Opsional)
+
+Untuk menggunakan MySQL sebagai database:
+
+1. Install MySQL client untuk Node.js:
+```bash
+npm install mysql2
+```
+
+2. Buat file `.env` dengan konfigurasi database:
+```
+DB_HOST=localhost
+DB_USER=your_username
+DB_PASSWORD=your_password
+DB_NAME=wedding_invitation
+DB_PORT=3306
+```
+
+3. Aktifkan kode di `src/lib/db.ts` untuk menggunakan koneksi MySQL
+4. Update service di `src/api/localGuestService.ts` untuk menggunakan MySQL
 
 ## Contributing
 

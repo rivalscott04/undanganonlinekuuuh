@@ -36,7 +36,7 @@ export const guestService = {
           try {
             const guests = results.data.slice(1).map((row: any) => ({
               name: row[0],
-              slug: row[0].toLowerCase().replace(/\s+/g, '-'),
+              slug: row[0].trim(), // Menggunakan nama asli tanpa perubahan
               status: 'active' as const
             }));
 

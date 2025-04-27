@@ -55,7 +55,7 @@ export default function GuestList() {
 
     const newGuest = {
       name: guestName,
-      slug: guestName.toLowerCase().replace(/\s+/g, '-'),
+      slug: guestName.trim(), // Menggunakan nama asli tanpa perubahan
       status: 'active' as const
     };
 
@@ -96,8 +96,14 @@ export default function GuestList() {
 
   const handleShareWhatsApp = (guest: Guest) => {
     const invitationLink = `${window.location.origin}/undangan?to=${encodeURIComponent(guest.slug)}`;
-    const message = `Assalamu'alaikum Wr. Wb.%0A%0AKepada Yth.%0A${guest.name}%0A%0ASilakan buka link undangan berikut:%0A${invitationLink}`;
-    window.open(`https://wa.me/?text=${message}`, '_blank');
+
+    // Membuat pesan WhatsApp
+    const phoneNumber = ""; // Kosong untuk membuka WhatsApp tanpa nomor tujuan
+    const message = `Assalamu'alaikum Wr. Wb.\n\nKepada Yth.\n${guest.name}\n\nSilakan buka link undangan berikut:\n${invitationLink}`;
+
+    // Menggunakan wa.me langsung
+    const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappLink, '_blank');
   };
 
   if (isLoading) {
@@ -108,11 +114,11 @@ export default function GuestList() {
     <div className="container mx-auto p-4 space-y-8">
       <div className="flex flex-col space-y-4">
         <h1 className="text-2xl font-bold">Manajemen Tamu Undangan</h1>
-        
+
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex-1">
-            <Input 
-              placeholder="Masukkan nama tamu" 
+            <Input
+              placeholder="Masukkan nama tamu"
               value={guestName}
               onChange={(e) => setGuestName(e.target.value)}
             />

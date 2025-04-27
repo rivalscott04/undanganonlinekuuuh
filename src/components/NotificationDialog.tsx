@@ -38,18 +38,20 @@ export function NotificationDialog({
           </div>
           <DialogDescription>
             Terdapat {count} data pegawai yang belum lengkap.
-            Silakan lengkapi data tersebut.
           </DialogDescription>
+          <p className="text-sm text-muted-foreground mt-1">
+            Silakan lengkapi data tersebut.
+          </p>
         </DialogHeader>
         <DialogFooter className="sm:justify-end mt-4">
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             onClick={onIgnore}
             className="border-slate-300 text-slate-700 hover:bg-slate-100 hover:text-slate-900"
           >
             Abaikan
           </Button>
-          <Button 
+          <Button
             onClick={onComplete}
             className="bg-retirement hover:bg-retirement-dark"
           >
@@ -75,10 +77,10 @@ export function showIncompleteDataNotification(count: number): Promise<boolean> 
     // Render the dialog
     const dialogRoot = document.createElement("div");
     dialogContainer.appendChild(dialogRoot);
-    
+
     // Set initial state
     let dialogOpen = true;
-    
+
     // Update the DOM
     const updateDialog = () => {
       // This is a simplified version - in a real app you would use ReactDOM.render
@@ -92,7 +94,7 @@ export function showIncompleteDataNotification(count: number): Promise<boolean> 
           resolve(true);
         }, 300);
       };
-      
+
       const handleIgnore = () => {
         console.log("Notification ignored");
         dialogOpen = false;
@@ -102,7 +104,7 @@ export function showIncompleteDataNotification(count: number): Promise<boolean> 
           resolve(false);
         }, 300);
       };
-      
+
       const handleOpenChange = (open: boolean) => {
         dialogOpen = open;
         if (!open) {
@@ -113,11 +115,11 @@ export function showIncompleteDataNotification(count: number): Promise<boolean> 
         }
         updateDialog();
       };
-      
+
       // In a real application, you would use React's rendering, not this DOM manipulation
       // This is just to illustrate the component would work
     };
-    
+
     updateDialog();
   });
 }

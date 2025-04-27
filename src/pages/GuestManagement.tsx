@@ -12,17 +12,13 @@ import Papa from 'papaparse';
 
 // Initialize Supabase client
 const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL!, 
+  import.meta.env.VITE_SUPABASE_URL!,
   import.meta.env.VITE_SUPABASE_ANON_KEY!
 );
 
 const generateSlug = (name: string) => {
-  return name
-    .toLowerCase()
-    .trim()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/[\s_-]+/g, '-')
-    .replace(/^-+|-+$/g, '');
+  // Hanya menggunakan nama asli tanpa perubahan
+  return name.trim();
 };
 
 export default function GuestManagement() {
@@ -39,7 +35,7 @@ export default function GuestManagement() {
         .from('guests')
         .select('*')
         .order('created_at', { ascending: false });
-      
+
       if (error) throw error;
       return data as Guest[];
     }
@@ -53,7 +49,7 @@ export default function GuestManagement() {
         .insert(newGuest)
         .select()
         .single();
-      
+
       if (error) throw error;
       return data as Guest;
     },
@@ -103,9 +99,9 @@ export default function GuestManagement() {
           const { error } = await supabase
             .from('guests')
             .insert(guests);
-          
+
           if (error) throw error;
-          
+
           queryClient.invalidateQueries({ queryKey: ['guests'] });
           toast({
             title: "Import Berhasil",
@@ -136,19 +132,25 @@ export default function GuestManagement() {
 
   const handleShareWhatsApp = (guest: Guest) => {
     const invitationLink = `${window.location.origin}/undangan?to=${encodeURIComponent(guest.slug)}`;
-    const message = `Assalamu'alaikum Wr. Wb.%0A%0AKepada Yth.%0A${guest.name}%0A%0ASilakan buka link undangan berikut:%0A${invitationLink}`;
-    window.open(`https://wa.me/?text=${message}`, '_blank');
+
+    // Membuat pesan WhatsApp
+    const phoneNumber = ""; // Kosong untuk membuka WhatsApp tanpa nomor tujuan
+    const message = `Assalamu'alaikum Wr. Wb.\n\nKepada Yth.\n${guest.name}\n\nSilakan buka link undangan berikut:\n${invitationLink}`;
+
+    // Menggunakan wa.me langsung
+    const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappLink, '_blank');
   };
 
   return (
     <div className="container mx-auto p-4 space-y-8">
       <div className="flex flex-col space-y-4">
         <h1 className="text-2xl font-bold">Manajemen Tamu Undangan</h1>
-        
+
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex-1">
-            <Input 
-              placeholder="Masukkan nama tamu" 
+            <Input
+              placeholder="Masukkan nama tamu"
               value={guestName}
               onChange={(e) => setGuestName(e.target.value)}
             />

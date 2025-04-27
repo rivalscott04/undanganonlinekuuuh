@@ -21,31 +21,31 @@ interface Wish {
 export default function WeddingInvitation() {
   const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
   const [wishes, setWishes] = useState<Wish[]>([]);
-  
+
   const handleWishSent = (newWish: Wish) => {
     setWishes(prevWishes => [newWish, ...prevWishes]);
   };
-  
+
   const handleEnvelopeOpen = () => {
     setIsEnvelopeOpen(true);
   };
-  
+
   const { toast } = useToast();
-  
+
   return (
     <div className="bg-white min-h-screen overflow-x-hidden w-full">
       {/* Music Toggle is now always visible, regardless of envelope state */}
       <MusicToggle />
-      
+
       <HeroEnvelope onEnvelopeOpen={handleEnvelopeOpen} />
-      
+
       {isEnvelopeOpen && (
         <>
           <Intro />
           <CountdownTimer targetDate="2025-05-31T08:00:00" />
           <EventDetails />
           <RSVPConfirm />
-          
+
           <section className="py-12 sm:py-16 px-4 bg-[#F1F0FB]">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-6 sm:mb-8">
@@ -65,7 +65,7 @@ export default function WeddingInvitation() {
                   <p className="text-center text-xs text-slate-600 mb-2">a.n Rival Biasrori</p>
                   <div className="flex items-center justify-center gap-2 bg-retirement-light/10 rounded-md px-3 py-1.5 border border-retirement-muted/30">
                     <p className="font-mono text-retirement-dark text-sm">7205700867</p>
-                    <button 
+                    <button
                       onClick={() => {
                         navigator.clipboard.writeText("7205700867");
                         toast({
@@ -88,7 +88,7 @@ export default function WeddingInvitation() {
                   <p className="text-center text-xs text-slate-600 mb-2">a.n Syahrina Ulya Ramadhani</p>
                   <div className="flex items-center justify-center gap-2 bg-retirement-light/10 rounded-md px-3 py-1.5 border border-retirement-muted/30">
                     <p className="font-mono text-retirement-dark text-sm">0010205703314</p>
-                    <button 
+                    <button
                       onClick={() => {
                         navigator.clipboard.writeText("0010205703314");
                         toast({
@@ -115,12 +115,12 @@ export default function WeddingInvitation() {
                   Berikan ucapan dan doa restu untuk kedua mempelai
                 </p>
               </div>
-              
+
               <WishesForm onWishSent={handleWishSent} />
               <WishesList wishes={wishes} />
             </div>
           </section>
-          
+
           <footer className="py-6 sm:py-8 bg-[#F1F0FB] text-center text-2xs sm:text-xs text-slate-500 border-t border-retirement-muted/20">
             <div className="max-w-4xl mx-auto px-4">
               <p className="mb-1 font-serif text-sm sm:text-base text-retirement-dark">Rival & Syahrina</p>
@@ -133,7 +133,7 @@ export default function WeddingInvitation() {
           </footer>
         </>
       )}
-      
+
       <Toaster />
     </div>
   );
