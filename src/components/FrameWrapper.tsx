@@ -2,7 +2,7 @@
 import React, { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { Diamond, Heart, Flower, GiftIcon, Sparkles } from "lucide-react";
+import { Flower, Flower2 } from "lucide-react";
 
 interface FrameWrapperProps {
   children: ReactNode;
@@ -12,151 +12,205 @@ interface FrameWrapperProps {
 export function FrameWrapper({ children, className }: FrameWrapperProps) {
   return (
     <div className={cn(
-      "relative px-4 py-6 sm:py-8 md:py-12 overflow-hidden bg-gradient-to-b from-[#EDF1F7] to-[#F8FAFC]", 
+      "relative px-4 py-6 sm:py-8 md:py-12 overflow-hidden bg-gradient-to-b from-[#F5F0FF] to-[#FCF4FF]", 
       className
     )}>
-      {/* Top Decorative Elements */}
+      {/* Top Floral Frame */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[95%] sm:w-[90%] md:w-[85%] max-w-4xl">
-        <svg viewBox="0 0 1000 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
-          <path 
-            d="M500 10 L950 10 C950 10 980 10 980 40 C980 45 970 50 950 50 C930 50 920 30 900 30 C880 30 870 50 850 50 C830 50 820 30 800 30 C780 30 770 50 750 50 C730 50 720 30 700 30 C680 30 670 50 650 50 C630 50 620 30 600 30 C580 30 570 50 550 50 C530 50 520 30 500 30" 
-            fill="none" 
-            stroke="#33C3F0" 
-            strokeWidth="2"
-            className="opacity-80"
-          />
-          <path 
-            d="M500 10 L50 10 C50 10 20 10 20 40 C20 45 30 50 50 50 C70 50 80 30 100 30 C120 30 130 50 150 50 C170 50 180 30 200 30 C220 30 230 50 250 50 C270 50 280 30 300 30 C320 30 330 50 350 50 C370 50 380 30 400 30 C420 30 430 50 450 50 C470 50 480 30 500 30" 
-            fill="none" 
-            stroke="#33C3F0" 
-            strokeWidth="2"
-            className="opacity-80"
-          />
-          <circle cx="500" cy="10" r="4" fill="#33C3F0" />
-          <circle cx="500" cy="30" r="3" fill="#33C3F0" />
-        </svg>
+        <div className="relative h-16">
+          {/* Central Flower */}
+          <div className="absolute left-1/2 -translate-x-1/2 top-0 text-[#9b87f5]">
+            <svg width="80" height="40" viewBox="0 0 80 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M40,5 C42,2 45,0 50,0 C55,0 58,2 60,5 C62,8 60,12 57,15 C54,18 50,20 40,20 C30,20 26,18 23,15 C20,12 18,8 20,5 C22,2 25,0 30,0 C35,0 38,2 40,5 Z" fill="currentColor" fillOpacity="0.2" />
+              <path d="M40,5 C42,2 45,0 50,0 C55,0 58,2 60,5 C62,8 60,12 57,15 C54,18 50,20 40,20 C30,20 26,18 23,15 C20,12 18,8 20,5 C22,2 25,0 30,0 C35,0 38,2 40,5 Z" stroke="currentColor" strokeWidth="1" fill="none" />
+              <circle cx="40" cy="10" r="3" fill="currentColor" />
+            </svg>
+          </div>
+
+          {/* Left Side Floral Pattern */}
+          <div className="absolute left-0 top-4 w-[45%] h-10">
+            <svg width="100%" height="100%" viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+              <path d="M200,20 Q180,5 160,20 Q140,35 120,20 Q100,5 80,20 Q60,35 40,20 Q20,5 0,20" stroke="#9b87f5" strokeWidth="1.5" fill="none" />
+              <path d="M200,20 Q170,30 140,20 Q110,10 80,20 Q50,30 20,20 Q10,15 0,20" stroke="#9b87f5" strokeWidth="1" strokeDasharray="3 3" fill="none" />
+              
+              {/* Small flowers along the vine */}
+              <circle cx="20" cy="20" r="3" fill="#9b87f5" fillOpacity="0.6" />
+              <circle cx="60" cy="20" r="2.5" fill="#9b87f5" fillOpacity="0.4" />
+              <circle cx="100" cy="20" r="3" fill="#9b87f5" fillOpacity="0.6" />
+              <circle cx="140" cy="20" r="2.5" fill="#9b87f5" fillOpacity="0.4" />
+              <circle cx="180" cy="20" r="3" fill="#9b87f5" fillOpacity="0.6" />
+            </svg>
+          </div>
+
+          {/* Right Side Floral Pattern */}
+          <div className="absolute right-0 top-4 w-[45%] h-10">
+            <svg width="100%" height="100%" viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+              <path d="M0,20 Q20,5 40,20 Q60,35 80,20 Q100,5 120,20 Q140,35 160,20 Q180,5 200,20" stroke="#9b87f5" strokeWidth="1.5" fill="none" />
+              <path d="M0,20 Q30,30 60,20 Q90,10 120,20 Q150,30 180,20 Q190,15 200,20" stroke="#9b87f5" strokeWidth="1" strokeDasharray="3 3" fill="none" />
+              
+              {/* Small flowers along the vine */}
+              <circle cx="20" cy="20" r="3" fill="#9b87f5" fillOpacity="0.6" />
+              <circle cx="60" cy="20" r="2.5" fill="#9b87f5" fillOpacity="0.4" />
+              <circle cx="100" cy="20" r="3" fill="#9b87f5" fillOpacity="0.6" />
+              <circle cx="140" cy="20" r="2.5" fill="#9b87f5" fillOpacity="0.4" />
+              <circle cx="180" cy="20" r="3" fill="#9b87f5" fillOpacity="0.6" />
+            </svg>
+          </div>
+        </div>
       </div>
 
-      {/* Floating Decorative Elements */}
-      <div className="absolute left-[5%] top-[15%] text-[#33C3F0]/30 hidden md:block">
-        <Diamond size={20} />
+      {/* Left Side Floral Elements */}
+      <div className="absolute left-0 top-1/2 -translate-y-1/2">
+        <div className="relative h-[400px] w-16">
+          <div className="absolute top-0 left-0">
+            <Flower className="h-8 w-8 text-[#9b87f5] opacity-40" />
+          </div>
+          <div className="absolute top-1/4 left-4">
+            <Flower2 className="h-6 w-6 text-[#9b87f5] opacity-30" />
+          </div>
+          <div className="absolute top-2/4 left-1">
+            <Flower className="h-10 w-10 text-[#9b87f5] opacity-40" />
+          </div>
+          <div className="absolute top-3/4 left-4">
+            <Flower2 className="h-6 w-6 text-[#9b87f5] opacity-30" />
+          </div>
+          
+          {/* Vertical vine with flowers */}
+          <div className="absolute top-0 left-8 h-full w-4">
+            <svg width="100%" height="100%" viewBox="0 0 20 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10,0 Q5,100 15,200 Q5,300 10,400" stroke="#9b87f5" strokeWidth="1" fill="none" />
+              <circle cx="10" cy="80" r="3" fill="#9b87f5" fillOpacity="0.6" />
+              <circle cx="10" cy="160" r="2" fill="#9b87f5" fillOpacity="0.4" />
+              <circle cx="10" cy="240" r="3" fill="#9b87f5" fillOpacity="0.6" />
+              <circle cx="10" cy="320" r="2" fill="#9b87f5" fillOpacity="0.4" />
+            </svg>
+          </div>
+        </div>
       </div>
-      <div className="absolute right-[5%] top-[20%] text-[#33C3F0]/30 hidden md:block">
-        <Diamond size={20} />
-      </div>
-      <div className="absolute left-[8%] bottom-[15%] text-[#33C3F0]/30 hidden md:block">
-        <Heart size={20} />
-      </div>
-      <div className="absolute right-[8%] bottom-[20%] text-[#33C3F0]/30 hidden md:block">
-        <Heart size={20} />
-      </div>
-
-      {/* Left Side Ornament */}
-      <div className="absolute left-0 top-1/2 -translate-y-1/2 h-[60%] max-h-[400px] hidden md:block">
-        <svg viewBox="0 0 50 400" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-full">
-          <path 
-            d="M10 200 C10 150 40 150 40 100 C40 50 10 50 10 0 L10 200Z" 
-            fill="none" 
-            stroke="#33C3F0" 
-            strokeWidth="2"
-            className="opacity-60"
-          />
-          <path 
-            d="M10 200 C10 250 40 250 40 300 C40 350 10 350 10 400 L10 200Z" 
-            fill="none" 
-            stroke="#33C3F0" 
-            strokeWidth="2"
-            className="opacity-60"
-          />
-          <circle cx="10" cy="200" r="3" fill="#33C3F0" />
-          <circle cx="40" cy="100" r="2" fill="#33C3F0" className="opacity-60" />
-          <circle cx="40" cy="300" r="2" fill="#33C3F0" className="opacity-60" />
-        </svg>
-      </div>
-
-      {/* Right Side Ornament */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] max-h-[400px] hidden md:block">
-        <svg viewBox="0 0 50 400" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-full">
-          <path 
-            d="M40 200 C40 150 10 150 10 100 C10 50 40 50 40 0 L40 200Z" 
-            fill="none" 
-            stroke="#33C3F0" 
-            strokeWidth="2"
-            className="opacity-60"
-          />
-          <path 
-            d="M40 200 C40 250 10 250 10 300 C10 350 40 350 40 400 L40 200Z" 
-            fill="none" 
-            stroke="#33C3F0" 
-            strokeWidth="2"
-            className="opacity-60"
-          />
-          <circle cx="40" cy="200" r="3" fill="#33C3F0" />
-          <circle cx="10" cy="100" r="2" fill="#33C3F0" className="opacity-60" />
-          <circle cx="10" cy="300" r="2" fill="#33C3F0" className="opacity-60" />
-        </svg>
+      
+      {/* Right Side Floral Elements */}
+      <div className="absolute right-0 top-1/2 -translate-y-1/2">
+        <div className="relative h-[400px] w-16">
+          <div className="absolute top-0 right-0">
+            <Flower className="h-8 w-8 text-[#9b87f5] opacity-40" />
+          </div>
+          <div className="absolute top-1/4 right-4">
+            <Flower2 className="h-6 w-6 text-[#9b87f5] opacity-30" />
+          </div>
+          <div className="absolute top-2/4 right-1">
+            <Flower className="h-10 w-10 text-[#9b87f5] opacity-40" />
+          </div>
+          <div className="absolute top-3/4 right-4">
+            <Flower2 className="h-6 w-6 text-[#9b87f5] opacity-30" />
+          </div>
+          
+          {/* Vertical vine with flowers */}
+          <div className="absolute top-0 right-8 h-full w-4">
+            <svg width="100%" height="100%" viewBox="0 0 20 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10,0 Q15,100 5,200 Q15,300 10,400" stroke="#9b87f5" strokeWidth="1" fill="none" />
+              <circle cx="10" cy="80" r="3" fill="#9b87f5" fillOpacity="0.6" />
+              <circle cx="10" cy="160" r="2" fill="#9b87f5" fillOpacity="0.4" />
+              <circle cx="10" cy="240" r="3" fill="#9b87f5" fillOpacity="0.6" />
+              <circle cx="10" cy="320" r="2" fill="#9b87f5" fillOpacity="0.4" />
+            </svg>
+          </div>
+        </div>
       </div>
 
-      {/* Bottom Decorative Elements */}
+      {/* Bottom Floral Frame */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[95%] sm:w-[90%] md:w-[85%] max-w-4xl">
-        <svg viewBox="0 0 1000 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
-          <path 
-            d="M500 50 L950 50 C950 50 980 50 980 20 C980 15 970 10 950 10 C930 10 920 30 900 30 C880 30 870 10 850 10 C830 10 820 30 800 30 C780 30 770 10 750 10 C730 10 720 30 700 30 C680 30 670 10 650 10 C630 10 620 30 600 30 C580 30 570 10 550 10 C530 10 520 30 500 30" 
-            fill="none" 
-            stroke="#33C3F0" 
-            strokeWidth="2"
-            className="opacity-80"
-          />
-          <path 
-            d="M500 50 L50 50 C50 50 20 50 20 20 C20 15 30 10 50 10 C70 10 80 30 100 30 C120 30 130 10 150 10 C170 10 180 30 200 30 C220 30 230 10 250 10 C270 10 280 30 300 30 C320 30 330 10 350 10 C370 10 380 30 400 30 C420 30 430 10 450 10 C470 10 480 30 500 30" 
-            fill="none" 
-            stroke="#33C3F0" 
-            strokeWidth="2"
-            className="opacity-80"
-          />
-          <circle cx="500" cy="50" r="4" fill="#33C3F0" />
-          <circle cx="500" cy="30" r="3" fill="#33C3F0" />
+        <div className="relative h-16">
+          {/* Central Flower */}
+          <div className="absolute left-1/2 -translate-x-1/2 bottom-0 text-[#9b87f5]">
+            <svg width="80" height="40" viewBox="0 0 80 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M40,35 C42,38 45,40 50,40 C55,40 58,38 60,35 C62,32 60,28 57,25 C54,22 50,20 40,20 C30,20 26,22 23,25 C20,28 18,32 20,35 C22,38 25,40 30,40 C35,40 38,38 40,35 Z" fill="currentColor" fillOpacity="0.2" />
+              <path d="M40,35 C42,38 45,40 50,40 C55,40 58,38 60,35 C62,32 60,28 57,25 C54,22 50,20 40,20 C30,20 26,22 23,25 C20,28 18,32 20,35 C22,38 25,40 30,40 C35,40 38,38 40,35 Z" stroke="currentColor" strokeWidth="1" fill="none" />
+              <circle cx="40" cy="30" r="3" fill="currentColor" />
+            </svg>
+          </div>
+
+          {/* Left Side Floral Pattern */}
+          <div className="absolute left-0 bottom-4 w-[45%] h-10">
+            <svg width="100%" height="100%" viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+              <path d="M200,20 Q180,35 160,20 Q140,5 120,20 Q100,35 80,20 Q60,5 40,20 Q20,35 0,20" stroke="#9b87f5" strokeWidth="1.5" fill="none" />
+              <path d="M200,20 Q170,10 140,20 Q110,30 80,20 Q50,10 20,20 Q10,25 0,20" stroke="#9b87f5" strokeWidth="1" strokeDasharray="3 3" fill="none" />
+              
+              {/* Small flowers along the vine */}
+              <circle cx="20" cy="20" r="3" fill="#9b87f5" fillOpacity="0.6" />
+              <circle cx="60" cy="20" r="2.5" fill="#9b87f5" fillOpacity="0.4" />
+              <circle cx="100" cy="20" r="3" fill="#9b87f5" fillOpacity="0.6" />
+              <circle cx="140" cy="20" r="2.5" fill="#9b87f5" fillOpacity="0.4" />
+              <circle cx="180" cy="20" r="3" fill="#9b87f5" fillOpacity="0.6" />
+            </svg>
+          </div>
+
+          {/* Right Side Floral Pattern */}
+          <div className="absolute right-0 bottom-4 w-[45%] h-10">
+            <svg width="100%" height="100%" viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+              <path d="M0,20 Q20,35 40,20 Q60,5 80,20 Q100,35 120,20 Q140,5 160,20 Q180,35 200,20" stroke="#9b87f5" strokeWidth="1.5" fill="none" />
+              <path d="M0,20 Q30,10 60,20 Q90,30 120,20 Q150,10 180,20 Q190,25 200,20" stroke="#9b87f5" strokeWidth="1" strokeDasharray="3 3" fill="none" />
+              
+              {/* Small flowers along the vine */}
+              <circle cx="20" cy="20" r="3" fill="#9b87f5" fillOpacity="0.6" />
+              <circle cx="60" cy="20" r="2.5" fill="#9b87f5" fillOpacity="0.4" />
+              <circle cx="100" cy="20" r="3" fill="#9b87f5" fillOpacity="0.6" />
+              <circle cx="140" cy="20" r="2.5" fill="#9b87f5" fillOpacity="0.4" />
+              <circle cx="180" cy="20" r="3" fill="#9b87f5" fillOpacity="0.6" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      {/* Corner Floral Elements */}
+      <div className="absolute top-0 left-0 w-24 h-24">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+          <path d="M30,0 C30,30 0,30 0,30" stroke="#9b87f5" strokeWidth="1" fill="none" />
+          <path d="M50,0 C50,50 0,50 0,50" stroke="#9b87f5" strokeWidth="1.5" fill="none" />
+          <path d="M20,0 C20,20 0,20 0,20" stroke="#9b87f5" strokeWidth="1" fill="none" />
+          
+          {/* Floral element */}
+          <path d="M15,15 C20,10 25,10 25,15 C25,20 20,20 15,15" fill="#9b87f5" fillOpacity="0.2" />
+          <path d="M15,15 C20,10 25,10 25,15 C25,20 20,20 15,15" stroke="#9b87f5" strokeWidth="0.5" fill="none" />
+          <circle cx="20" cy="15" r="1.5" fill="#9b87f5" />
         </svg>
       </div>
 
-      {/* Islamic Pattern Corners */}
-      <div className="absolute top-0 left-0 w-24 h-24 opacity-30">
+      <div className="absolute top-0 right-0 w-24 h-24 transform scale-x-[-1]">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-          <path d="M0,0 L50,0 L50,50 C22.5,50 0,27.5 0,0 Z" fill="none" stroke="#33C3F0" strokeWidth="1.5" />
-          <path d="M0,0 L35,0 L35,35 C16,35 0,19 0,0 Z" fill="none" stroke="#33C3F0" strokeWidth="1" />
-          <path d="M10,0 C10,10 0,10 0,10" fill="none" stroke="#33C3F0" strokeWidth="1" />
-          <path d="M20,0 C20,20 0,20 0,20" fill="none" stroke="#33C3F0" strokeWidth="1" />
-          <path d="M30,0 C30,30 0,30 0,30" fill="none" stroke="#33C3F0" strokeWidth="1" />
+          <path d="M30,0 C30,30 0,30 0,30" stroke="#9b87f5" strokeWidth="1" fill="none" />
+          <path d="M50,0 C50,50 0,50 0,50" stroke="#9b87f5" strokeWidth="1.5" fill="none" />
+          <path d="M20,0 C20,20 0,20 0,20" stroke="#9b87f5" strokeWidth="1" fill="none" />
+          
+          {/* Floral element */}
+          <path d="M15,15 C20,10 25,10 25,15 C25,20 20,20 15,15" fill="#9b87f5" fillOpacity="0.2" />
+          <path d="M15,15 C20,10 25,10 25,15 C25,20 20,20 15,15" stroke="#9b87f5" strokeWidth="0.5" fill="none" />
+          <circle cx="20" cy="15" r="1.5" fill="#9b87f5" />
         </svg>
       </div>
 
-      <div className="absolute top-0 right-0 w-24 h-24 opacity-30 transform scale-x-[-1]">
+      <div className="absolute bottom-0 left-0 w-24 h-24 transform scale-y-[-1]">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-          <path d="M0,0 L50,0 L50,50 C22.5,50 0,27.5 0,0 Z" fill="none" stroke="#33C3F0" strokeWidth="1.5" />
-          <path d="M0,0 L35,0 L35,35 C16,35 0,19 0,0 Z" fill="none" stroke="#33C3F0" strokeWidth="1" />
-          <path d="M10,0 C10,10 0,10 0,10" fill="none" stroke="#33C3F0" strokeWidth="1" />
-          <path d="M20,0 C20,20 0,20 0,20" fill="none" stroke="#33C3F0" strokeWidth="1" />
-          <path d="M30,0 C30,30 0,30 0,30" fill="none" stroke="#33C3F0" strokeWidth="1" />
+          <path d="M30,0 C30,30 0,30 0,30" stroke="#9b87f5" strokeWidth="1" fill="none" />
+          <path d="M50,0 C50,50 0,50 0,50" stroke="#9b87f5" strokeWidth="1.5" fill="none" />
+          <path d="M20,0 C20,20 0,20 0,20" stroke="#9b87f5" strokeWidth="1" fill="none" />
+          
+          {/* Floral element */}
+          <path d="M15,15 C20,10 25,10 25,15 C25,20 20,20 15,15" fill="#9b87f5" fillOpacity="0.2" />
+          <path d="M15,15 C20,10 25,10 25,15 C25,20 20,20 15,15" stroke="#9b87f5" strokeWidth="0.5" fill="none" />
+          <circle cx="20" cy="15" r="1.5" fill="#9b87f5" />
         </svg>
       </div>
 
-      <div className="absolute bottom-0 left-0 w-24 h-24 opacity-30 transform scale-y-[-1]">
+      <div className="absolute bottom-0 right-0 w-24 h-24 transform scale-x-[-1] scale-y-[-1]">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-          <path d="M0,0 L50,0 L50,50 C22.5,50 0,27.5 0,0 Z" fill="none" stroke="#33C3F0" strokeWidth="1.5" />
-          <path d="M0,0 L35,0 L35,35 C16,35 0,19 0,0 Z" fill="none" stroke="#33C3F0" strokeWidth="1" />
-          <path d="M10,0 C10,10 0,10 0,10" fill="none" stroke="#33C3F0" strokeWidth="1" />
-          <path d="M20,0 C20,20 0,20 0,20" fill="none" stroke="#33C3F0" strokeWidth="1" />
-          <path d="M30,0 C30,30 0,30 0,30" fill="none" stroke="#33C3F0" strokeWidth="1" />
-        </svg>
-      </div>
-
-      <div className="absolute bottom-0 right-0 w-24 h-24 opacity-30 transform scale-x-[-1] scale-y-[-1]">
-        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-          <path d="M0,0 L50,0 L50,50 C22.5,50 0,27.5 0,0 Z" fill="none" stroke="#33C3F0" strokeWidth="1.5" />
-          <path d="M0,0 L35,0 L35,35 C16,35 0,19 0,0 Z" fill="none" stroke="#33C3F0" strokeWidth="1" />
-          <path d="M10,0 C10,10 0,10 0,10" fill="none" stroke="#33C3F0" strokeWidth="1" />
-          <path d="M20,0 C20,20 0,20 0,20" fill="none" stroke="#33C3F0" strokeWidth="1" />
-          <path d="M30,0 C30,30 0,30 0,30" fill="none" stroke="#33C3F0" strokeWidth="1" />
+          <path d="M30,0 C30,30 0,30 0,30" stroke="#9b87f5" strokeWidth="1" fill="none" />
+          <path d="M50,0 C50,50 0,50 0,50" stroke="#9b87f5" strokeWidth="1.5" fill="none" />
+          <path d="M20,0 C20,20 0,20 0,20" stroke="#9b87f5" strokeWidth="1" fill="none" />
+          
+          {/* Floral element */}
+          <path d="M15,15 C20,10 25,10 25,15 C25,20 20,20 15,15" fill="#9b87f5" fillOpacity="0.2" />
+          <path d="M15,15 C20,10 25,10 25,15 C25,20 20,20 15,15" stroke="#9b87f5" strokeWidth="0.5" fill="none" />
+          <circle cx="20" cy="15" r="1.5" fill="#9b87f5" />
         </svg>
       </div>
 
@@ -167,20 +221,71 @@ export function FrameWrapper({ children, className }: FrameWrapperProps) {
         transition={{ duration: 0.5, delay: 0.2 }}
         className={cn(
           "py-8 sm:py-10 md:py-12 px-4 sm:px-6 md:px-8 relative mx-auto",
-          "bg-white/95 backdrop-blur-sm shadow-sm",
-          "border-[1px] border-[#33C3F0]/20",
+          "bg-white/90 backdrop-blur-sm shadow-sm",
+          "border-[1px] border-[#9b87f5]/20",
           "my-16",
           "max-w-4xl"
         )}
       >
         {/* Inner Decorative Border */}
-        <div className="absolute inset-[5px] border-[1px] border-[#33C3F0]/30"></div>
+        <div className="absolute inset-[6px] border-[1px] border-[#9b87f5]/20"></div>
         
-        {/* Corner Accents */}
-        <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#33C3F0]/50"></div>
-        <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-[#33C3F0]/50"></div>
-        <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-[#33C3F0]/50"></div>
-        <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[#33C3F0]/50"></div>
+        {/* Corner Flowers */}
+        <div className="absolute top-3 left-3 w-12 h-12 text-[#9b87f5]">
+          <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+            <path d="M25,5 C30,5 30,15 25,15 C20,15 20,5 25,5 Z" fill="currentColor" fillOpacity="0.2" />
+            <path d="M15,15 C20,15 20,25 15,25 C10,25 10,15 15,15 Z" fill="currentColor" fillOpacity="0.2" />
+            <path d="M15,35 C20,35 20,45 15,45 C10,45 10,35 15,35 Z" fill="currentColor" fillOpacity="0.2" />
+            <path d="M35,15 C40,15 40,25 35,25 C30,25 30,15 35,15 Z" fill="currentColor" fillOpacity="0.2" />
+            <path d="M35,35 C40,35 40,45 35,45 C30,45 30,35 35,35 Z" fill="currentColor" fillOpacity="0.2" />
+            <path d="M25,45 C30,45 30,35 25,35 C20,35 20,45 25,45 Z" fill="currentColor" fillOpacity="0.2" />
+            <path d="M45,25 C45,30 35,30 35,25 C35,20 45,20 45,25 Z" fill="currentColor" fillOpacity="0.2" />
+            <path d="M5,25 C5,30 15,30 15,25 C15,20 5,20 5,25 Z" fill="currentColor" fillOpacity="0.2" />
+            <circle cx="25" cy="25" r="5" fill="currentColor" fillOpacity="0.3" />
+          </svg>
+        </div>
+        
+        <div className="absolute top-3 right-3 w-12 h-12 text-[#9b87f5]">
+          <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+            <path d="M25,5 C30,5 30,15 25,15 C20,15 20,5 25,5 Z" fill="currentColor" fillOpacity="0.2" />
+            <path d="M15,15 C20,15 20,25 15,25 C10,25 10,15 15,15 Z" fill="currentColor" fillOpacity="0.2" />
+            <path d="M15,35 C20,35 20,45 15,45 C10,45 10,35 15,35 Z" fill="currentColor" fillOpacity="0.2" />
+            <path d="M35,15 C40,15 40,25 35,25 C30,25 30,15 35,15 Z" fill="currentColor" fillOpacity="0.2" />
+            <path d="M35,35 C40,35 40,45 35,45 C30,45 30,35 35,35 Z" fill="currentColor" fillOpacity="0.2" />
+            <path d="M25,45 C30,45 30,35 25,35 C20,35 20,45 25,45 Z" fill="currentColor" fillOpacity="0.2" />
+            <path d="M45,25 C45,30 35,30 35,25 C35,20 45,20 45,25 Z" fill="currentColor" fillOpacity="0.2" />
+            <path d="M5,25 C5,30 15,30 15,25 C15,20 5,20 5,25 Z" fill="currentColor" fillOpacity="0.2" />
+            <circle cx="25" cy="25" r="5" fill="currentColor" fillOpacity="0.3" />
+          </svg>
+        </div>
+        
+        <div className="absolute bottom-3 left-3 w-12 h-12 text-[#9b87f5]">
+          <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+            <path d="M25,5 C30,5 30,15 25,15 C20,15 20,5 25,5 Z" fill="currentColor" fillOpacity="0.2" />
+            <path d="M15,15 C20,15 20,25 15,25 C10,25 10,15 15,15 Z" fill="currentColor" fillOpacity="0.2" />
+            <path d="M15,35 C20,35 20,45 15,45 C10,45 10,35 15,35 Z" fill="currentColor" fillOpacity="0.2" />
+            <path d="M35,15 C40,15 40,25 35,25 C30,25 30,15 35,15 Z" fill="currentColor" fillOpacity="0.2" />
+            <path d="M35,35 C40,35 40,45 35,45 C30,45 30,35 35,35 Z" fill="currentColor" fillOpacity="0.2" />
+            <path d="M25,45 C30,45 30,35 25,35 C20,35 20,45 25,45 Z" fill="currentColor" fillOpacity="0.2" />
+            <path d="M45,25 C45,30 35,30 35,25 C35,20 45,20 45,25 Z" fill="currentColor" fillOpacity="0.2" />
+            <path d="M5,25 C5,30 15,30 15,25 C15,20 5,20 5,25 Z" fill="currentColor" fillOpacity="0.2" />
+            <circle cx="25" cy="25" r="5" fill="currentColor" fillOpacity="0.3" />
+          </svg>
+        </div>
+        
+        <div className="absolute bottom-3 right-3 w-12 h-12 text-[#9b87f5]">
+          <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+            <path d="M25,5 C30,5 30,15 25,15 C20,15 20,5 25,5 Z" fill="currentColor" fillOpacity="0.2" />
+            <path d="M15,15 C20,15 20,25 15,25 C10,25 10,15 15,15 Z" fill="currentColor" fillOpacity="0.2" />
+            <path d="M15,35 C20,35 20,45 15,45 C10,45 10,35 15,35 Z" fill="currentColor" fillOpacity="0.2" />
+            <path d="M35,15 C40,15 40,25 35,25 C30,25 30,15 35,15 Z" fill="currentColor" fillOpacity="0.2" />
+            <path d="M35,35 C40,35 40,45 35,45 C30,45 30,35 35,35 Z" fill="currentColor" fillOpacity="0.2" />
+            <path d="M25,45 C30,45 30,35 25,35 C20,35 20,45 25,45 Z" fill="currentColor" fillOpacity="0.2" />
+            <path d="M45,25 C45,30 35,30 35,25 C35,20 45,20 45,25 Z" fill="currentColor" fillOpacity="0.2" />
+            <path d="M5,25 C5,30 15,30 15,25 C15,20 5,20 5,25 Z" fill="currentColor" fillOpacity="0.2" />
+            <circle cx="25" cy="25" r="5" fill="currentColor" fillOpacity="0.3" />
+          </svg>
+        </div>
         
         <div className="relative z-10 p-5">
           {children}
@@ -189,4 +294,3 @@ export function FrameWrapper({ children, className }: FrameWrapperProps) {
     </div>
   );
 }
-
