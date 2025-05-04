@@ -1,4 +1,3 @@
-
 import React, { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -161,58 +160,166 @@ export function FrameWrapper({ children, className }: FrameWrapperProps) {
         </div>
       </div>
 
-      {/* Corner Floral Elements */}
-      <div className="absolute top-0 left-0 w-24 h-24">
-        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-          <path d="M30,0 C30,30 0,30 0,30" stroke="#9b87f5" strokeWidth="1" fill="none" />
-          <path d="M50,0 C50,50 0,50 0,50" stroke="#9b87f5" strokeWidth="1.5" fill="none" />
-          <path d="M20,0 C20,20 0,20 0,20" stroke="#9b87f5" strokeWidth="1" fill="none" />
-          
-          {/* Floral element */}
-          <path d="M15,15 C20,10 25,10 25,15 C25,20 20,20 15,15" fill="#9b87f5" fillOpacity="0.2" />
-          <path d="M15,15 C20,10 25,10 25,15 C25,20 20,20 15,15" stroke="#9b87f5" strokeWidth="0.5" fill="none" />
-          <circle cx="20" cy="15" r="1.5" fill="#9b87f5" />
-        </svg>
-      </div>
+      {/* Animated Corner Floral Elements */}
+      {/* Top Left Corner */}
+      <motion.div 
+        className="absolute top-0 left-0 w-24 h-24"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1, ease: "easeOut" }}
+      >
+        <motion.div
+          animate={{ 
+            rotate: [0, 5, 0, -5, 0],
+            scale: [1, 1.05, 1, 0.95, 1] 
+          }}
+          transition={{ 
+            duration: 8, 
+            ease: "easeInOut", 
+            repeat: Infinity,
+            repeatType: "reverse" 
+          }}
+        >
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+            <path d="M30,0 C30,30 0,30 0,30" stroke="#9b87f5" strokeWidth="1" fill="none" />
+            <path d="M50,0 C50,50 0,50 0,50" stroke="#9b87f5" strokeWidth="1.5" fill="none" />
+            <path d="M20,0 C20,20 0,20 0,20" stroke="#9b87f5" strokeWidth="1" fill="none" />
+            
+            {/* Floral element with animation */}
+            <motion.g
+              animate={{ rotate: [0, 360] }}
+              transition={{ duration: 20, ease: "linear", repeat: Infinity }}
+              style={{ transformOrigin: "center" }}
+            >
+              <path d="M25,15 C30,10 35,15 30,20 C25,25 20,20 25,15" fill="#9b87f5" fillOpacity="0.2" />
+              <path d="M15,25 C20,20 25,25 20,30 C15,35 10,30 15,25" fill="#9b87f5" fillOpacity="0.2" />
+              <path d="M35,25 C40,20 45,25 40,30 C35,35 30,30 35,25" fill="#9b87f5" fillOpacity="0.2" />
+              <path d="M25,35 C30,30 35,35 30,40 C25,45 20,40 25,35" fill="#9b87f5" fillOpacity="0.2" />
+              <circle cx="25" cy="25" r="3" fill="#9b87f5" />
+            </motion.g>
+          </svg>
+        </motion.div>
+      </motion.div>
 
-      <div className="absolute top-0 right-0 w-24 h-24 transform scale-x-[-1]">
-        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-          <path d="M30,0 C30,30 0,30 0,30" stroke="#9b87f5" strokeWidth="1" fill="none" />
-          <path d="M50,0 C50,50 0,50 0,50" stroke="#9b87f5" strokeWidth="1.5" fill="none" />
-          <path d="M20,0 C20,20 0,20 0,20" stroke="#9b87f5" strokeWidth="1" fill="none" />
-          
-          {/* Floral element */}
-          <path d="M15,15 C20,10 25,10 25,15 C25,20 20,20 15,15" fill="#9b87f5" fillOpacity="0.2" />
-          <path d="M15,15 C20,10 25,10 25,15 C25,20 20,20 15,15" stroke="#9b87f5" strokeWidth="0.5" fill="none" />
-          <circle cx="20" cy="15" r="1.5" fill="#9b87f5" />
-        </svg>
-      </div>
+      {/* Top Right Corner */}
+      <motion.div 
+        className="absolute top-0 right-0 w-24 h-24"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+      >
+        <motion.div
+          animate={{ 
+            rotate: [0, -5, 0, 5, 0],
+            scale: [1, 0.95, 1, 1.05, 1] 
+          }}
+          transition={{ 
+            duration: 7, 
+            ease: "easeInOut", 
+            repeat: Infinity,
+            repeatType: "reverse" 
+          }}
+        >
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+            <path d="M70,0 C70,30 100,30 100,30" stroke="#9b87f5" strokeWidth="1" fill="none" />
+            <path d="M50,0 C50,50 100,50 100,50" stroke="#9b87f5" strokeWidth="1.5" fill="none" />
+            <path d="M80,0 C80,20 100,20 100,20" stroke="#9b87f5" strokeWidth="1" fill="none" />
+            
+            {/* Floral element with animation */}
+            <motion.g
+              animate={{ rotate: [0, -360] }}
+              transition={{ duration: 22, ease: "linear", repeat: Infinity }}
+              style={{ transformOrigin: "center" }}
+            >
+              <path d="M75,15 C70,10 65,15 70,20 C75,25 80,20 75,15" fill="#9b87f5" fillOpacity="0.2" />
+              <path d="M85,25 C80,20 75,25 80,30 C85,35 90,30 85,25" fill="#9b87f5" fillOpacity="0.2" />
+              <path d="M65,25 C60,20 55,25 60,30 C65,35 70,30 65,25" fill="#9b87f5" fillOpacity="0.2" />
+              <path d="M75,35 C70,30 65,35 70,40 C75,45 80,40 75,35" fill="#9b87f5" fillOpacity="0.2" />
+              <circle cx="75" cy="25" r="3" fill="#9b87f5" />
+            </motion.g>
+          </svg>
+        </motion.div>
+      </motion.div>
 
-      <div className="absolute bottom-0 left-0 w-24 h-24 transform scale-y-[-1]">
-        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-          <path d="M30,0 C30,30 0,30 0,30" stroke="#9b87f5" strokeWidth="1" fill="none" />
-          <path d="M50,0 C50,50 0,50 0,50" stroke="#9b87f5" strokeWidth="1.5" fill="none" />
-          <path d="M20,0 C20,20 0,20 0,20" stroke="#9b87f5" strokeWidth="1" fill="none" />
-          
-          {/* Floral element */}
-          <path d="M15,15 C20,10 25,10 25,15 C25,20 20,20 15,15" fill="#9b87f5" fillOpacity="0.2" />
-          <path d="M15,15 C20,10 25,10 25,15 C25,20 20,20 15,15" stroke="#9b87f5" strokeWidth="0.5" fill="none" />
-          <circle cx="20" cy="15" r="1.5" fill="#9b87f5" />
-        </svg>
-      </div>
+      {/* Bottom Left Corner */}
+      <motion.div 
+        className="absolute bottom-0 left-0 w-24 h-24"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
+      >
+        <motion.div
+          animate={{ 
+            rotate: [0, 5, 0, -5, 0],
+            scale: [1, 1.05, 1, 0.95, 1] 
+          }}
+          transition={{ 
+            duration: 9, 
+            ease: "easeInOut", 
+            repeat: Infinity,
+            repeatType: "reverse" 
+          }}
+        >
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+            <path d="M30,100 C30,70 0,70 0,70" stroke="#9b87f5" strokeWidth="1" fill="none" />
+            <path d="M50,100 C50,50 0,50 0,50" stroke="#9b87f5" strokeWidth="1.5" fill="none" />
+            <path d="M20,100 C20,80 0,80 0,80" stroke="#9b87f5" strokeWidth="1" fill="none" />
+            
+            {/* Floral element with animation */}
+            <motion.g
+              animate={{ rotate: [0, 360] }}
+              transition={{ duration: 24, ease: "linear", repeat: Infinity }}
+              style={{ transformOrigin: "center" }}
+            >
+              <path d="M25,85 C30,90 35,85 30,80 C25,75 20,80 25,85" fill="#9b87f5" fillOpacity="0.2" />
+              <path d="M15,75 C20,80 25,75 20,70 C15,65 10,70 15,75" fill="#9b87f5" fillOpacity="0.2" />
+              <path d="M35,75 C40,80 45,75 40,70 C35,65 30,70 35,75" fill="#9b87f5" fillOpacity="0.2" />
+              <path d="M25,65 C30,70 35,65 30,60 C25,55 20,60 25,65" fill="#9b87f5" fillOpacity="0.2" />
+              <circle cx="25" cy="75" r="3" fill="#9b87f5" />
+            </motion.g>
+          </svg>
+        </motion.div>
+      </motion.div>
 
-      <div className="absolute bottom-0 right-0 w-24 h-24 transform scale-x-[-1] scale-y-[-1]">
-        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-          <path d="M30,0 C30,30 0,30 0,30" stroke="#9b87f5" strokeWidth="1" fill="none" />
-          <path d="M50,0 C50,50 0,50 0,50" stroke="#9b87f5" strokeWidth="1.5" fill="none" />
-          <path d="M20,0 C20,20 0,20 0,20" stroke="#9b87f5" strokeWidth="1" fill="none" />
-          
-          {/* Floral element */}
-          <path d="M15,15 C20,10 25,10 25,15 C25,20 20,20 15,15" fill="#9b87f5" fillOpacity="0.2" />
-          <path d="M15,15 C20,10 25,10 25,15 C25,20 20,20 15,15" stroke="#9b87f5" strokeWidth="0.5" fill="none" />
-          <circle cx="20" cy="15" r="1.5" fill="#9b87f5" />
-        </svg>
-      </div>
+      {/* Bottom Right Corner */}
+      <motion.div 
+        className="absolute bottom-0 right-0 w-24 h-24"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
+      >
+        <motion.div
+          animate={{ 
+            rotate: [0, -5, 0, 5, 0],
+            scale: [1, 0.95, 1, 1.05, 1] 
+          }}
+          transition={{ 
+            duration: 8, 
+            ease: "easeInOut", 
+            repeat: Infinity,
+            repeatType: "reverse" 
+          }}
+        >
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+            <path d="M70,100 C70,70 100,70 100,70" stroke="#9b87f5" strokeWidth="1" fill="none" />
+            <path d="M50,100 C50,50 100,50 100,50" stroke="#9b87f5" strokeWidth="1.5" fill="none" />
+            <path d="M80,100 C80,80 100,80 100,80" stroke="#9b87f5" strokeWidth="1" fill="none" />
+            
+            {/* Floral element with animation */}
+            <motion.g
+              animate={{ rotate: [0, -360] }}
+              transition={{ duration: 26, ease: "linear", repeat: Infinity }}
+              style={{ transformOrigin: "center" }}
+            >
+              <path d="M75,85 C70,90 65,85 70,80 C75,75 80,80 75,85" fill="#9b87f5" fillOpacity="0.2" />
+              <path d="M85,75 C80,80 75,75 80,70 C85,65 90,70 85,75" fill="#9b87f5" fillOpacity="0.2" />
+              <path d="M65,75 C60,80 55,75 60,70 C65,65 70,70 65,75" fill="#9b87f5" fillOpacity="0.2" />
+              <path d="M75,65 C70,70 65,65 70,60 C75,55 80,60 75,65" fill="#9b87f5" fillOpacity="0.2" />
+              <circle cx="75" cy="75" r="3" fill="#9b87f5" />
+            </motion.g>
+          </svg>
+        </motion.div>
+      </motion.div>
 
       {/* Content */}
       <motion.div 
@@ -230,62 +337,7 @@ export function FrameWrapper({ children, className }: FrameWrapperProps) {
         {/* Inner Decorative Border */}
         <div className="absolute inset-[6px] border-[1px] border-[#9b87f5]/20"></div>
         
-        {/* Corner Flowers */}
-        <div className="absolute top-3 left-3 w-12 h-12 text-[#9b87f5]">
-          <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-            <path d="M25,5 C30,5 30,15 25,15 C20,15 20,5 25,5 Z" fill="currentColor" fillOpacity="0.2" />
-            <path d="M15,15 C20,15 20,25 15,25 C10,25 10,15 15,15 Z" fill="currentColor" fillOpacity="0.2" />
-            <path d="M15,35 C20,35 20,45 15,45 C10,45 10,35 15,35 Z" fill="currentColor" fillOpacity="0.2" />
-            <path d="M35,15 C40,15 40,25 35,25 C30,25 30,15 35,15 Z" fill="currentColor" fillOpacity="0.2" />
-            <path d="M35,35 C40,35 40,45 35,45 C30,45 30,35 35,35 Z" fill="currentColor" fillOpacity="0.2" />
-            <path d="M25,45 C30,45 30,35 25,35 C20,35 20,45 25,45 Z" fill="currentColor" fillOpacity="0.2" />
-            <path d="M45,25 C45,30 35,30 35,25 C35,20 45,20 45,25 Z" fill="currentColor" fillOpacity="0.2" />
-            <path d="M5,25 C5,30 15,30 15,25 C15,20 5,20 5,25 Z" fill="currentColor" fillOpacity="0.2" />
-            <circle cx="25" cy="25" r="5" fill="currentColor" fillOpacity="0.3" />
-          </svg>
-        </div>
-        
-        <div className="absolute top-3 right-3 w-12 h-12 text-[#9b87f5]">
-          <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-            <path d="M25,5 C30,5 30,15 25,15 C20,15 20,5 25,5 Z" fill="currentColor" fillOpacity="0.2" />
-            <path d="M15,15 C20,15 20,25 15,25 C10,25 10,15 15,15 Z" fill="currentColor" fillOpacity="0.2" />
-            <path d="M15,35 C20,35 20,45 15,45 C10,45 10,35 15,35 Z" fill="currentColor" fillOpacity="0.2" />
-            <path d="M35,15 C40,15 40,25 35,25 C30,25 30,15 35,15 Z" fill="currentColor" fillOpacity="0.2" />
-            <path d="M35,35 C40,35 40,45 35,45 C30,45 30,35 35,35 Z" fill="currentColor" fillOpacity="0.2" />
-            <path d="M25,45 C30,45 30,35 25,35 C20,35 20,45 25,45 Z" fill="currentColor" fillOpacity="0.2" />
-            <path d="M45,25 C45,30 35,30 35,25 C35,20 45,20 45,25 Z" fill="currentColor" fillOpacity="0.2" />
-            <path d="M5,25 C5,30 15,30 15,25 C15,20 5,20 5,25 Z" fill="currentColor" fillOpacity="0.2" />
-            <circle cx="25" cy="25" r="5" fill="currentColor" fillOpacity="0.3" />
-          </svg>
-        </div>
-        
-        <div className="absolute bottom-3 left-3 w-12 h-12 text-[#9b87f5]">
-          <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-            <path d="M25,5 C30,5 30,15 25,15 C20,15 20,5 25,5 Z" fill="currentColor" fillOpacity="0.2" />
-            <path d="M15,15 C20,15 20,25 15,25 C10,25 10,15 15,15 Z" fill="currentColor" fillOpacity="0.2" />
-            <path d="M15,35 C20,35 20,45 15,45 C10,45 10,35 15,35 Z" fill="currentColor" fillOpacity="0.2" />
-            <path d="M35,15 C40,15 40,25 35,25 C30,25 30,15 35,15 Z" fill="currentColor" fillOpacity="0.2" />
-            <path d="M35,35 C40,35 40,45 35,45 C30,45 30,35 35,35 Z" fill="currentColor" fillOpacity="0.2" />
-            <path d="M25,45 C30,45 30,35 25,35 C20,35 20,45 25,45 Z" fill="currentColor" fillOpacity="0.2" />
-            <path d="M45,25 C45,30 35,30 35,25 C35,20 45,20 45,25 Z" fill="currentColor" fillOpacity="0.2" />
-            <path d="M5,25 C5,30 15,30 15,25 C15,20 5,20 5,25 Z" fill="currentColor" fillOpacity="0.2" />
-            <circle cx="25" cy="25" r="5" fill="currentColor" fillOpacity="0.3" />
-          </svg>
-        </div>
-        
-        <div className="absolute bottom-3 right-3 w-12 h-12 text-[#9b87f5]">
-          <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-            <path d="M25,5 C30,5 30,15 25,15 C20,15 20,5 25,5 Z" fill="currentColor" fillOpacity="0.2" />
-            <path d="M15,15 C20,15 20,25 15,25 C10,25 10,15 15,15 Z" fill="currentColor" fillOpacity="0.2" />
-            <path d="M15,35 C20,35 20,45 15,45 C10,45 10,35 15,35 Z" fill="currentColor" fillOpacity="0.2" />
-            <path d="M35,15 C40,15 40,25 35,25 C30,25 30,15 35,15 Z" fill="currentColor" fillOpacity="0.2" />
-            <path d="M35,35 C40,35 40,45 35,45 C30,45 30,35 35,35 Z" fill="currentColor" fillOpacity="0.2" />
-            <path d="M25,45 C30,45 30,35 25,35 C20,35 20,45 25,45 Z" fill="currentColor" fillOpacity="0.2" />
-            <path d="M45,25 C45,30 35,30 35,25 C35,20 45,20 45,25 Z" fill="currentColor" fillOpacity="0.2" />
-            <path d="M5,25 C5,30 15,30 15,25 C15,20 5,20 5,25 Z" fill="currentColor" fillOpacity="0.2" />
-            <circle cx="25" cy="25" r="5" fill="currentColor" fillOpacity="0.3" />
-          </svg>
-        </div>
+        {/* Corner Flowers - Original static ones are replaced by the animated ones above */}
         
         <div className="relative z-10 p-5">
           {children}
