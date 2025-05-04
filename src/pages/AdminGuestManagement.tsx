@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Guest } from '@/types/guest';
@@ -113,7 +114,7 @@ export default function AdminGuestManagement() {
       return;
     }
 
-    const newGuest: Guest = {
+    const newGuest: Omit<Guest, 'id' | 'created_at'> = {
       name: guestName,
       slug: generateSlug(guestName),
       phone_number: guestPhone,
@@ -155,8 +156,9 @@ export default function AdminGuestManagement() {
   };
 
   const handleDeleteGuest = (id: number) => {
-    // Gunakan toast untuk konfirmasi daripada alert
-    toast({
+    // Gunakan toast untuk konfirmasi
+    const { toast: toastFn } = useToast();
+    toastFn({
       title: "Konfirmasi Hapus",
       description: "Apakah Anda yakin ingin menghapus tamu ini?",
       action: (
@@ -166,7 +168,7 @@ export default function AdminGuestManagement() {
             size="sm"
             onClick={() => {
               deleteGuestMutation.mutate(id);
-              toast({
+              toastFn({
                 title: "Menghapus tamu",
                 description: "Tamu sedang dihapus..."
               });
@@ -177,7 +179,9 @@ export default function AdminGuestManagement() {
           <Button
             variant="outline"
             size="sm"
-            onClick={() => toast.dismiss()}
+            onClick={() => {
+              // Just create a new toast or do nothing
+            }}
           >
             Batal
           </Button>
@@ -196,8 +200,8 @@ export default function AdminGuestManagement() {
         const guests = results.data.slice(1).map((row: any) => ({
           name: row[0],
           slug: generateSlug(row[0]),
-          phone_number: row[1] || '', // Kolom kedua untuk nomor HP
-          status: 'active'
+          phone_number: row[1] || '', 
+          status: 'active' as const // Fix by using 'as const' to ensure correct type
         }));
 
         try {
@@ -251,7 +255,7 @@ export default function AdminGuestManagement() {
       toast({
         title: "Perhatian",
         description: "Tamu ini tidak memiliki nomor HP. WhatsApp akan dibuka tanpa nomor tujuan.",
-        variant: "warning"
+        variant: "destructive" // Changed from "warning" to "destructive" as per available variants
       });
     }
   };
@@ -408,7 +412,7 @@ export default function AdminGuestManagement() {
                   <TableCell className="hidden sm:table-cell py-1 px-1 sm:py-3 sm:px-4 text-[10px] sm:text-sm">
                     {guest.attendance === 'confirmed' ? (
                       <div className="flex items-center gap-1">
-                        <Badge variant="success" className="bg-green-100 text-green-800 hover:bg-green-100 hover:text-green-800 text-[8px] sm:text-xs px-1 py-0 h-4">
+                        <Badge variant="default" className="bg-green-100 text-green-800 hover:bg-green-100 hover:text-green-800 text-[8px] sm:text-xs px-1 py-0 h-4">
                           <Check className="h-2 w-2 mr-0.5 sm:h-3 sm:w-3 sm:mr-1" />
                           Hadir
                         </Badge>
@@ -579,7 +583,7 @@ export default function AdminGuestManagement() {
                       <div className="flex flex-col gap-1 sm:gap-2">
                         <div className="flex items-center gap-1 sm:gap-2 flex-wrap">
                           {editingGuest.attendance === 'confirmed' ? (
-                            <Badge variant="success" className="bg-green-100 text-green-800 text-[10px] sm:text-xs">
+                            <Badge variant="default" className="bg-green-100 text-green-800 text-[10px] sm:text-xs">
                               <Check className="h-2 w-2 sm:h-3 sm:w-3 mr-1" />
                               Hadir
                             </Badge>

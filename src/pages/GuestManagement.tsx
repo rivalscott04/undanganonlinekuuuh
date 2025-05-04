@@ -1,7 +1,6 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { createClient } from '@supabase/supabase-js';
 import { Guest } from '@/types/guest';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,12 +8,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Copy, Share2, Upload } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import Papa from 'papaparse';
-
-// Initialize Supabase client
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL!,
-  import.meta.env.VITE_SUPABASE_ANON_KEY!
-);
+import { guestService } from '@/api/guestService';
 
 const generateSlug = (name: string) => {
   // Hanya menggunakan nama asli tanpa perubahan
@@ -30,28 +24,13 @@ export default function GuestManagement() {
   // Fetch guests
   const { data: guests, isLoading } = useQuery({
     queryKey: ['guests'],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('guests')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-      return data as Guest[];
-    }
+    queryFn: () => guestService.getGuests()
   });
 
   // Add guest mutation
   const addGuestMutation = useMutation({
-    mutationFn: async (newGuest: Guest) => {
-      const { data, error } = await supabase
-        .from('guests')
-        .insert(newGuest)
-        .select()
-        .single();
-
-      if (error) throw error;
-      return data as Guest;
+    mutationFn: async (newGuest: Omit<Guest, 'id' | 'created_at'>) => {
+      return guestService.addGuest(newGuest);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['guests'] });
@@ -73,10 +52,10 @@ export default function GuestManagement() {
       return;
     }
 
-    const newGuest: Guest = {
+    const newGuest = {
       name: guestName,
       slug: generateSlug(guestName),
-      status: 'active'
+      status: 'active' as const
     };
 
     addGuestMutation.mutate(newGuest);
@@ -89,18 +68,14 @@ export default function GuestManagement() {
     setIsUploading(true);
     Papa.parse(file, {
       complete: async (results) => {
-        const guests = results.data.slice(1).map((row: any) => ({
-          name: row[0],
-          slug: generateSlug(row[0]),
-          status: 'active'
-        }));
-
         try {
-          const { error } = await supabase
-            .from('guests')
-            .insert(guests);
+          const guests = results.data.slice(1).map((row: any) => ({
+            name: row[0],
+            slug: generateSlug(row[0]),
+            status: 'active' as const
+          }));
 
-          if (error) throw error;
+          await guestService.importGuests(guests);
 
           queryClient.invalidateQueries({ queryKey: ['guests'] });
           toast({

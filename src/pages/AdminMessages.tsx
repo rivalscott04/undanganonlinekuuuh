@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import AdminLayout from '@/components/AdminLayout';
@@ -40,7 +41,8 @@ export default function AdminMessages() {
 
   // Handle delete with toast confirmation
   const handleDeleteMessage = (message: Message) => {
-    toast({
+    const { toast: toastFn } = useToast();
+    toastFn({
       title: "Konfirmasi Hapus",
       description: `Apakah Anda yakin ingin menghapus ucapan dari ${message.name}?`,
       action: (
@@ -50,7 +52,7 @@ export default function AdminMessages() {
             size="sm"
             onClick={() => {
               message.id && deleteMessageMutation.mutate(message.id);
-              toast({
+              toastFn({
                 title: "Menghapus ucapan",
                 description: "Ucapan sedang dihapus..."
               });
@@ -61,7 +63,9 @@ export default function AdminMessages() {
           <Button
             variant="outline"
             size="sm"
-            onClick={() => toast.dismiss()}
+            onClick={() => {
+              // No direct dismiss call, just show another toast if needed
+            }}
           >
             Batal
           </Button>
